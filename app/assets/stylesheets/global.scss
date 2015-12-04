@@ -1,0 +1,11 @@
+.page-layout{
+  position: absolute;
+  height: -moz-calc(100% - 164px);
+  height: -webkit-calc(100% - 164px);
+  height: -o-calc(100% - 164px);
+  height: calc(100% - 164px);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  overflow: auto;
+}

@@ -1,0 +1,22 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <h5> Neues Projekt anlegen </h5>
+    <hr>
+    <%= form_for @project, url: {action: "create"} do |f| %>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input type="text" name="project[title]" id="project_title" class="mdl-textfield__input">
+        <label class="mdl-textfield__label" for="project_title">Titel</label>
+      </div>
+      <br>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input type="text" name="project[description]" id="project_description" class="mdl-textfield__input">
+        <label class="mdl-textfield__label" for="project_description">Beschreibung</label>
+      </div>
+      <br>
+      <br>
+      <%= f.submit "Erstellen", class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent' %>
+    <% end %><br>
+    <%= link_to projects_path, class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' do %>Zurück<%end%>
+  </div>
+</div>

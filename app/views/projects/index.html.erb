@@ -1,20 +1,29 @@
-<h5> Meine Projekte </h5>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <h5> Meine Projekte </h5>
+    <hr>
 
-<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-  <thead>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric">Projektnummer</th>
-      <th>Titel</th>
-      <th>Beschreibung</th>
-    </tr>
-  </thead>
-  <tbody>
-  	<% @projects.each do |project| %>
-	    <tr>
-	      <td class="mdl-data-table__cell--non-numeric"><%= project.id %></td>
-	      <td><%= project.title %></td>
-	      <td><%= project.description %></td>
-	    </tr>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">Projektnummer</th>
+          <th>Titel</th>
+          <th>Beschreibung</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projects.each do |project| %>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric"><%= project.id %></td>
+            <td><%= project.title %></td>
+            <td><%= project.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <%= link_to new_project_path , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent' do %>
+      <i class="material-icons">add</i> Neues Projekt
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+  <header class="mdl-layout__header project-header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+    <span class="mdl-layout-title">
+      <%= link_to projects_path , class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color--indigo-500' do %>
+      <i class="material-icons">keyboard_arrow_left</i>
+      <% end %> <%= @project.title %>
+    </span>
+    <span class="project-description"><%= @project.description %></span>
+  </header>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+      <div class="mdl-tabs__tab-bar">
+          <a href="#pbs" class="mdl-tabs__tab is-active">Product Breakdown</a>
+          <a href="#wbs" class="mdl-tabs__tab">Work Breakdown</a>
+          <a href="#rbs" class="mdl-tabs__tab">Ressource Breakdown</a>
+      </div>
+
+      <div class="mdl-tabs__panel is-active" id="pbs">
+        <%= javascript_tag do %>
+          drawPBS('<%= @project.title %>', '<%= @project.title %>', '<%= @project.title %>');
+        <% end %>
+        <div id="pbs_div"></div>
+      </div>
+      <div class="mdl-tabs__panel" id="wbs">
+        wbs content
+      </div>
+      <div class="mdl-tabs__panel" id="rbs">
+        rbs content
+      </div>
+    </div>
+  </div>
+</div>

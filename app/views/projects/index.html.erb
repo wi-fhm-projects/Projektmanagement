@@ -2,21 +2,22 @@
   <div class="mdl-cell mdl-cell--12-col">
     <h5> Meine Projekte </h5>
     <hr>
-
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
       <thead>
         <tr>
           <th class="mdl-data-table__cell--non-numeric">Projektnummer</th>
-          <th>Titel</th>
-          <th>Beschreibung</th>
+          <th class="mdl-data-table__cell--non-numeric">Titel</th>
+          <th class="mdl-data-table__cell--non-numeric">Beschreibung</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <% @projects.each do |project| %>
           <tr>
             <td class="mdl-data-table__cell--non-numeric"><%= project.id %></td>
-            <td><%= project.title %></td>
-            <td><%= project.description %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%= project.title %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%= project.description %></td>
+            <td><%= link_to 'Anzeigen', project %></td>
           </tr>
         <% end %>
       </tbody>

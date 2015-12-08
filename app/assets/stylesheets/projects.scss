@@ -1,3 +1,12 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.project-header{
+  background-color: rgb(66,66,66)!important;
+
+  .project-description{
+    margin: 20px;
+    font-style: italic;
+  }
+}

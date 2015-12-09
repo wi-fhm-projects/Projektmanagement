@@ -18,10 +18,8 @@
       </div>
 
       <div class="mdl-tabs__panel is-active" id="pbs">
-<!--         <%= javascript_tag do %>
-          drawPBS('<%= @project.title %>', '<%= @project.title %>', '<%= @project.title %>');
-        <% end %> -->
-        <div id="pbs_div"></div>
+        <div id='pbs_chart'></div>
+        <%= render_chart @pbs_chart, 'pbs_chart' %>
       </div>
       <div class="mdl-tabs__panel" id="wbs">
         wbs content

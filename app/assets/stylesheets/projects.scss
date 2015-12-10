@@ -3,10 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .project-header{
-  background-color: rgb(66,66,66)!important;
+	background-color: rgb(66,66,66)!important;
 
-  .project-description{
-    margin: 20px;
-    font-style: italic;
-  }
+	.project-description{
+		margin: 20px;
+		font-style: italic;
+	}
+}
+
+#create-product-div{
+	display:none;
 }

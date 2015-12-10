@@ -18,8 +18,17 @@
       </div>
 
       <div class="mdl-tabs__panel is-active" id="pbs">
-        <div id='pbs_chart'></div>
-        <%= render_chart @pbs_chart, 'pbs_chart' %>
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--6-col">
+            <% unless @project.product %>
+              <h6> Es wurde noch kein Produkt angelegt! </h6>
+            <% end %>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col">
+            <div id='pbs_chart'></div>
+            <%= render_chart @pbs_chart, 'pbs_chart' %>
+          </div>
+        </div>
       </div>
       <div class="mdl-tabs__panel" id="wbs">
         wbs content

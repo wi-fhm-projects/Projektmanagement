@@ -1,3 +1,14 @@
 // Place all the styles related to the product controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.product-item{
+  background-color: rgb(66,66,66);
+  color: white;
+  min-height: 100px;
+  min-width: 150px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  position: absolute;
+}

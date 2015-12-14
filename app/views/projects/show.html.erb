@@ -17,22 +17,59 @@
           <a href="#rbs" class="mdl-tabs__tab">Ressource Breakdown</a>
       </div>
 
+<!-- Product Breakdown Structure -->
       <div class="mdl-tabs__panel is-active" id="pbs">
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--6-col">
+
+            <!-- Neues Produkt -->
             <% unless @project.product %>
               <h6> Es wurde noch kein Produkt angelegt! </h6>
+              <%= form_for @product, url: {action: "create", controller: 'products'} do |f| %>
+                <%= f.hidden_field :project_id, :value => @project.id %>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input type="text" name="product[name]" id="product_name" class="mdl-textfield__input">
+                  <label class="mdl-textfield__label" for="product_name">Name</label>
+                </div>
+                <br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input type="text" name="product[description]" id="product_description" class="mdl-textfield__input">
+                  <label class="mdl-textfield__label" for="product_description">Beschreibung</label>
+                </div>
+                <br>
+                <br>
+                <%= f.submit "Erstellen", class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' %>
+              <% end %><br>
+            <% end %>
+
+            <!-- Produkt anzeigen -->
+            <% if @project.product %>
+              <div class="mdl-shadow--2dp product-item">
+                  <h6><%= @project.product.name %></h6>
+                  <%= @project.product.description %><br><br>
+                  <%= link_to '', class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
+                    Öffnen
+                  <% end %>
+              </div>
             <% end %>
           </div>
+
+
+          <!-- Chart Anzeigen -->
           <div class="mdl-cell mdl-cell--6-col">
             <div id='pbs_chart'></div>
             <%= render_chart @pbs_chart, 'pbs_chart' %>
           </div>
         </div>
       </div>
+
+      <!-- Work Breakdown Structure -->
       <div class="mdl-tabs__panel" id="wbs">
         wbs content
       </div>
+
+
+      <!-- Ressource Breakdown Structure -->
       <div class="mdl-tabs__panel" id="rbs">
         rbs content
       </div>

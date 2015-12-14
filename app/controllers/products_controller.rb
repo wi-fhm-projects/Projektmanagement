@@ -10,10 +10,10 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-
+    @project = Project.find(product_params[:project_id])
     respond_to do |format|
       if @product.save
-        format.html { redirect_to products_path, notice: 'Product wurde erfolgreich erstellt.' }
+        format.html { redirect_to @project , notice: 'Product wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
@@ -41,6 +41,6 @@ class ProductsController < ApplicationController
     end
   
     def product_params
-      params.require(:product).permit(:title, :description, :project_id)
+      params.require(:product).permit(:name, :description, :project_id)
     end
 end

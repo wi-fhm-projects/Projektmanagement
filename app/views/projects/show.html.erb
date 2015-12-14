@@ -12,13 +12,13 @@
   <div class="mdl-cell mdl-cell--12-col">
     <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
       <div class="mdl-tabs__tab-bar">
-          <a href="#pbs" class="mdl-tabs__tab is-active">Product Breakdown</a>
+          <a href="#pbs" class="mdl-tabs__tab">Product Breakdown</a>
           <a href="#wbs" class="mdl-tabs__tab">Work Breakdown</a>
           <a href="#rbs" class="mdl-tabs__tab">Ressource Breakdown</a>
           <a href="#rdm" class="mdl-tabs__tab is-active">Roadmap</a>
       </div>
 
-      <div class="mdl-tabs__panel is-active" id="pbs">
+      <div class="mdl-tabs__panel" id="pbs">
         <div id='pbs_chart'></div>
         <%= render_chart @pbs_chart, 'pbs_chart' %>
       </div>

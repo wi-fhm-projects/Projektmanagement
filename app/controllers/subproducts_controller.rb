@@ -1,29 +1,29 @@
-class ProductsController < ApplicationController
+class SubproductsController < ApplicationController
   before_action :find_product, only: [:destroy, :show]
 
   def index
-    @products = Product.all
+    @subproducts = Subproduct.all
   end
 
   def show
   end
 
   def create
-    @product = Product.new(product_params)
+    @subproduct = Subproduct.new(product_params)
     @project = Project.find(product_params[:project_id])
     respond_to do |format|
-      if @product.save
+      if @subproduct.save
         format.html { redirect_to @project , notice: 'Product wurde erfolgreich erstellt.' }
-        format.json { render :show, status: :created, location: @product }
+        format.json { render :show, status: :created, location: @subproduct }
       else
         format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        format.json { render json: @subproduct.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @product.destroy
+    @subproduct.destroy
     respond_to do |format|
       format.html { redirect_to products_url, notice: 'Product wurde erfolgreich entfernt.' }
       format.json { head :no_content }
@@ -31,13 +31,13 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @subproduct = Subproduct.new
   end
 
   private
 
     def find_product
-      @product = Product.find(params[:id])
+      @subproduct = Subproduct.find(params[:id])
     end
   
     def product_params

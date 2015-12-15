@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
 	end
 
   def show
-    @product = Product.new
+    @product = Subproduct.new
     product_breakdown_chart
   end
 

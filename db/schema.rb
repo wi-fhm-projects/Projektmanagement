@@ -13,7 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20151210092452) do
 
-  create_table "products", force: :cascade do |t|
+  create_table "projects", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "subproducts", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.integer  "project_id"
@@ -21,13 +28,6 @@ ActiveRecord::Schema.define(version: 20151210092452) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "products", ["project_id"], name: "index_products_on_project_id"
-
-  create_table "projects", force: :cascade do |t|
-    t.string   "title"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
+  add_index "subproducts", ["project_id"], name: "index_subproducts_on_project_id"
 
 end

@@ -1,6 +1,6 @@
-class CreateProducts < ActiveRecord::Migration
+class CreateSubproducts < ActiveRecord::Migration
   def change
-    create_table :products do |t|
+    create_table :subproducts do |t|
       t.string :name
       t.string :description
       t.references :project, index: true

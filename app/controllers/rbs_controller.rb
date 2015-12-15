@@ -1,6 +1,8 @@
 class RbsController < ApplicationController
   def index
     @project = Project.find(params[:project])
+    @kinds = Kind.find(@project)
+    @roles = Role.find(@project)
     @kind = Kind.new
     @role = Role.new
 
@@ -12,7 +14,7 @@ class RbsController < ApplicationController
 
   def create
     @kind = Kind.new(kind_params)
-
+    @project = Project.find(kind_params[:project_id])
     respond_to do |format|
       if @kind.save
         format.html { redirect_to rbs_path(project: @project), notice: 'Typ wurde erfolgreich erstellt.' }
@@ -27,7 +29,7 @@ class RbsController < ApplicationController
    def destroy
     @kind.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Typ wurde erfolgreich entfernt.' }
+      format.html { redirect_to rbs_path(project: @project), notice: 'Typ wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end
@@ -43,7 +45,7 @@ class RbsController < ApplicationController
     end
 
     def kind_params
-      params.require(:kind).permit(:name)
+      params.require(:kind).permit(:name, :project_id)
     end
 
     def ressource_breakdown_chart

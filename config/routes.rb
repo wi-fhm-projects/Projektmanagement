@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   resources :projects
   resources :products
+  resources :pbs
 
 
   root 'projects#index'

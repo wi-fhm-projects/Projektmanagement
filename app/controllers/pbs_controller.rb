@@ -4,6 +4,7 @@ before_action :find_project, only: [:destroy, :show]
 def index
 	@project = Project.find(params[:project])
   @subproduct = Subproduct.new
+  @modul = Modul.new
 end
 
 def show

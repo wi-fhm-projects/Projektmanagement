@@ -19,42 +19,39 @@
       <tbody>
           <tr class="first-level">
             <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="second-level">
-            <td></td>
             <td class="mdl-data-table__cell--non-numeric" colspan="3">
-            <%= form_for @subproduct, url: {action: "create", controller: 'subproducts'} do |f| %>
-              <%= f.hidden_field :project_id, value: @project.id %>
-              <%= f.text_field :name %>
-              <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' do %>
-                <i class="material-icons">add_circle</i>
+              <%= form_for @subproduct, url: {action: "create", controller: 'subproducts'} do |f| %>
+                <%= f.hidden_field :project_id, value: @project.id %>
+                <%= f.text_field :name %>
+                <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                  <i class="material-icons">add_circle</i>
+                <% end %>
               <% end %>
             </td>
-            <% end %>
           </tr>
           <% @project.subproducts.each do |subproduct| %>
             <tr class="second-level">
               <td></td>
               <td class="mdl-data-table__cell--non-numeric"> <%= subproduct.name %></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr class="third-level">
-              <td></td>
-              <td></td>
               <td class="mdl-data-table__cell--non-numeric" colspan="2">
-              <%= form_for @subproduct, url: {action: "create", controller: 'subproducts'} do |f| %>
+              <%= form_for @modul, url: {action: "create", controller: 'moduls'} do |f| %>
                 <%= f.hidden_field :project_id, value: @project.id %>
+                <%= f.hidden_field :subproduct_id, value: subproduct.id %>
                 <%= f.text_field :name %>
-                <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' do %>
+                <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                   <i class="material-icons">add_circle</i>
                 <% end %>
-                <% end %>
+              <% end %>
               </td>
-            </tr> 
+            </tr>
+            <% subproduct.moduls.each do |modul| %>
+              <tr class="third-level">
+                <td></td>
+                <td></td>
+                <td class="mdl-data-table__cell--non-numeric"> <%= modul.name %></td>
+                <td></td>
+              </tr>
+            <% end %>
           <% end %>
       </tbody>
     </table>

@@ -1,8 +1,6 @@
 class RbsController < ApplicationController
   def index
     @project = Project.find(params[:project])
-    @kinds = Kind.find(@project)
-    @roles = Role.find(@project)
     @kind = Kind.new
     @role = Role.new
 
@@ -63,6 +61,6 @@ class RbsController < ApplicationController
         ]
       )
       opts   = { :allowHtml => true }
-      @pbs_chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
+      @rbs_chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
     end
 end

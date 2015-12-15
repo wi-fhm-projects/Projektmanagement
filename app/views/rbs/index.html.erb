@@ -30,51 +30,45 @@
             <td></td>
             <td></td>
           </tr>
-          <tr>
-            <td class="mdl-data-table__cell--non-numeric"></td>
-            <td class="mdl-data-table__cell--non-numeric"></td>
-            <td class="mdl-data-table__cell--non-numeric"></td>
-            <td class="mdl-data-table__cell--non-numeric"></td>
-          </tr>
-          <% @project.kinds.each do |kind| %>
-            <tr>
-              <td></td>
-              <td class="mdl-data-table__cell--non-numeric"><%=kind.name %></td>
-              <%= form_for @role, url: {action: "create", controller: 'role'} do |f| %>
-              <%= f.hidden_field :project_id, value: @project.id %>
-              <td><%= f.text_field :name %></td>
-              <td><%= f.text_field :qualifikation %></td>
-              <td>
-                <%= f.text_field :experience %>
-                <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' do %>
-                  <i class="material-icons">add_circle</i>
-                  <% end %>
-              </td>
-              <%end%>
-            </tr>
-            <% @project.roles.each do |role| %>
-               <tr>
-                  <td class="mdl-data-table__cell--non-numeric"></td>
-                  <td class="mdl-data-table__cell--non-numeric"></td>
-                  <td class="mdl-data-table__cell--non-numeric"><%=role.name%></td>
-                  <td class="mdl-data-table__cell--non-numeric">
-                    <%=role.qualifikation%>
-                  </td>
-                  <td class="mdl-data-table__cell--non-numeric">
-                    <%=role.experience%>
-                  </td>
-                </tr>
+
+            <% @project.kinds.each do |kind| %>
+              <tr>
+                <td></td>
+                <td class="mdl-data-table__cell--non-numeric"><%=kind.name %></td>
+                <%= form_for @role, url: {action: "create", controller: 'role'} do |f| %>
+                <%= f.hidden_field :kind_id, value: kind.id %>
+                <td><%= f.text_field :name %></td>
+                <td><%= f.text_field :qualifikation %></td>
+                <td>
+                  <%= f.text_field :experience %>
+                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' do %>
+                    <i class="material-icons">add_circle</i>
+                    <% end %>
+                </td>
+                <%end%>
+              </tr>
+
+                <% kind.roles.each do |role| %>
+                   <tr>
+                      <td class="mdl-data-table__cell--non-numeric">t</td>
+                      <td class="mdl-data-table__cell--non-numeric"></td>
+                      <td class="mdl-data-table__cell--non-numeric"><%=role.name%></td>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <%=role.qualifikation%>
+                      </td>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <%=role.experience%>
+                      </td>
+                    </tr>
+                <%end%>
+
             <%end%>
-          <%end%>
+
       </tbody>
     </table>
   </div>
   <div class="mdl-tabs__panel" id="tree-panel">
-    <ul>
-      <li>Tywin</li>
-      <li>Cersei</li>
-      <li>Jamie</li>
-      <li>Tyrion</li>
-    </ul>
+    <div id='rdm_chart'></div>
+        <%=ressource_breakdown_chart %>
   </div>
 </div>

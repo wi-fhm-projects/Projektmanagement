@@ -9,9 +9,10 @@ class RoleController < ApplicationController
 
   def create
     @role = Role.new(role_params)
-    @project = Project.find(kind_params[:project_id])
+    @kind = Kind.find(role_params[:kind_id])
+    @project = Project.find(@kind.project)
     respond_to do |format|
-      if @project.save
+      if @role.save
         format.html { redirect_to rbs_path(project: @project), notice: 'Rolle wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
@@ -40,6 +41,6 @@ class RoleController < ApplicationController
     end
 
     def role_params
-      params.require(:role).permit(:name, :qualifikation, :experience, :project_id)
+      params.require(:role).permit(:name, :qualifikation, :experience, :kind_id)
     end
 end

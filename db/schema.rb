@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(version: 20151215101722) do
     t.string   "name"
     t.string   "qualifikation"
     t.string   "experience"
-    t.integer  "project_id"
+    t.integer  "kind_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
 
-  add_index "roles", ["project_id"], name: "index_roles_on_project_id"
+  add_index "roles", ["kind_id"], name: "index_roles_on_kind_id"
 
   create_table "subproducts", force: :cascade do |t|
     t.string   "name"

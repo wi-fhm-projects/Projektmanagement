@@ -17,13 +17,13 @@
         </tr>
       </thead>
       <tbody>
-          <tr>
+          <tr class="first-level">
             <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
             <td></td>
             <td></td>
             <td></td>
           </tr>
-          <tr>
+          <tr class="second-level">
             <td></td>
             <td class="mdl-data-table__cell--non-numeric" colspan="3">
             <%= form_for @subproduct, url: {action: "create", controller: 'subproducts'} do |f| %>
@@ -36,12 +36,25 @@
             <% end %>
           </tr>
           <% @project.subproducts.each do |subproduct| %>
-            <tr>
+            <tr class="second-level">
               <td></td>
               <td class="mdl-data-table__cell--non-numeric"> <%= subproduct.name %></td>
               <td></td>
               <td></td>
             </tr>
+            <tr class="third-level">
+              <td></td>
+              <td></td>
+              <td class="mdl-data-table__cell--non-numeric" colspan="2">
+              <%= form_for @subproduct, url: {action: "create", controller: 'subproducts'} do |f| %>
+                <%= f.hidden_field :project_id, value: @project.id %>
+                <%= f.text_field :name %>
+                <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' do %>
+                  <i class="material-icons">add_circle</i>
+                <% end %>
+                <% end %>
+              </td>
+            </tr> 
           <% end %>
       </tbody>
     </table>

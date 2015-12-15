@@ -9,38 +9,52 @@
     <span class="project-description"><%= @project.description %></span>
   </header>
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--12-col">
-    <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-      <div class="mdl-tabs__tab-bar">
-          <a href="#pbs" class="mdl-tabs__tab is-active">Product Breakdown</a>
-          <a href="#wbs" class="mdl-tabs__tab">Work Breakdown</a>
-          <a href="#rbs" class="mdl-tabs__tab">Ressource Breakdown</a>
+  <div class="mdl-cell mdl-cell--4-col">
+    <!-- Product Breaktdown -->
+    <div class="structure mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title mdl-card--expand">
+        <h2 class="mdl-card__title-text">Product Breakdown Structure</h2>
       </div>
-
-<!-- Product Breakdown Structure -->
-      <div class="mdl-tabs__panel is-active" id="pbs">
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--6-col">
-          </div>
-
-
-          <!-- Chart Anzeigen -->
-          <div class="mdl-cell mdl-cell--6-col">
-            <div id='pbs_chart'></div>
-            <%= render_chart @pbs_chart, 'pbs_chart' %>
-          </div>
-        </div>
+      <div class="mdl-card__supporting-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Aenan convallis.
       </div>
-
-      <!-- Work Breakdown Structure -->
-      <div class="mdl-tabs__panel" id="wbs">
-        wbs content
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          <%= link_to "test", project_pbs_path %>
+        </a>
       </div>
-
-
-      <!-- Ressource Breakdown Structure -->
-      <div class="mdl-tabs__panel" id="rbs">
-        rbs content
+    </div>
+  </div>
+  <div class="mdl-cell mdl-cell--4-col">
+    <div class="structure mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title mdl-card--expand">
+        <h2 class="mdl-card__title-text">Ressource Breakdown Structure</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Aenan convallis.
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          View Updates
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="mdl-cell mdl-cell--4-col">
+    <div class="structure mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title mdl-card--expand">
+        <h2 class="mdl-card__title-text">Work Breakdown Structure</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Aenan convallis.
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          View Updates
+        </a>
       </div>
     </div>
   </div>

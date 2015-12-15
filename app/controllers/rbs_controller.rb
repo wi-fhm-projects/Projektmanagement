@@ -1,6 +1,8 @@
 class RbsController < ApplicationController
   def index
     @project = Project.find(params[:project])
+    @kind = Kind.new
+    @role = Role.new
 
   end
 

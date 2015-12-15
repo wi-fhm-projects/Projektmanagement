@@ -1,4 +1,4 @@
-<%= @project.title %>
+<%= render partial: '/shared/header', locals: {project: @project} %>
 
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
   <div class="mdl-tabs__tab-bar">
@@ -7,22 +7,8 @@
   </div>
 
   <div class="mdl-tabs__panel is-active" id="table-panel">
-    <ul>
-      <li>Eddard</li>
-      <li>Catelyn</li>
-      <li>Robb</li>
-      <li>Sansa</li>
-      <li>Brandon</li>
-      <li>Arya</li>
-      <li>Rickon</li>
-    </ul>
+
   </div>
   <div class="mdl-tabs__panel" id="tree-panel">
-    <ul>
-      <li>Tywin</li>
-      <li>Cersei</li>
-      <li>Jamie</li>
-      <li>Tyrion</li>
-    </ul>
   </div>
 </div>

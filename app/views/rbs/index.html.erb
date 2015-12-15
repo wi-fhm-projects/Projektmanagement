@@ -7,14 +7,59 @@
   </div>
 
   <div class="mdl-tabs__panel is-active" id="table-panel">
-    <ul>
-      <li>Eddard</li>
-      <li>Catelyn</li>
-      <li>Robb</li>
-      <li>Sansa</li>
-      <li>Brandon</li>
-      <li>Arya</li>
-      <li>Rickon</li>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">Art</th>
+          <th class="mdl-data-table__cell--non-numeric">Rolle</th>
+          <th class="mdl-data-table__cell--non-numeric">Qualifikation</th>
+           <th class="mdl-data-table__cell--non-numeric">Erfahrung</th>
+        </tr>
+      </thead>
+      <tbody>
+
+
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input type="text" name="kind[name]" id="kind_name" class="mdl-textfield__input">
+                <label class="mdl-textfield__label" for="kind_name">Typ-Bezeichnung</label>
+              </div>
+
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input type="text" name="kind[name]" id="kind_name" class="mdl-textfield__input">
+                <label class="mdl-textfield__label" for="kind_name">Rollen-Bezeichnung</label>
+              </div>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input type="text" name="kind[name]" id="kind_name" class="mdl-textfield__input">
+                <label class="mdl-textfield__label" for="kind_name">Qualifikations-Bezeichnung</label>
+              </div>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <div class="mdl-textfield mdl-js-textfield">
+                <input type="text" name="kind[name]" id="kind_name" class="mdl-textfield__input">
+                <label class="mdl-textfield__label" for="kind_name">Erfahrungs-Bezeichnung</label>
+              </div>
+            </td>
+            <td>
+
+
+            </td>
+          </tr>
+
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
+          </tr>
+
+      </tbody>
+    </table>
     </ul>
   </div>
   <div class="mdl-tabs__panel" id="tree-panel">

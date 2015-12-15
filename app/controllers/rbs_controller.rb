@@ -1,6 +1,7 @@
 class RbsController < ApplicationController
   def index
     @project = Project.find(params[:project])
+
   end
 
   def show

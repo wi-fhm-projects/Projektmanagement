@@ -1,0 +1,32 @@
+<%= @project.title %>
+
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__tab-bar">
+      <a href="#table-panel" class="mdl-tabs__tab is-active">Tabelle</a>
+      <a href="#tree-panel" class="mdl-tabs__tab">Baumdiagramm</a>
+  </div>
+
+  <div class="mdl-tabs__panel is-active" id="table-panel">
+    <ul>
+      <li>Eddard</li>
+      <li>Catelyn</li>
+      <li>Robb</li>
+      <li>Sansa</li>
+      <li>Brandon</li>
+      <li>Arya</li>
+      <li>Rickon</li>
+    </ul>
+  </div>
+  <div class="mdl-tabs__panel" id="tree-panel">
+    <ul>
+      <li>Tywin</li>
+      <li>Cersei</li>
+      <li>Jamie</li>
+      <li>Tyrion</li>
+    </ul>
+  </div>
+   <br>
+    <%= link_to new_rb_path , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
+      <i class="material-icons">add</i> Neuer Typ
+    <% end %>
+</div>

@@ -3,7 +3,7 @@ before_action :find_project, only: [:destroy, :show]
 
 def index
 	@project = Project.find(params[:project])
-  @projects = Project.all
+  @subproduct = Subproduct.new
 end
 
 def show

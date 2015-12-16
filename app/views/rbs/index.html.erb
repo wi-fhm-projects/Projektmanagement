@@ -34,7 +34,10 @@
             <% @project.kinds.each do |kind| %>
               <tr>
                 <td></td>
-                <td class="mdl-data-table__cell--non-numeric"><%=kind.name %></td>
+                <td class="mdl-data-table__cell--non-numeric"><%=kind.name %>
+                  <i class="material-icons mdl-button mdl-js-button mdl-button--icon mdl-button--colored">create</i>
+                  <i class="material-icons mdl-button mdl-js-button mdl-button--icon mdl-button--colored">remove_circle</i>
+                </td>
                 <%= form_for @role, url: {action: "create", controller: 'role'} do |f| %>
                 <%= f.hidden_field :kind_id, value: kind.id %>
                 <td><%= f.text_field :name %></td>
@@ -44,13 +47,14 @@
                   <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' do %>
                     <i class="material-icons">add_circle</i>
                     <% end %>
+
                 </td>
                 <%end%>
               </tr>
 
                 <% kind.roles.each do |role| %>
                    <tr>
-                      <td class="mdl-data-table__cell--non-numeric">t</td>
+                      <td class="mdl-data-table__cell--non-numeric"></td>
                       <td class="mdl-data-table__cell--non-numeric"></td>
                       <td class="mdl-data-table__cell--non-numeric"><%=role.name%></td>
                       <td class="mdl-data-table__cell--non-numeric">
@@ -58,6 +62,8 @@
                       </td>
                       <td class="mdl-data-table__cell--non-numeric">
                         <%=role.experience%>
+                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon mdl-button--colored">create</i>
+                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon mdl-button--colored">remove_circle</i>
                       </td>
                     </tr>
                 <%end%>

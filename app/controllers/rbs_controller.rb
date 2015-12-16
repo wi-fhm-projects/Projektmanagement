@@ -48,9 +48,6 @@ class RbsController < ApplicationController
 
     def ressource_breakdown_chart
 
-      baum = ""
-      baum = "[ {:v => \'@project.title\', :f =>\' @project.title \'   }, \' \'    , \' @project.title \' ]"
-
       data_table = GoogleVisualr::DataTable.new
       data_table.new_column('string', 'Name'   )
       data_table.new_column('string', 'Manager')

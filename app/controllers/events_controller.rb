@@ -71,4 +71,34 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:title, :startDate, :endDate)
     end
+
+
+    def roadmap_chart
+        data_table = GoogleVisualr::DataTable.new
+        data_table.new_column('string', 'Event'         )
+        data_table.new_column('date',   'Startzeitpunkt')
+        data_table.new_column('date',   'Endzeitpunkt'  )
+
+        @roadmaps.each do |roadmap|
+          data_table.add_row(
+          [
+            roadmap.event, Date.new(roadmap.startDate.year, roadmap.startDate.month, roadmap.startDate.day), Date.new(roadmap.endDate.year, roadmap.endDate.month, roadmap.endDate.day)
+          ]
+          )
+        end
+
+        #data_table.add_rows(
+        #[
+        #  [ 'Projektentwurf', Date.new(2015, 12, 31), Date.new(2016, 2, 29) ],
+        #  [ 'Feinplanung',      Date.new(2016, 2, 29),  Date.new(2016, 5, 30) ],
+        #  [ 'Kundenpräsentation',  Date.new(2016, 4, 30),  Date.new(2016, 6, 30) ]
+        #  ]
+        #)
+
+        opts   = { :allowHtml => true }
+        @rdm_chart = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
+    end
+
+
+    
 end

@@ -1,31 +1,23 @@
-<p id="notice"><%= notice %></p>
+<%= render partial: '/shared/header', locals: {project: @project} %>
 
-<h1>Listing Events</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Startdate</th>
-      <th>Enddate</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <h5> Meine Roadmap </h5>
+    <hr>
 
-  <tbody>
-    <% @events.each do |event| %>
-      <tr>
-        <td><%= event.title %></td>
-        <td><%= event.startDate %></td>
-        <td><%= event.endDate %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <!-- Nur die Roadmap anzeigen, wenn auch Events angelegt wurden -->
+    <% if @events != nil then%>
+    <div id='rdm_chart'></div>
+    <%= render_chart @rdm_chart, 'rdm_chart' %>
     <% end %>
-  </tbody>
-</table>
+    <br>
+    <%= link_to new_event_path , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
+      <i class="material-icons">add</i> Neues Event
+    <% end %>
+    <%= link_to edit_event_path(@events), class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
+      <i class="material-icons">add</i> Events bearbeiten
+    <% end %>
+  </div>
 
-<br>
-
-<%= link_to 'New Event', new_event_path %>
+</div>

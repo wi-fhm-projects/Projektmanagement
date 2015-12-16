@@ -1,28 +1,24 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
+    find_project
+    event_chart
   end
 
-  # GET /events/1
-  # GET /events/1.json
   def show
   end
 
-  # GET /events/new
   def new
     @event = Event.new
   end
 
-  # GET /events/1/edit
   def edit
   end
 
-  # POST /events
-  # POST /events.json
   def create
     @event = Event.new(event_params)
 
@@ -37,8 +33,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -51,8 +45,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # DELETE /events/1
-  # DELETE /events/1.json
   def destroy
     @event.destroy
     respond_to do |format|
@@ -63,42 +55,39 @@ class EventsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
+    def find_event
+        @event = Event.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def find_project
+      @project = Project.find(params[:project])
+    end
+
     def event_params
       params.require(:event).permit(:title, :startDate, :endDate)
     end
 
 
-    def roadmap_chart
+    def event_chart
         data_table = GoogleVisualr::DataTable.new
         data_table.new_column('string', 'Event'         )
         data_table.new_column('date',   'Startzeitpunkt')
         data_table.new_column('date',   'Endzeitpunkt'  )
 
-        @roadmaps.each do |roadmap|
+        if @events != nil then
+        @events.each do |event|
           data_table.add_row(
           [
-            roadmap.event, Date.new(roadmap.startDate.year, roadmap.startDate.month, roadmap.startDate.day), Date.new(roadmap.endDate.year, roadmap.endDate.month, roadmap.endDate.day)
+            event.title, Date.new(event.startDate.year, event.startDate.month, event.startDate.day), Date.new(event.endDate.year, event.endDate.month, event.endDate.day)
           ]
           )
+          end
         end
-
-        #data_table.add_rows(
-        #[
-        #  [ 'Projektentwurf', Date.new(2015, 12, 31), Date.new(2016, 2, 29) ],
-        #  [ 'Feinplanung',      Date.new(2016, 2, 29),  Date.new(2016, 5, 30) ],
-        #  [ 'Kundenpräsentation',  Date.new(2016, 4, 30),  Date.new(2016, 6, 30) ]
-        #  ]
-        #)
 
         opts   = { :allowHtml => true }
         @rdm_chart = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
 
 
-    
+
 end

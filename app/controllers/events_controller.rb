@@ -17,6 +17,8 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @events = Event.all
+    find_project
   end
 
   def create

@@ -17,9 +17,12 @@ ActiveRecord::Schema.define(version: 20151216153017) do
     t.string   "title"
     t.date     "startDate"
     t.date     "endDate"
+    t.integer  "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "events", ["project_id"], name: "index_events_on_project_id"
 
   create_table "kinds", force: :cascade do |t|
     t.string   "name"
@@ -45,14 +48,6 @@ ActiveRecord::Schema.define(version: 20151216153017) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "roadmaps", force: :cascade do |t|
-    t.string   "event"
-    t.date     "startDate"
-    t.date     "endDate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "roles", force: :cascade do |t|

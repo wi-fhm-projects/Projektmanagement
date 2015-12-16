@@ -7,19 +7,20 @@
     <hr>
 
     <!-- Nur die Roadmap anzeigen, wenn auch Events angelegt wurden -->
-    <% if @events != nil then%>
+    <% if @project.events != nil then%>
       <div id='rdm_chart'></div>
       <%= render_chart @rdm_chart, 'rdm_chart' %>
     <% end %>
     <br>
-    <%= link_to new_event_path , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
+    <%= link_to new_event_path(project: @project) , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
       <i class="material-icons">add</i> Neues Event
     <% end %>
-    <% if @events != nil then%>
-      <%= link_to edit_event_path(@project), class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
-      <i class="material-icons">add</i> Events bearbeiten
+    <% if @project.events != nil then%>
+      <%= link_to new_event_path , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
+      <i class="material-icons">add</i> Events bearbeiten (muss noch hinterlegt werden)
       <% end %>
     <% end %>
   </div>
+
 
 </div>

@@ -1,11 +1,10 @@
 class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy]
 
-  # GET /events
-  # GET /events.json
   def index
-    @events = Event.all
+    @event = Event.new
     find_project
+    #@events = Event.all
     event_chart
   end
 
@@ -13,24 +12,28 @@ class EventsController < ApplicationController
   end
 
   def new
+    find_project
     @event = Event.new
   end
 
   def edit
-    @events = Event.all
     find_project
+    @events = Event.all
   end
 
   def create
+    #find_project
     @event = Event.new(event_params)
+    @project = Project.find(event_params[:project_id])
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+        #Hier noch auf die Roadmap an sich verlinken, anstatt auf die Show von Project!!
+        format.html { redirect_to  @project, notice: 'Event was successfully created.' }
+        format.json { render :index, status: :created, location: @event }
       else
         format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -66,7 +69,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:title, :startDate, :endDate)
+      params.require(:event).permit(:title, :startDate, :endDate, :project_id)
     end
 
 
@@ -76,8 +79,8 @@ class EventsController < ApplicationController
         data_table.new_column('date',   'Startzeitpunkt')
         data_table.new_column('date',   'Endzeitpunkt'  )
 
-        if @events != nil then
-        @events.each do |event|
+        if @project.events != nil then
+        @project.events.each do |event|
           data_table.add_row(
           [
             event.title, Date.new(event.startDate.year, event.startDate.month, event.startDate.day), Date.new(event.endDate.year, event.endDate.month, event.endDate.day)

@@ -4,6 +4,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :title
       t.date :startDate
       t.date :endDate
+      t.references :project, index: true
 
       t.timestamps null: false
     end

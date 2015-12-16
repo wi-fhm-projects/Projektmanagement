@@ -47,19 +47,33 @@ class RbsController < ApplicationController
     end
 
     def ressource_breakdown_chart
+
+      baum = ""
+      baum = "[ {:v => \'@project.title\', :f =>\' @project.title \'   }, \' \'    , \' @project.title \' ]"
+
       data_table = GoogleVisualr::DataTable.new
       data_table.new_column('string', 'Name'   )
       data_table.new_column('string', 'Manager')
       data_table.new_column('string', 'ToolTip')
-      data_table.add_rows(
+      data_table.add_row(
         [
-          [ {:v => 'Mike', :f => 'Mike<div style="color:red; font-style:italic">President</div>'   }, ''    , 'The President' ],
-          [ {:v => 'Jim' , :f => 'Jim<div style="color:red; font-style:italic">Vice President<div>'}, 'Mike', 'VP'            ],
-          [ 'Alice'  , 'Mike', ''           ],
-          [ 'Bob'    , 'Jim' , 'Bob Sponge' ],
-          [ 'Carol'  , 'Bob' , ''           ]
+         {:v => @project.title, :f =>@project.title   }, @project.title, ' '
         ]
       )
+      @project.kinds.each do |kind|
+        data_table.add_row(
+          [
+            {:v => kind.name, :f =>kind.name   }, @project.title, ' '
+          ]
+        )
+        kind.roles.each do |role|
+          data_table.add_row(
+            [
+              {:v => role.name, :f =>role.name   }, kind.name, ' '
+            ]
+          )
+        end
+      end
       opts   = { :allowHtml => true }
       @rbs_chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
     end

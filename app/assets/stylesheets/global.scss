@@ -12,6 +12,33 @@
 
 .wide-table{
 	width: 100%;
+
+  .first-level{
+    background-color: #3949AB;
+    color:white;
+
+    &:hover{
+      color:black;
+    };
+  }
+
+  .second-level{
+    background-color: #7986CB;
+    color:white;
+
+    &:hover{
+      color:black;
+    };
+  }
+
+  .third-level{
+    background-color: #C5CAE9;
+    color:black;   
+  }
+
+  .fourth-level{
+
+  }
 }
 
 .button-middle{

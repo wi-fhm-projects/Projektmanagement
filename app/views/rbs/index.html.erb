@@ -1,3 +1,4 @@
+<%= render partial: '/shared/header', locals: {project: @project} %>
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
    <div class="mdl-tabs__tab-bar">
       <a href="#table-panel" class="mdl-tabs__tab is-active">Tabelle</a>
@@ -15,13 +16,13 @@
         </tr>
       </thead>
       <tbody>
-          <tr>
+          <tr class="first-level">
             <td><%= @project.title %></td>
             <td>
               <%= form_for @kind, url: {action: "create", controller: 'rbs'} do |f| %>
               <%= f.hidden_field :project_id, value: @project.id %>
               <%= f.text_field :name %>
-              <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' do %>
+              <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
               <i class="material-icons">add_circle</i>
               <% end %>
             </td>
@@ -32,11 +33,11 @@
           </tr>
 
             <% @project.kinds.each do |kind| %>
-              <tr>
+              <tr class="second-level">
                 <td></td>
                 <td class="mdl-data-table__cell--non-numeric"><%=kind.name %>
-                  <i class="material-icons mdl-button mdl-js-button mdl-button--icon mdl-button--colored">create</i>
-                  <i class="material-icons mdl-button mdl-js-button mdl-button--icon mdl-button--colored">remove_circle</i>
+                  <i class="material-icons mdl-button mdl-js-button mdl-button--icon">create</i>
+                  <i class="material-icons mdl-button mdl-js-button mdl-button--icon">remove_circle</i>
                 </td>
                 <%= form_for @role, url: {action: "create", controller: 'role'} do |f| %>
                 <%= f.hidden_field :kind_id, value: kind.id %>
@@ -44,7 +45,7 @@
                 <td><%= f.text_field :qualifikation %></td>
                 <td>
                   <%= f.text_field :experience %>
-                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored' do %>
+                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
                     <% end %>
 
@@ -53,7 +54,7 @@
               </tr>
 
                 <% kind.roles.each do |role| %>
-                   <tr>
+                   <tr class="third-level">
                       <td class="mdl-data-table__cell--non-numeric"></td>
                       <td class="mdl-data-table__cell--non-numeric"></td>
                       <td class="mdl-data-table__cell--non-numeric"><%=role.name%></td>
@@ -62,8 +63,8 @@
                       </td>
                       <td class="mdl-data-table__cell--non-numeric">
                         <%=role.experience%>
-                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon mdl-button--colored">create</i>
-                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon mdl-button--colored">remove_circle</i>
+                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon">create</i>
+                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon">remove_circle</i>
                       </td>
                     </tr>
                 <%end%>

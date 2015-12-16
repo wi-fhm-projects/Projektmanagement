@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
   resources :projects
-  resources :products
   resources :rbs
   resources :role
+  resources :subproducts, :moduls
+  resources :pbs
 
 
 

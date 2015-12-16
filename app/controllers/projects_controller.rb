@@ -7,7 +7,6 @@ class ProjectsController < ApplicationController
 
   def show
     @product = Subproduct.new
-    product_breakdown_chart
   end
 
   def create
@@ -45,23 +44,4 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :description)
     end
-
-    def product_breakdown_chart
-      data_table = GoogleVisualr::DataTable.new
-      data_table.new_column('string', 'Name'   )
-      data_table.new_column('string', 'Manager')
-      data_table.new_column('string', 'ToolTip')
-      data_table.add_rows(
-        [
-          [ {:v => 'Mike', :f => 'Mike<div style="color:red; font-style:italic">President</div>'   }, ''    , 'The President' ],
-          [ {:v => 'Jim' , :f => 'Jim<div style="color:red; font-style:italic">Vice President<div>'}, 'Mike', 'VP'            ],
-          [ 'Alice'  , 'Mike', ''           ],
-          [ 'Bob'    , 'Jim' , 'Bob Sponge' ],
-          [ 'Carol'  , 'Bob' , ''           ]
-        ]
-      )
-      opts   = { :allowHtml => true }
-      @pbs_chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
-    end
-
 end

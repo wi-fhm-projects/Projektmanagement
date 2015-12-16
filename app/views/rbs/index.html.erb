@@ -68,7 +68,8 @@
     </table>
   </div>
   <div class="mdl-tabs__panel" id="tree-panel">
-    <div id='rdm_chart'></div>
-        <%=ressource_breakdown_chart %>
-  </div>
+    <div id='chart'>
+
+    </div>
+    <%= render_chart(@rbs_chart, 'chart') %>
 </div>

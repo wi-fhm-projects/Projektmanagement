@@ -3,11 +3,11 @@ class RbsController < ApplicationController
     @project = Project.find(params[:project])
     @kind = Kind.new
     @role = Role.new
-
+    ressource_breakdown_chart
   end
 
   def show
-
+    ressource_breakdown_chart
   end
 
   def create

@@ -17,6 +17,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    find_project
     find_event
   end
 

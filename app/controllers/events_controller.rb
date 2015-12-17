@@ -13,6 +13,7 @@ class EventsController < ApplicationController
   def new
     find_project
     @event = Event.new
+    @events = Event.all
   end
 
   def edit

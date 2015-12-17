@@ -30,6 +30,6 @@
     <br>
     <%= f.submit "Erstellen", class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' %>
     <% end %><br>
-    <%= link_to projects_path, class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' do %>Zurück<%end%>
+    <%= link_to events_path(project: @project), class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' do %>Zurück<%end%>
   </div>
 </div>

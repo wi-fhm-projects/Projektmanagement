@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20151216153017) do
 
   create_table "events", force: :cascade do |t|
+    t.integer  "number"
     t.string   "title"
     t.date     "startDate"
     t.date     "endDate"

@@ -1,24 +1,68 @@
 <%= render partial: '/shared/header', locals: {project: @project} %>
 
-<div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--12-col">
-    <h5> Meine Roadmap </h5>
-    <hr>
-    <!-- Nur die Roadmap anzeigen, wenn auch Events angelegt wurden -->
-    <% if @project.events.any? then%>
+<div class="mdl-cell mdl-cell--10-col">
+  <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs__tab-bar">
+      <a class="mdl-tabs__tab" href="#table-panel">Eventliste</a>
+      <a class="mdl-tabs__tab is-active" href="#tree-panel">Roadmap</a>
+    </div>
+
+    <div class="mdl-tabs__panel" id="table-panel">
+      <% if @project.events.any? then%>
+      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">Eventnummer</th>
+            <th class="mdl-data-table__cell--non-numeric">Event</th>
+            <th class="mdl-data-table__cell--non-numeric">Startzeitpunkt</th>
+            <th class="mdl-data-table__cell--non-numeric">Endzeitpunkt</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @project.events.each do |event| %>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric"><%= event.number %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%= event.title %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%= event.startDate %></td>
+            <td class="mdl-data-table__cell--non-numeric"><%= event.endDate %></td>
+            <td>
+              <%= link_to event, method: :delete, data: { confirm: 'Soll das Event wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+              <i class="material-icons">delete</i>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to edit_event_path(event.id, project: @project), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+              <i id="2" class="material-icons">mode_edit</i>
+              <% end %>
+              <div class="mdl-tooltip" for="1">
+                Event löschen
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+
+      <br>
+      <%= link_to new_event_path(project: @project) , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
+      <i class="material-icons">add</i>
+      Neues Event
+      <% end %>
+    </div>
+
+    <div class="mdl-tabs__panel is-active" id="tree-panel">
+      <!-- Nur die Roadmap anzeigen, wenn auch Events angelegt wurden -->
+      <% if @project.events.any? then%>
       <div id='rdm_chart'></div>
       <%= render_chart @rdm_chart, 'rdm_chart' %>
-    <% end %>
-    <br>
-    <%= link_to new_event_path(project: @project) , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
-      <i class="material-icons">add</i> Neues Event
-    <% end %>
-    <!-- Nur den Button anzeigen, wenn auch Events angelegt wurden -->
-    <% if @project.events.any? then%>
-      <%= link_to new_event_path , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
-      <i class="material-icons">add</i> Events bearbeiten (muss noch hinterlegt werden)
+    <% else %>
+      <i class="material-icons">report_problem</i>
+      Noch keine Events vorhanden. Bitte erst Events anlegen.
       <% end %>
-    <% end %>
-  </div>
+    </div>
 
+  </div>
 </div>

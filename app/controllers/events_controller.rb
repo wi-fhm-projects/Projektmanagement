@@ -23,6 +23,19 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     find_project_by_id
 
+    if @event.number == nil then
+      @event.number = 1
+    end
+    if @event.title == nil then
+      @event.title = "Titel"
+    end
+    if @event.startDate == nil then
+      @event.startDate = DateTime.now
+    end
+    if @event.endDate == nil then
+      @event.endDate = DateTime.now + 90
+    end
+
     respond_to do |format|
       if @event.save
         #Hier noch auf die Roadmap an sich verlinken, anstatt auf die Show von Project!!
@@ -53,7 +66,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+      format.html { redirect_to projects_path, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,7 +89,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:title, :startDate, :endDate, :project_id)
+      params.require(:event).permit(:number, :title, :startDate, :endDate, :project_id)
     end
 
     def event_chart

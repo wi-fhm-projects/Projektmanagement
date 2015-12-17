@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @events.each do |event| %>
+        <% @project.events.each do |event| %>
           <tr>
             <td class="mdl-data-table__cell--non-numeric"><%= event.id %></td>
             <td class="mdl-data-table__cell--non-numeric"><%= event.title %></td>

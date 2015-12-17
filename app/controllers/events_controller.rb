@@ -4,7 +4,6 @@ class EventsController < ApplicationController
   def index
     @event = Event.new
     find_project
-    #@events = Event.all
     event_chart
   end
 
@@ -17,14 +16,12 @@ class EventsController < ApplicationController
   end
 
   def edit
-    find_project
-    @events = Event.all
+    find_event
   end
 
   def create
-    #find_project
     @event = Event.new(event_params)
-    @project = Project.find(event_params[:project_id])
+    find_project_by_id
 
     respond_to do |format|
       if @event.save
@@ -39,9 +36,12 @@ class EventsController < ApplicationController
   end
 
   def update
+    find_event
+    find_project
+
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.html { redirect_to @project, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -58,8 +58,11 @@ class EventsController < ApplicationController
     end
   end
 
+
+
+
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def find_event
         @event = Event.find(params[:id])
     end
@@ -68,10 +71,13 @@ class EventsController < ApplicationController
       @project = Project.find(params[:project])
     end
 
+    def find_project_by_id
+      @project = Project.find(event_params[:project_id])
+    end
+
     def event_params
       params.require(:event).permit(:title, :startDate, :endDate, :project_id)
     end
-
 
     def event_chart
         data_table = GoogleVisualr::DataTable.new
@@ -79,7 +85,7 @@ class EventsController < ApplicationController
         data_table.new_column('date',   'Startzeitpunkt')
         data_table.new_column('date',   'Endzeitpunkt'  )
 
-        if @project.events != nil then
+        if @project.events.any? then
         @project.events.each do |event|
           data_table.add_row(
           [
@@ -92,7 +98,4 @@ class EventsController < ApplicationController
         opts   = { :allowHtml => true }
         @rdm_chart = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
-
-
-
 end

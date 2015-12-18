@@ -13,7 +13,7 @@
             <h2 class="format mdl-card__title-text"><%=project.title %></h2>
           </div>
           <div class="mdl-card__supporting-text">
-            <%= project.description %>
+            <%= truncate(project.description, :length => 120) %>
           </div>
           <div class="mdl-card__actions mdl-card--border">
             <%= link_to project, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>

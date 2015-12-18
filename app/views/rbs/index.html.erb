@@ -38,12 +38,6 @@
 
                 <td class="mdl-data-table__cell--non-numeric">
                   <%=kind.name %>
-                  <div align="right">
-                    <i class="material-icons mdl-button mdl-js-button mdl-button--icon">create</i>
-                    <%= link_to rb, method: :delete, data: { confirm: 'Soll die Art wirklich gelöscht werden?' } do %>
-                    <i class="material-icons mdl-button mdl-js-button mdl-button--icon">remove_circle</i>
-                    <%end%>
-                  </div>
                 </td>
 
                 <%= form_for @role, url: {action: "create", controller: 'role'} do |f| %>
@@ -70,8 +64,6 @@
                       </td>
                       <td class="mdl-data-table__cell--non-numeric">
                         <%=role.experience%>
-                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon">create</i>
-                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon">remove_circle</i>
                       </td>
                     </tr>
                 <%end%>

@@ -6,7 +6,7 @@
       <i class="material-icons">keyboard_arrow_left</i>
       <% end %> <%= @project.title %>
     </span>
-    <span class="project-description"><%= @project.description %></span>
+    <span class="project-description"><%=truncate(@project.description, :length => 120) %></span>
   </header>
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--4-col">

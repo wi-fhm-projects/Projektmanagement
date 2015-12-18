@@ -66,7 +66,10 @@ class RbsController < ApplicationController
         kind.roles.each do |role|
           data_table.add_row(
             [
-              {:v => "r"+role.id.to_s, :f =>role.name   }, "k"+kind.id.to_s, ' '
+              {:v => "r"+role.id.to_s,
+                :f =>'<div style="font-style:bold">'+ role.name+'</div>'+
+                '<div style="font-style:italic">'+'Qualifikation:<br>'+role.qualifikation+'</div>'+
+                '<div style="font-style:italic">'+'Erfahrung:<br>'+role.experience+'</div>'}, "k"+kind.id.to_s, ' '
             ]
           )
         end

@@ -1,37 +1,29 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--12-col">
-    <h5> Meine Projekte </h5>
-    <hr>
-    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
-      <thead>
-        <tr>
-          <th class="mdl-data-table__cell--non-numeric">Projektnummer</th>
-          <th class="mdl-data-table__cell--non-numeric">Titel</th>
-          <th class="mdl-data-table__cell--non-numeric">Beschreibung</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @projects.each do |project| %>
-          <tr>
-            <td class="mdl-data-table__cell--non-numeric"><%= project.id %></td>
-            <td class="mdl-data-table__cell--non-numeric"><%= project.title %></td>
-            <td class="mdl-data-table__cell--non-numeric"><%= project.description %></td>
-            <td>
-              <%= link_to project, method: :delete, data: { confirm: 'Soll das Projekt wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
-                <i class="material-icons">delete</i>
-              <% end %>
-              <%= link_to project, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
-                <i class="material-icons">folder_open</i>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <br>
     <%= link_to new_project_path , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
       <i class="material-icons">add</i> Neues Projekt
     <% end %>
+    <h5> Meine Projekte </h5>
+    <hr>
   </div>
+  <% @projects.each do |project| %>
+      <div class="mdl-cell mdl-cell--4-col">
+        <div class="structure mdl-card mdl-shadow--2dp">
+          <div class="format mdl-card__title mdl-card--expand">
+            <h2 class="format mdl-card__title-text"><%=project.title %></h2>
+          </div>
+          <div class="mdl-card__supporting-text">
+            <%= project.description %>
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <%= link_to project, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+              <i class="material-icons">folder_open</i>
+            <% end %>
+            <%= link_to project, method: :delete, data: { confirm: 'Soll das Projekt wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+              <i class="material-icons">delete</i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
 </div>

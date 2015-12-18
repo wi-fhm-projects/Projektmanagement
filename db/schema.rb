@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215135900) do
+ActiveRecord::Schema.define(version: 20151218101955) do
 
   create_table "kinds", force: :cascade do |t|
     t.string   "name"
@@ -59,5 +59,32 @@ ActiveRecord::Schema.define(version: 20151215135900) do
   end
 
   add_index "subproducts", ["project_id"], name: "index_subproducts_on_project_id"
+
+  create_table "subtasks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "subtasks", ["task_id"], name: "index_subtasks_on_task_id"
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tasks", ["project_id"], name: "index_tasks_on_project_id"
+
+  create_table "workpackages", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "subtask_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "workpackages", ["subtask_id"], name: "index_workpackages_on_subtask_id"
 
 end

@@ -13,7 +13,7 @@ class SubproductsController < ApplicationController
     @project = Project.find(product_params[:project_id])
     respond_to do |format|
       if @subproduct.save
-        format.html { redirect_to @project , notice: 'Product wurde erfolgreich erstellt.' }
+        format.html { redirect_to pbs_path(project: @project) , notice: 'Product wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @subproduct }
       else
         format.html { render :new }
@@ -41,6 +41,6 @@ class SubproductsController < ApplicationController
     end
   
     def product_params
-      params.require(:product).permit(:name, :description, :project_id)
+      params.require(:subproduct).permit(:name, :description, :project_id)
     end
 end

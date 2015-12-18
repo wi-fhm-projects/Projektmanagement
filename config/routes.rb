@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   resources :projects
-  resources :products
+  resources :rbs
+  resources :role
+  resources :subproducts, :moduls
+  resources :pbs
+  resources :wbs, :subtask, :workpackage
+
 
 
   root 'projects#index'

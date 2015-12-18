@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210092452) do
+ActiveRecord::Schema.define(version: 20151218101955) do
+
+  create_table "kinds", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "kinds", ["project_id"], name: "index_kinds_on_project_id"
+
+  create_table "moduls", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "subproduct_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "moduls", ["subproduct_id"], name: "index_moduls_on_subproduct_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -19,6 +38,17 @@ ActiveRecord::Schema.define(version: 20151210092452) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.string   "qualifikation"
+    t.string   "experience"
+    t.integer  "kind_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "roles", ["kind_id"], name: "index_roles_on_kind_id"
 
   create_table "subproducts", force: :cascade do |t|
     t.string   "name"
@@ -29,5 +59,32 @@ ActiveRecord::Schema.define(version: 20151210092452) do
   end
 
   add_index "subproducts", ["project_id"], name: "index_subproducts_on_project_id"
+
+  create_table "subtasks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "subtasks", ["task_id"], name: "index_subtasks_on_task_id"
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tasks", ["project_id"], name: "index_tasks_on_project_id"
+
+  create_table "workpackages", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "subtask_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "workpackages", ["subtask_id"], name: "index_workpackages_on_subtask_id"
 
 end

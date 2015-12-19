@@ -40,7 +40,6 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        #Hier noch auf die Roadmap an sich verlinken, anstatt auf die Show von Project!!
         format.html { redirect_to  events_path(project: @project), notice: 'Event was successfully created.' }
         format.json { render :index, status: :created, location: @event }
       else
@@ -88,6 +87,14 @@ class EventsController < ApplicationController
 
     def find_project_by_id
       @project = Project.find(event_params[:project_id])
+    end
+
+    def set_project
+      @project = project
+    end
+
+    def get_project
+      @project
     end
 
     def event_params

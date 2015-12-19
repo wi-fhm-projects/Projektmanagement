@@ -6,6 +6,7 @@ def index
   @subproduct = Subproduct.new
   @modul = Modul.new
   @component = Component.new
+  product_breakdown_chart
 end
 
 def show
@@ -50,19 +51,37 @@ private
   end
 
   def product_breakdown_chart
-    data_table = GoogleVisualr::DataTable.new
-    data_table.new_column('string', 'Name'   )
-    data_table.new_column('string', 'Manager')
-    data_table.new_column('string', 'ToolTip')
-    data_table.add_rows(
-      [
-        [ {:v => 'Mike', :f => 'Mike<div style="color:red; font-style:italic">President</div>'   }, ''    , 'The President' ],
-        [ {:v => 'Jim' , :f => 'Jim<div style="color:red; font-style:italic">Vice President<div>'}, 'Mike', 'VP'            ],
-        [ 'Alice'  , 'Mike', ''           ],
-        [ 'Bob'    , 'Jim' , 'Bob Sponge' ],
-        [ 'Carol'  , 'Bob' , ''           ]
-      ]
-    )
+      data_table = GoogleVisualr::DataTable.new
+      data_table.new_column('string', 'Name'   )
+      data_table.new_column('string', 'Manager')
+      data_table.new_column('string', 'ToolTip')
+      data_table.add_row(
+        [
+         {:v => "p"+@project.id.to_s, :f =>@project.title   }, "p"+@project.id.to_s, ' '
+        ]
+      )
+      @project.subproducts.each do |subproduct|
+        data_table.add_row(
+          [
+            {:v => "s"+subproduct.id.to_s, :f =>subproduct.name   }, "p"+@project.id.to_s, ' '
+          ]
+        )
+        subproduct.moduls.each do |modul|
+          data_table.add_row(
+            [
+              {:v => "m"+modul.id.to_s, :f =>modul.name   }, "s"+subproduct.id.to_s, ' '
+            ]
+          )
+
+          modul.components.each do |component|
+            data_table.add_row(
+              [
+                {:v => "c"+component.id.to_s, :f =>component.name   }, "m"+modul.id.to_s, ' '
+              ]
+            )
+          end
+        end
+      end
     opts   = { :allowHtml => true }
     @pbs_chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
   end

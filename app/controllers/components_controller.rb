@@ -10,10 +10,10 @@ def create
 
   respond_to do |format|
     if @component.save
-      format.html { redirect_to pbs_path(project: @project), notice: 'Komponente wurde erfolgreich erstellt.' }
+      format.html { redirect_to pbs_path(project: @project), success: 'Komponente wurde erfolgreich erstellt.' }
       format.json { render :show, status: :created, location: @component }
     else
-      format.html { render :new }
+      format.html { redirect_to pbs_path(project: @project), danger: 'Kompnente nicht erstellt' }
       format.json { render json: @component.errors, status: :unprocessable_entity }
     end
   end
@@ -22,7 +22,7 @@ end
 def destroy
   @component.destroy
   respond_to do |format|
-    format.html { redirect_to components_url, notice: 'Komponente wurde erfolgreich entfernt.' }
+    format.html { redirect_to components_url, success: 'Komponente wurde erfolgreich entfernt.' }
     format.json { head :no_content }
   end
 end

@@ -15,7 +15,7 @@ class RbsController < ApplicationController
     @project = Project.find(kind_params[:project_id])
     respond_to do |format|
       if @kind.save
-        format.html { redirect_to rbs_path(project: @project), notice: 'Typ wurde erfolgreich erstellt.' }
+        format.html { redirect_to rbs_path(project: @project), success: 'Typ wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
         format.html { render :new }
@@ -27,7 +27,7 @@ class RbsController < ApplicationController
    def destroy
     @kind.destroy
     respond_to do |format|
-      format.html { redirect_to rbs_path(project: @project), notice: 'Typ wurde erfolgreich entfernt.' }
+      format.html { redirect_to rbs_path(project: @project), success: 'Typ wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end

@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 
   resources :projects
-  resources :rbs
-  resources :role
+  resources :rbs, :role
   resources :pbs, :subproducts, :moduls, :components
   resources :wbs, :subtask, :workpackage
 

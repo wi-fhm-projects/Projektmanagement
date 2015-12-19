@@ -14,10 +14,10 @@ class WorkpackageController < ApplicationController
     @project = Project.find(@task.project)
     respond_to do |format|
       if @workpack.save
-        format.html { redirect_to wbs_path(project: @project), notice: 'Arbeitspacket wurde erfolgreich erstellt.' }
+        format.html { redirect_to wbs_path(project: @project), success: 'Arbeitspaket wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
-        format.html { render :new }
+        format.html { redirect_to wbs_path(project: @project), danger: 'Arbeitspaket nicht erstellt' }
         format.json { render json: @subtask.errors, status: :unprocessable_entity }
       end
     end
@@ -26,7 +26,7 @@ class WorkpackageController < ApplicationController
    def destroy
     @workpack.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Arbeitspacket wurde erfolgreich entfernt.' }
+      format.html { redirect_to projects_url, success: 'Arbeitspacket wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end

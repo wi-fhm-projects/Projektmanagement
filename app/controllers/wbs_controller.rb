@@ -16,7 +16,7 @@ class WbsController < ApplicationController
     @project = Project.find(task_params[:project_id])
     respond_to do |format|
       if @task.save
-        format.html { redirect_to wbs_path(project: @project), notice: 'Aufgabe wurde erfolgreich erstellt.' }
+        format.html { redirect_to wbs_path(project: @project), success: 'Aufgabe wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
         format.html { render :new }
@@ -28,7 +28,7 @@ class WbsController < ApplicationController
    def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to rbs_path(project: @project), notice: 'Aufgabe wurde erfolgreich entfernt.' }
+      format.html { redirect_to rbs_path(project: @project), success: 'Aufgabe wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end

@@ -1,10 +1,12 @@
 <%= render partial: '/shared/header', locals: {project: @project} %>
+
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
    <div class="mdl-tabs__tab-bar">
       <a href="#table-panel" class="mdl-tabs__tab is-active">Tabelle</a>
       <a href="#tree-panel" class="mdl-tabs__tab">Baumdiagramm</a>
   </div>
   <div class="mdl-tabs__panel is-active" id="table-panel">
+    <%= render partial: '/shared/flash_message'%>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
       <thead>
         <tr>
@@ -38,12 +40,6 @@
 
                 <td class="mdl-data-table__cell--non-numeric">
                   <%=kind.name %>
-                  <div align="right">
-                    <i class="material-icons mdl-button mdl-js-button mdl-button--icon">create</i>
-                    <%= link_to rb, method: :delete, data: { confirm: 'Soll die Art wirklich gelöscht werden?' } do %>
-                    <i class="material-icons mdl-button mdl-js-button mdl-button--icon">remove_circle</i>
-                    <%end%>
-                  </div>
                 </td>
 
                 <%= form_for @role, url: {action: "create", controller: 'role'} do |f| %>
@@ -70,8 +66,6 @@
                       </td>
                       <td class="mdl-data-table__cell--non-numeric">
                         <%=role.experience%>
-                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon">create</i>
-                        <i class="material-icons mdl-button mdl-js-button mdl-button--icon">remove_circle</i>
                       </td>
                     </tr>
                 <%end%>

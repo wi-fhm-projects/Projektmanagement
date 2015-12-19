@@ -21,6 +21,25 @@
 }
 .structure > .mdl-card__title {
   color: #fff;
-  background:
-    url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+  text-align: bottom center 15%;
+  background: url('Business-Table.jpg') top no-repeat #3F51B5 ;
+  background-size: 100% 100%;
+
+}
+
+.picture_pbs > .structure {
+  background: url('construction-PBS.jpg') top no-repeat #3F51B5 ;
+  background-size: 100% 100%;
+}
+
+.picture_rbs > .structure {
+  background: url('Business-Table.jpg') top no-repeat #3F51B5 ;
+  background-size: 100% 100%;
+}
+
+.format > .mdl-card__title-text {
+  display: block;
+  font-weight: bold;
+  font-family:'Arial';
+  text-align: center;
 }

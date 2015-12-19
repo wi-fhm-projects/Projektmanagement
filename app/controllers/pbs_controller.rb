@@ -5,6 +5,7 @@ def index
 	@project = Project.find(params[:project])
   @subproduct = Subproduct.new
   @modul = Modul.new
+  @component = Component.new
 end
 
 def show

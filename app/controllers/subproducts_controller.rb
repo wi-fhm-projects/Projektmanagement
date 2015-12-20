@@ -13,10 +13,10 @@ class SubproductsController < ApplicationController
     @project = Project.find(product_params[:project_id])
     respond_to do |format|
       if @subproduct.save
-        format.html { redirect_to pbs_path(project: @project) , notice: 'Product wurde erfolgreich erstellt.' }
+        format.html { redirect_to pbs_path(project: @project) , success: 'Teilprodukt wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @subproduct }
       else
-        format.html { render :new }
+        format.html { redirect_to pbs_path(project: @project), danger: 'Teilprodukt nicht erstellt' }
         format.json { render json: @subproduct.errors, status: :unprocessable_entity }
       end
     end
@@ -25,7 +25,7 @@ class SubproductsController < ApplicationController
   def destroy
     @subproduct.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product wurde erfolgreich entfernt.' }
+      format.html { redirect_to products_url, success: 'Product wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end
@@ -39,7 +39,7 @@ class SubproductsController < ApplicationController
     def find_product
       @subproduct = Subproduct.find(params[:id])
     end
-  
+
     def product_params
       params.require(:subproduct).permit(:name, :description, :project_id)
     end

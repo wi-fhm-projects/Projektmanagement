@@ -10,10 +10,10 @@ def create
 
   respond_to do |format|
     if @modul.save
-      format.html { redirect_to pbs_path(project: @project), notice: 'Projekt wurde erfolgreich erstellt.' }
+      format.html { redirect_to pbs_path(project: @project), success: 'Modul wurde erfolgreich erstellt.' }
       format.json { render :show, status: :created, location: @modul }
     else
-      format.html { render :new }
+      format.html { redirect_to pbs_path(project: @project), danger: 'Modul nicht erstellt' }
       format.json { render json: @modul.errors, status: :unprocessable_entity }
     end
   end
@@ -22,7 +22,7 @@ end
 def destroy
   @modul.destroy
   respond_to do |format|
-    format.html { redirect_to moduls_url, notice: 'Projekt wurde erfolgreich entfernt.' }
+    format.html { redirect_to moduls_url, success: 'Projekt wurde erfolgreich entfernt.' }
     format.json { head :no_content }
   end
 end

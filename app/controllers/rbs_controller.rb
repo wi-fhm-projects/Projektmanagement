@@ -54,19 +54,22 @@ class RbsController < ApplicationController
       data_table.new_column('string', 'ToolTip')
       data_table.add_row(
         [
-         {:v => @project.title, :f =>@project.title   }, @project.title, ' '
+         {:v => "p"+@project.id.to_s, :f =>@project.title   }, "p"+@project.id.to_s, ' '
         ]
       )
       @project.kinds.each do |kind|
         data_table.add_row(
           [
-            {:v => kind.name, :f =>kind.name   }, @project.title, ' '
+            {:v => "k"+kind.id.to_s, :f =>kind.name   }, "p"+@project.id.to_s, ' '
           ]
         )
         kind.roles.each do |role|
           data_table.add_row(
             [
-              {:v => role.name, :f =>role.name   }, kind.name, ' '
+              {:v => "r"+role.id.to_s,
+                :f =>'<div style="font-style:bold">'+ role.name+'</div>'+
+                '<div style="font-style:italic">'+'Qualifikation:<br>'+role.qualifikation+'</div>'+
+                '<div style="font-style:italic">'+'Erfahrung:<br>'+role.experience+'</div>'}, "k"+kind.id.to_s, ' '
             ]
           )
         end

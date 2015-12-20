@@ -55,26 +55,26 @@ class WbsController < ApplicationController
       data_table.new_column('string', 'ToolTip')
       data_table.add_row(
         [
-         {:v => @project.title, :f =>@project.title   }, @project.title, ' '
+         {:v => "p"+@project.id.to_s, :f =>@project.title   }, "p"+@project.id.to_s, ' '
         ]
       )
       @project.tasks.each do |task|
         data_table.add_row(
           [
-            {:v => task.name, :f =>task.name   }, @project.title, ' '
+            {:v => "t"+task.id.to_s, :f =>task.name   }, "p"+@project.id.to_s, ' '
           ]
         )
         task.subtasks.each do |sub|
           data_table.add_row(
             [
-              {:v => sub.name, :f =>sub.name   }, task.name, ' '
+              {:v => "s"+sub.id.to_s, :f =>sub.name   }, "t"+task.id.to_s, ' '
             ]
           )
 
           sub.workpackages.each do |work|
             data_table.add_row(
               [
-                {:v => work.name, :f =>work.name   }, sub.name, ' '
+                {:v => "w"+work.id.to_s, :f =>work.name   }, "s"+sub.id.to_s, ' '
               ]
             )
           end

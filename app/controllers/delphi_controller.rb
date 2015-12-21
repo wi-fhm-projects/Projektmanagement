@@ -4,13 +4,15 @@ class DelphiController < ApplicationController
 
   end
   def show
+    @project = Project.find(params[:project])
+
   end
   def create
-    @quest = Questionarie.new(quest_params)
+    @quest = Questionary.new(quest_params)
     @project = Project.find(quest_params[:project_id])
     respond_to do |format|
       if @quest.save
-        format.html { redirect_to rbs_path(project: @project), success: 'Fragebogen wurde erfolgreich erstellt.' }
+        format.html { redirect_to delphi_index_path(project: @project), success: 'Fragebogen wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
         format.html { render :new }
@@ -28,7 +30,8 @@ class DelphiController < ApplicationController
   end
 
   def new
-    @quest = Questionarie.new
+    @project = Project.find(params[:project])
+    @quest = Questionary.new
   end
 
   private
@@ -38,6 +41,6 @@ class DelphiController < ApplicationController
     end
 
     def quest_params
-      params.require(:questionarie).permit(:name, :description, :project_id)
+      params.require(:questionary).permit(:name, :description, :project_id)
     end
 end

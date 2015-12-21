@@ -1,0 +1,22 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <h5> Neuen Fragebogen anlegen </h5>
+    <hr>
+    <%= form_for @quest, url: {action: "create"} do |f| %>
+      <%= f.hidden_field :project_id, value: @project.id %>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input type="text" name="questionary[name]" id="name" class="mdl-textfield__input">
+        <label class="mdl-textfield__label" for="project_title">Titel</label>
+      </div>
+      <br>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input type="text" name="questionary[description]" id="description" class="mdl-textfield__input">
+        <label class="mdl-textfield__label" for="project_description">Beschreibung</label>
+      </div>
+      <br>
+      <br>
+      <%= f.submit "Erstellen", class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' %>
+    <% end %><br>
+    <%= link_to delphi_index_path(project: @project), class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' do %>Zurück<%end%>
+  </div>
+</div>

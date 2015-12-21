@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy]
 
+
   def index
     @event = Event.new
     find_project
@@ -51,7 +52,7 @@ class EventsController < ApplicationController
 
   def update
     find_event
-    find_project
+    #find_project
 
     respond_to do |format|
       if @event.update(event_params)

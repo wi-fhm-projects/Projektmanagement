@@ -3,7 +3,7 @@
   <div class="mdl-cell mdl-cell--12-col">
     <h5> Event bearbeiten </h5>
     <hr>
-    <%= form_for @event, url: {action: "edit"} do |f| %>
+    <%= form_for @event, url: {action: "update"} do |f| %>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <input class="mdl-textfield__input" id="event_number" name="event[number]" type="integer">

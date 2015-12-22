@@ -20,9 +20,10 @@ def create
 end
 
 def destroy
+  @project = @modul.subproduct.project
   @modul.destroy
   respond_to do |format|
-    format.html { redirect_to moduls_url, success: 'Projekt wurde erfolgreich entfernt.' }
+    format.html { redirect_to pbs_path(project: @project), success: 'Modul wurde erfolgreich entfernt.' }
     format.json { head :no_content }
   end
 end
@@ -33,6 +34,10 @@ end
 
 def modul_params
   params.require(:modul).permit(:name, :description, :subproduct_id)
+end
+
+def find_modul
+  @modul = Modul.find(params[:id])
 end
 
 end

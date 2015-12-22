@@ -21,12 +21,11 @@
         </div>
       </header>
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title">Projekte</span>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Projekte</a>
-          <a class="mdl-navigation__link" href="">Benutzer</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
+          <% @projects.each do |project| %>
+            <%= link_to project, class: 'mdl-navigation__link' do %><%= project.title %><% end %>
+          <% end %>
         </nav>
       </div>
       <main class="mdl-layout__content">

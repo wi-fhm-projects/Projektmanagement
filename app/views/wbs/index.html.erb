@@ -1,4 +1,4 @@
-<%= render partial: '/shared/header', locals: {project: @project} %>
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: @project, section: 'Work-Breakdown-Structure'} %>
 
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
    <div class="mdl-tabs__tab-bar">
@@ -13,13 +13,13 @@
           <th class="mdl-data-table__cell--non-numeric">Projekt</th>
           <th class="mdl-data-table__cell--non-numeric">Aufgabe</th>
           <th class="mdl-data-table__cell--non-numeric">Teilaufgabe</th>
-          <th class="mdl-data-table__cell--non-numeric">Arbeitspacket</th>
+          <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
         </tr>
       </thead>
       <tbody>
           <tr class="first-level">
-            <td><%= @project.title %></td>
-            <td>
+            <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
+            <td class="mdl-data-table__cell--non-numeric">
               <%= form_for @task, url: {action: "create", controller: 'wbs'} do |f| %>
               <%= f.hidden_field :project_id, value: @project.id %>
               <%= f.text_field :name %>
@@ -41,7 +41,7 @@
                 </td>
                 <%= form_for @subtask, url: {action: "create", controller: 'subtask'} do |f| %>
                 <%= f.hidden_field :task_id, value: task.id %>
-                <td>
+                <td class="mdl-data-table__cell--non-numeric">
                   <%= f.text_field :name %>
                   <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                   <i class="material-icons">add_circle</i>

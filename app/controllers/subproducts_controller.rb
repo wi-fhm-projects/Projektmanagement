@@ -23,9 +23,10 @@ class SubproductsController < ApplicationController
   end
 
   def destroy
+    @project = @subproduct.project
     @subproduct.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, success: 'Product wurde erfolgreich entfernt.' }
+      format.html { redirect_to pbs_path(project: @project), success: 'Teilproduct wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end

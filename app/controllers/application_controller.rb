@@ -3,4 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   add_flash_types :success, :warning, :danger, :info
+  before_action :find_projects
+
+  def find_projects
+    @projects = Project.all
+  end
 end

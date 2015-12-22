@@ -1,4 +1,4 @@
-<%= render partial: '/shared/header', locals: {project: @project} %>
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: :back, section: 'Breitband-Delphi'} %>
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
   <div class="mdl-tabs__panel is-active" id="table-panel">
     <%= render partial: '/shared/flash_message'%>
@@ -6,7 +6,7 @@
       <thead>
         <tr>
           <th class="mdl-data-table__cell--non-numeric">Projekt</th>
-          <th class="mdl-data-table__cell--non-numeric">Arbeitspacket</th>
+          <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
           <th class="mdl-data-table__cell--non-numeric">Frage</th>
           <th class="mdl-data-table__cell--non-numeric">Antwort</th>
         </tr>
@@ -23,9 +23,8 @@
           <% @questionary.questions.each do |quest| %>
             <tr class="second-level">
               <td></td>
-              <td>
+              <td class="mdl-data-table__cell--non-numeric">
                 <%=quest.workpackage.subtask.task.name%>/<%=quest.workpackage.subtask.name%>/<%=quest.workpackage.name%>
-
               </td>
               <td class="mdl-data-table__cell--non-numeric"><%=quest.frage%></td>
               <td class="mdl-data-table__cell--non-numeric" colspan="2">

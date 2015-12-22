@@ -23,10 +23,11 @@
               <td></td>
               <td class="mdl-data-table__cell--non-numeric"><%=quest.frage%></td>
               <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                Durchschnitt: <%=quest.response_average%>
               </td>
             </tr>
               <% quest.responses.each do |response| %>
-              <tr>
+              <tr class="third-level">
                 <td></td>
               <td class="mdl-data-table__cell--non-numeric"></td>
               <td class="mdl-data-table__cell--non-numeric" colspan="2">

@@ -14,6 +14,7 @@ class ResponseController < ApplicationController
     @question = Question.find(resp_params[:question_id])
     respond_to do |format|
       if @response.save
+        calculate_average
         format.html { redirect_to response_index_path(project: @question.questionary.project,questionary: @question.questionary), success: 'Antwort wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
@@ -44,5 +45,16 @@ class ResponseController < ApplicationController
 
     def resp_params
       params.require(:response).permit(:antwort,:question_id)
+    end
+
+    def calculate_average
+      anzahl = 0
+      wert = 0
+      @question.responses.each do |resp|
+        wert = wert + resp.antwort.to_i
+        anzahl = anzahl + 1
+      end
+      @question.response_average = wert/anzahl
+      @question.save
     end
 end

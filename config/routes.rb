@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :rbs, :role
   resources :pbs, :subproducts, :moduls, :components
   resources :wbs, :subtask, :workpackage
+  resources :delphi, :question, :response
 
 
 

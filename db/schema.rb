@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151219112014) do
+ActiveRecord::Schema.define(version: 20151222063759) do
 
   create_table "components", force: :cascade do |t|
     t.string   "name"
@@ -48,6 +48,37 @@ ActiveRecord::Schema.define(version: 20151219112014) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "questionaries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "questionaries", ["project_id"], name: "index_questionaries_on_project_id"
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "frage"
+    t.integer  "response_average"
+    t.integer  "questionary_id"
+    t.integer  "workpackage_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "questions", ["questionary_id"], name: "index_questions_on_questionary_id"
+  add_index "questions", ["workpackage_id"], name: "index_questions_on_workpackage_id"
+
+  create_table "responses", force: :cascade do |t|
+    t.string   "antwort"
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "responses", ["question_id"], name: "index_responses_on_question_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

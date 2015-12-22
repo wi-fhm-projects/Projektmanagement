@@ -6,7 +6,7 @@
       <thead>
         <tr>
           <th class="mdl-data-table__cell--non-numeric">Projekt</th>
-          <th class="mdl-data-table__cell--non-numeric">Arbeitspacket</th>
+          <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
           <th class="mdl-data-table__cell--non-numeric">Frage</th>
         </tr>
       </thead>
@@ -16,7 +16,7 @@
           </td>
             <%= form_for @quest, url: {action: "create", controller: 'question'} do |f| %>
             <%= f.hidden_field :questionary_id, value: @questionary.id %>
-            <td>
+            <td class="mdl-data-table__cell--non-numeric">
 
               <%= f.select(:workpackage_id,@packages) %>
 

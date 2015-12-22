@@ -6,7 +6,7 @@
       <thead>
         <tr>
           <th class="mdl-data-table__cell--non-numeric">Projekt</th>
-          <th class="mdl-data-table__cell--non-numeric">Arbeitspacket</th>
+          <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
           <th class="mdl-data-table__cell--non-numeric">Frage</th>
           <th class="mdl-data-table__cell--non-numeric">Antwort</th>
         </tr>
@@ -31,7 +31,7 @@
               <% quest.responses.each do |response| %>
               <tr class="third-level">
                 <td></td>
-                <td>
+                <td class="mdl-data-table__cell--non-numeric">
                   <%=response.question.workpackage.subtask.task.name%>/<%=response.question.workpackage.subtask.name%>/<%=response.question.workpackage.name%>
                 </td>
               <td class="mdl-data-table__cell--non-numeric"></td>

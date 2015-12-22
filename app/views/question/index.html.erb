@@ -14,10 +14,15 @@
           <tr class="first-level">
             <td class="mdl-data-table__cell--non-numeric"><%= @project.title %><%=@questionary.id%></td>
           </td>
-            <td></td>
+            <%= form_for @quest, url: {action: "create", controller: 'question'} do |f| %>
+            <%= f.hidden_field :questionary_id, value: @questionary.id %>
+            <td>
+
+              <%= f.select(:workpackage_id,@packages) %>
+
+            </td>
             <td class="mdl-data-table__cell--non-numeric" colspan="3">
-              <%= form_for @quest, url: {action: "create", controller: 'question'} do |f| %>
-                <%= f.hidden_field :questionary_id, value: @questionary.id %>
+
                 <%= f.text_field :frage %>
                   <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                   <i class="material-icons">add_circle</i>
@@ -28,7 +33,9 @@
           <% @questionary.questions.each do |quest| %>
             <tr class="second-level">
               <td></td>
-              <td class="mdl-data-table__cell--non-numeric"></td>
+              <td class="mdl-data-table__cell--non-numeric">
+                <%=quest.workpackage.subtask.task.name%>/<%=quest.workpackage.subtask.name%>/<%=quest.workpackage.name%>
+              </td>
               <td class="mdl-data-table__cell--non-numeric" colspan="2">
                 <%=quest.frage%>
               </td>

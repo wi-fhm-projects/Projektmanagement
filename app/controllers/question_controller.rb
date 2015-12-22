@@ -44,15 +44,16 @@ class QuestionController < ApplicationController
     end
 
     def quest_params
-      params.require(:question).permit(:frage,:questionary_id)
+      params.require(:question).permit(:frage, :workpackage_id, :questionary_id)
     end
 
     def selected_workpackages
-      @packages = ""
+      @packages = Array.new
       @project.tasks.each do |task|
         task.subtasks.each do |subtask|
           subtask.workpackages.each do |work|
-            @packages +="<option value="+work.id.to_s+">"+work.name.to_s+"</option>"
+            pack = [work.subtask.task.name+"/"+work.subtask.name+"/"+work.name,work.id]
+            @packages.push(pack)
           end
         end
       end

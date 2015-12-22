@@ -1,0 +1,48 @@
+<%= render partial: '/shared/header', locals: {project: @project} %>
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__panel is-active" id="table-panel">
+    <%= render partial: '/shared/flash_message'%>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">Projekt</th>
+          <th class="mdl-data-table__cell--non-numeric">Frage</th>
+          <th class="mdl-data-table__cell--non-numeric">Antwort</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="first-level">
+            <td class="mdl-data-table__cell--non-numeric"><%= @project.title %><%=@questionary.id%></td>
+          </td>
+            <td></td>
+            <td class="mdl-data-table__cell--non-numeric" colspan="3">
+            </td>
+          </tr>
+          <% @questionary.questions.each do |quest| %>
+            <tr class="second-level">
+              <td></td>
+              <td class="mdl-data-table__cell--non-numeric"><%=quest.frage%></td>
+              <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                <%= form_for @answer, url: {action: "create", controller: 'response'} do |f| %>
+                <%= f.hidden_field :question_id, value: quest.id %>
+                <%= f.text_field :antwort %>
+                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                  <i class="material-icons">add_circle</i>
+                <% end %>
+              <% end %>
+              </td>
+            </tr>
+              <% quest.responses.each do |response| %>
+              <tr>
+                <td></td>
+              <td class="mdl-data-table__cell--non-numeric"><%=quest.frage%></td>
+              <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                <%=response.antwort%>
+              </td>
+              </tr>
+              <%end%>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

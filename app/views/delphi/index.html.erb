@@ -20,6 +20,9 @@
             <%= link_to response_index_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
               <i class="material-icons">folder_open</i>
             <% end %>
+            <%= link_to delphi_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+              <i class="material-icons">report</i>
+            <% end %>
             <%= link_to question_index_path(project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
               <i class="material-icons">create</i>
             <% end %>

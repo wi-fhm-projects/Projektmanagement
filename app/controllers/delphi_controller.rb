@@ -5,6 +5,7 @@ class DelphiController < ApplicationController
   end
   def show
     @project = Project.find(params[:project])
+    @questionary = Questionary.find(params[:questionary])
 
   end
   def create

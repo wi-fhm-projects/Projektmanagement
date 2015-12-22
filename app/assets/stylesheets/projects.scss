@@ -6,9 +6,15 @@
 	background-color: rgb(66,66,66)!important;
 
 	.project-description{
-		margin: 20px;
-		font-style: italic;
+    margin-left:10px;
+    line-height: 10;
+    font-size: 15px;
+    font-style: italic;
 	}
+
+  .header-chevron{
+    margin-left:10px;
+  }
 }
 
 #create-product-div{

@@ -20,3 +20,10 @@ document.addEventListener('page:change', function() {
   componentHandler.upgradeDom();
 });
 
+$(document).ready(function(){
+  $("tr").hover(function() {
+      $(this).find(".onMouseOver").css({"display":"block"});
+    }, function() {
+      $(this).find(".onMouseOver").css({"display":"none"});
+  });
+});

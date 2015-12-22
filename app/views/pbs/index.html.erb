@@ -15,6 +15,7 @@
           <th class="mdl-data-table__cell--non-numeric">Teilprodukt</th>
           <th class="mdl-data-table__cell--non-numeric">Modul</th>
           <th class="mdl-data-table__cell--non-numeric">Komponente</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,8 @@
                   <i class="material-icons">add_circle</i>
                 <% end %>
               <% end %>
+            </td>
+            <td>
             </td>
           </tr>
           <% @project.subproducts.each do |subproduct| %>
@@ -43,6 +46,13 @@
                     <i class="material-icons">add_circle</i>
                   <% end %>
                 <% end %>
+              </td>
+              <td>
+                <span class="onMouseOver">
+                 <%= button_to subproduct, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                    <i class="material-icons">delete</i>
+                  <% end %>
+                </span>
               </td>
             </tr>
             <% subproduct.moduls.each do |modul| %>
@@ -60,6 +70,13 @@
                     <% end %>
                   <% end %>
                 </td>
+                <td>
+                  <span class="onMouseOver">
+                   <%= button_to modul, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                      <i class="material-icons">delete</i>
+                    <% end %>
+                  </span>
+                </td>
               </tr>
               <% modul.components.each do |component| %>
                 <tr>
@@ -67,6 +84,13 @@
                   <td></td>
                   <td></td>
                   <td class="mdl-data-table__cell--non-numeric"> <%= component.name %></td>
+                  <td>
+                    <span class="onMouseOver">
+                     <%= button_to component, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                        <i class="material-icons">delete</i>
+                      <% end %>
+                    </span>
+                  </td>
                 </tr>
               <% end %>
             <% end %>

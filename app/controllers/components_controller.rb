@@ -20,9 +20,10 @@ def create
 end
 
 def destroy
+  @project = @component.modul.subproduct.project
   @component.destroy
   respond_to do |format|
-    format.html { redirect_to components_url, success: 'Komponente wurde erfolgreich entfernt.' }
+    format.html { redirect_to pbs_path(project: @project), success: 'Komponente wurde erfolgreich entfernt.' }
     format.json { head :no_content }
   end
 end
@@ -35,4 +36,7 @@ def component_params
   params.require(:component).permit(:name, :description, :modul_id)
 end
 
+  def find_component
+    @component = Component.find(params[:id])
+  end
 end

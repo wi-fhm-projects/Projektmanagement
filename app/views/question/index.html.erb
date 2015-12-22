@@ -1,0 +1,40 @@
+<%= render partial: '/shared/header', locals: {project: @project} %>
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__panel is-active" id="table-panel">
+    <%= render partial: '/shared/flash_message'%>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">Projekt</th>
+          <th class="mdl-data-table__cell--non-numeric">Arbeitspacket</th>
+          <th class="mdl-data-table__cell--non-numeric">Frage</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="first-level">
+            <td class="mdl-data-table__cell--non-numeric"><%= @project.title %><%=@questionary.id%></td>
+          </td>
+            <td></td>
+            <td class="mdl-data-table__cell--non-numeric" colspan="3">
+              <%= form_for @quest, url: {action: "create", controller: 'question'} do |f| %>
+                <%= f.hidden_field :questionary_id, value: @questionary.id %>
+                <%= f.text_field :frage %>
+                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                  <i class="material-icons">add_circle</i>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+          <% @questionary.questions.each do |quest| %>
+            <tr class="second-level">
+              <td></td>
+              <td class="mdl-data-table__cell--non-numeric"></td>
+              <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                <%=quest.frage%>
+              </td>
+            </tr>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

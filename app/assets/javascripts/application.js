@@ -22,7 +22,7 @@ document.addEventListener('page:change', function() {
 
 $(document).ready(function(){
   $("tr").hover(function() {
-      $(this).find(".onMouseOver").css({"display":"block"});
+      $(this).find(".onMouseOver").css({"display":"inline"});
     }, function() {
       $(this).find(".onMouseOver").css({"display":"none"});
   });

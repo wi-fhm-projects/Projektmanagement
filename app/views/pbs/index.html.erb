@@ -15,7 +15,7 @@
           <th class="mdl-data-table__cell--non-numeric">Teilprodukt</th>
           <th class="mdl-data-table__cell--non-numeric">Modul</th>
           <th class="mdl-data-table__cell--non-numeric">Komponente</th>
-          <th></th>
+          <th class="button-cell"></th>
         </tr>
       </thead>
       <tbody>
@@ -47,7 +47,7 @@
                   <% end %>
                 <% end %>
               </td>
-              <td>
+              <td class="button-cell">
                 <span class="onMouseOver">
                  <%= button_to subproduct, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">delete</i>
@@ -70,7 +70,7 @@
                     <% end %>
                   <% end %>
                 </td>
-                <td>
+                <td class="button-cell">
                   <span class="onMouseOver">
                    <%= button_to modul, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                       <i class="material-icons">delete</i>
@@ -84,7 +84,7 @@
                   <td></td>
                   <td></td>
                   <td class="mdl-data-table__cell--non-numeric"> <%= component.name %></td>
-                  <td>
+                  <td class="button-cell">
                     <span class="onMouseOver">
                      <%= button_to component, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                         <i class="material-icons">delete</i>

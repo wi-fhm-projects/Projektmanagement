@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20151223074143) do
   end
 
   add_index "events", ["project_id"], name: "index_events_on_project_id"
->>>>>>> origin/feature/roadmap_new
+
   create_table "kinds", force: :cascade do |t|
     t.string   "name"
     t.integer  "project_id"

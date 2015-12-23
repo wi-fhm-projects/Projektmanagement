@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20151223074143) do
 
   add_index "components", ["modul_id"], name: "index_components_on_modul_id"
 
+  create_table "events", force: :cascade do |t|
+    t.integer  "number"
+    t.string   "title"
+    t.date     "startDate"
+    t.date     "endDate"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "events", ["project_id"], name: "index_events_on_project_id"
+>>>>>>> origin/feature/roadmap_new
   create_table "kinds", force: :cascade do |t|
     t.string   "name"
     t.integer  "project_id"

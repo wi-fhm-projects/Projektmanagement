@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222063759) do
+ActiveRecord::Schema.define(version: 20151223074143) do
 
   create_table "components", force: :cascade do |t|
     t.string   "name"
@@ -71,6 +71,16 @@ ActiveRecord::Schema.define(version: 20151222063759) do
   add_index "questions", ["questionary_id"], name: "index_questions_on_questionary_id"
   add_index "questions", ["workpackage_id"], name: "index_questions_on_workpackage_id"
 
+  create_table "requirments", force: :cascade do |t|
+    t.string   "qualifikation"
+    t.string   "experience"
+    t.integer  "role_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "requirments", ["role_id"], name: "index_requirments_on_role_id"
+
   create_table "responses", force: :cascade do |t|
     t.string   "antwort"
     t.integer  "question_id"
@@ -82,11 +92,9 @@ ActiveRecord::Schema.define(version: 20151222063759) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
-    t.string   "qualifikation"
-    t.string   "experience"
     t.integer  "kind_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "roles", ["kind_id"], name: "index_roles_on_kind_id"

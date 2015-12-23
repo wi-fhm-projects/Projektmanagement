@@ -44,13 +44,14 @@
 
                 <%= form_for @role, url: {action: "create", controller: 'role'} do |f| %>
                 <%= f.hidden_field :kind_id, value: kind.id %>
-                <td class="mdl-data-table__cell--non-numeric"><%= f.text_field :name %></td>
-                <td class="mdl-data-table__cell--non-numeric"><%= f.text_field :qualifikation %></td>
-                <td class="mdl-data-table__cell--non-numeric">
-                  <%= f.text_field :experience %>
-                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                <td class="mdl-data-table__cell--non-numeric"><%= f.text_field :name %>
+                <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
                     <% end %>
+                </td>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td class="mdl-data-table__cell--non-numeric">
+
 
                 </td>
                 <%end%>
@@ -61,13 +62,33 @@
                       <td class="mdl-data-table__cell--non-numeric"></td>
                       <td class="mdl-data-table__cell--non-numeric"></td>
                       <td class="mdl-data-table__cell--non-numeric"><%=role.name%></td>
+                      <%= form_for @req, url: {action: "create", controller: 'requirment'} do |f| %>
+                      <%= f.hidden_field :role_id, value: role.id %>
                       <td class="mdl-data-table__cell--non-numeric">
-                        <%=role.qualifikation%>
+                        <%= f.text_field :qualifikation %>
                       </td>
                       <td class="mdl-data-table__cell--non-numeric">
-                        <%=role.experience%>
+                        <%= f.text_field :experience %>
+                        <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                        <i class="material-icons">add_circle</i>
+                      <% end %>
                       </td>
                     </tr>
+                    <% role.requirments.each do |req| %>
+                      <tr class="fourth-level">
+                      <td class="mdl-data-table__cell--non-numeric"></td>
+                      <td class="mdl-data-table__cell--non-numeric"></td>
+                      <td class="mdl-data-table__cell--non-numeric"></td>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <%=req.qualifikation%>
+                      </td>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <%=req.experience%>
+                      <% end %>
+                      </td>
+                    </tr>
+
+                    <%end%>
                 <%end%>
 
             <%end%>

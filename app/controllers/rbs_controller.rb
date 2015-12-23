@@ -3,6 +3,7 @@ class RbsController < ApplicationController
     @project = Project.find(params[:project])
     @kind = Kind.new
     @role = Role.new
+    @req = Requirment.new
     ressource_breakdown_chart
   end
 
@@ -67,11 +68,19 @@ class RbsController < ApplicationController
           data_table.add_row(
             [
               {:v => "r"+role.id.to_s,
-                :f =>'<div style="font-style:bold">'+ role.name+'</div>'+
-                '<div style="font-style:italic">'+'Qualifikation:<br>'+role.qualifikation+'</div>'+
-                '<div style="font-style:italic">'+'Erfahrung:<br>'+role.experience+'</div>'}, "k"+kind.id.to_s, ' '
+                :f =>'<div style="font-style:bold">'+ role.name+'</div>'}, "k"+kind.id.to_s, ' '
+
             ]
           )
+          role.requirments.each do |req|
+            data_table.add_row(
+            [
+              {:v => "re"+req.id.to_s,
+                :f =>'Qualifikation:<br>'+req.qualifikation+'<br>'+
+                'Erfahrung:<br>'+req.experience}, "r"+role.id.to_s, ' '
+            ]
+            )
+          end
         end
       end
       opts   = { :allowHtml => true }

@@ -25,10 +25,12 @@ ActiveRecord::Schema.define(version: 20151224100817) do
     t.string   "name"
     t.string   "description"
     t.integer  "modul_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "allocationItem_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
+  add_index "components", ["allocationItem_id"], name: "index_components_on_allocationItem_id"
   add_index "components", ["modul_id"], name: "index_components_on_modul_id"
 
   create_table "kinds", force: :cascade do |t|
@@ -101,10 +103,12 @@ ActiveRecord::Schema.define(version: 20151224100817) do
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "kind_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "allocationItem_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
+  add_index "roles", ["allocationItem_id"], name: "index_roles_on_allocationItem_id"
   add_index "roles", ["kind_id"], name: "index_roles_on_kind_id"
 
   create_table "subproducts", force: :cascade do |t|

@@ -9,11 +9,13 @@
       <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
       <th class="mdl-data-table__cell--non-numeric">Einsatzmittel</th>
       <th class="mdl-data-table__cell--non-numeric">Komponente</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr class="first-level">
       <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
+      <td class="mdl-data-table__cell--non-numeric"></td>
       <td class="mdl-data-table__cell--non-numeric"></td>
       <td class="mdl-data-table__cell--non-numeric"></td>
       <td class="mdl-data-table__cell--non-numeric"></td>
@@ -30,12 +32,14 @@
           <td class="mdl-data-table__cell--non-numeric"></td>
           <td class="mdl-data-table__cell--non-numeric"></td>
           <td class="mdl-data-table__cell--non-numeric"></td>
+          <td class="mdl-data-table__cell--non-numeric"></td>
         </tr>
         <% task.subtasks.each do |subtask| %>
           <tr class="third-level">
             <td class="mdl-data-table__cell--non-numeric"></td>
             <td class="mdl-data-table__cell--non-numeric"></td>
             <td class="mdl-data-table__cell--non-numeric"><%=subtask.name%></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
             <td class="mdl-data-table__cell--non-numeric"></td>
             <td class="mdl-data-table__cell--non-numeric"></td>
             <td class="mdl-data-table__cell--non-numeric"></td>
@@ -48,8 +52,27 @@
                 <td class="mdl-data-table__cell--non-numeric">
                   <%=work.name%>
                 </td>
-                <td class="mdl-data-table__cell--non-numeric"></td>
-                <td class="mdl-data-table__cell--non-numeric"></td>
+                <%= form_for @allocationItem, url: {action: "create", controller: 'allocationitems'} do |f| %>
+                  <td class="mdl-data-table__cell--non-numeric">
+                      <%= f.select(:role) do %>
+                       <% @roles.each do |c| -%>
+                          <%= content_tag(:option, c.name, value: c) %>
+                        <% end %>
+                      <% end %>
+                  </td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                      <%= f.select(:component) do %>
+                       <% @components.each do |c| -%>
+                          <%= content_tag(:option, c.name, value: c) %>
+                        <% end %>
+                      <% end %>
+                  </td>
+                  <td>
+                    <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                      <i class="material-icons">save</i>
+                    <% end %>
+                  </td>
+                <% end %>
               </tr>
             <%end%>
         <%end%>

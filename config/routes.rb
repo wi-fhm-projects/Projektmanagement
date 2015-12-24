@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   resources :pbs, :subproducts, :moduls, :components
   resources :wbs, :subtask, :workpackage
   resources :delphi, :question, :response
-  resources :ram
-
+  resources :ram, :allocationitems
 
 
   root 'projects#index'

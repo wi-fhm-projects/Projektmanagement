@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223074143) do
+ActiveRecord::Schema.define(version: 20151224100817) do
+
+  create_table "allocation_items", force: :cascade do |t|
+    t.integer  "workpackage_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "allocation_items", ["workpackage_id"], name: "index_allocation_items_on_workpackage_id"
 
   create_table "components", force: :cascade do |t|
     t.string   "name"

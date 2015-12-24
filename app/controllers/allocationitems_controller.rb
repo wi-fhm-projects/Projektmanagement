@@ -7,11 +7,11 @@ class AllocationitemsController < ApplicationController
   end
 
   def create
-    @allocationItem = AllocationItem.new(allocation_params)
-    @project = Project.find(@allocationItem.workpackage.project)
+    @allocationItem = Allocationitem.new(allocation_params)
+    @project = Project.find(@allocationItem.workpackage.subtask.task.project)
     respond_to do |format|
-      if @role.save
-        format.html { redirect_to ram_path(project: @project), success: 'Zuordnung wurde erfolgreich erstellt.' }
+      if @allocationItem.save
+        format.html { redirect_to ram_index_path(project: @project), success: 'Zuordnung wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
         format.html { redirect_to ram_path(project: @project), danger: 'Zuordnung nicht erstellt' }
@@ -29,7 +29,7 @@ class AllocationitemsController < ApplicationController
   end
 
   def new
-    @allocationItem = AllocationItem.new
+    @allocationItem = Allocationitem.new
   end
 
   private
@@ -39,6 +39,6 @@ class AllocationitemsController < ApplicationController
     end
 
     def allocation_params
-      params.require(:allocationItem).permit(:workpackage_id, :role_id, :component_id)
+      params.require(:allocationitem).permit(:workpackage_id, :role_id, :component_id)
     end
 end

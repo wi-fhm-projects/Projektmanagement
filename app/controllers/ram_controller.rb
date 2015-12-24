@@ -4,7 +4,7 @@ class RamController < ApplicationController
 
   def index
    @project = Project.find(params[:project])
-   @allocationItem = AllocationItem.new
+   @allocationItem = Allocationitem.new
    roles_select
    components_select
   end

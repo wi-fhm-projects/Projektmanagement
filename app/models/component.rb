@@ -1,5 +1,5 @@
 class Component < ActiveRecord::Base
   belongs_to :modul
-  belongs_to :allocationItem
+  has_one :allocationitem
   validates :name, presence: true
 end

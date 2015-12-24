@@ -53,19 +53,28 @@
                   <%=work.name%>
                 </td>
                 <%= form_for @allocationItem, url: {action: "create", controller: 'allocationitems'} do |f| %>
+                  <%= f.hidden_field :workpackage_id, value: work.id %>
                   <td class="mdl-data-table__cell--non-numeric">
-                      <%= f.select(:role) do %>
+                    <% if work.allocationitem %>
+                      <%= work.allocationitem.role.name %>
+                    <% else %>
+                      <%= f.select(:role_id) do %>
                        <% @roles.each do |c| -%>
-                          <%= content_tag(:option, c.name, value: c) %>
+                          <%= content_tag(:option, c.name, value: c.id) %>
                         <% end %>
                       <% end %>
+                    <% end %>
                   </td>
                   <td class="mdl-data-table__cell--non-numeric">
-                      <%= f.select(:component) do %>
+                    <% if work.allocationitem %>
+                      <%= work.allocationitem.component.name %>
+                    <% else %>
+                      <%= f.select(:component_id) do %>
                        <% @components.each do |c| -%>
-                          <%= content_tag(:option, c.name, value: c) %>
+                          <%= content_tag(:option, c.name, value: c.id) %>
                         <% end %>
                       <% end %>
+                    <% end %>
                   </td>
                   <td>
                     <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>

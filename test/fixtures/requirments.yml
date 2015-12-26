@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  qualifikation: MyString
-  experience: MyString
+req1:
+  qualifikation: qualifikation1
+  experience: experience1
+  role: role1
 
-two:
-  qualifikation: MyString
-  experience: MyString
+req2:
+  qualifikation: qualifikation2
+  experience: experience2
+  role: role2

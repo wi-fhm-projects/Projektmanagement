@@ -1,7 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  frage: MyString
+question1:
+  frage: frage1
+  questionary: questionary1
+  workpackage: workpackage1
 
-two:
-  frage: MyString
+question2:
+  frage: frage2
+  questionary: questionary2
+  workpackage: workpackage2

@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+subtask1:
+  name: subtask1
+  task: task1
 
-two:
-  name: MyString
+subtask2:
+  name: subtask2
+  task: task2

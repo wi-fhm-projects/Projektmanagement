@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyString
+component1:
+  name: component1
+  description: beschreibung1
+  modul: modul1
 
-two:
-  name: MyString
-  description: MyString
+component2:
+  name: component2
+  description: beschreibung2
+  modul: modul2

@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+role1:
   name: MyString
   qualifikation: MyString
   experience: MyString
+  kind: kind1
 
-two:
+role2:
   name: MyString
   qualifikation: MyString
   experience: MyString
+  kind: kind2

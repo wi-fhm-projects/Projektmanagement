@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  antwort: MyString
+response1:
+  antwort: Antwort1
+  question: question1
 
-two:
-  antwort: MyString
+response2:
+  antwort: Antwort2
+  question: question2

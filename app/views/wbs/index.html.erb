@@ -1,0 +1,93 @@
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: @project, section: 'Work-Breakdown-Structure'} %>
+
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+   <div class="mdl-tabs__tab-bar">
+      <a href="#table-panel" class="mdl-tabs__tab is-active">Tabelle</a>
+      <a href="#tree-panel" class="mdl-tabs__tab">Baumdiagramm</a>
+  </div>
+  <div class="mdl-tabs__panel is-active" id="table-panel">
+    <%= render partial: '/shared/flash_message'%>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">Projekt</th>
+          <th class="mdl-data-table__cell--non-numeric">Aufgabe</th>
+          <th class="mdl-data-table__cell--non-numeric">Teilaufgabe</th>
+          <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="first-level">
+            <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <%= form_for @task, url: {action: "create", controller: 'wbs'} do |f| %>
+              <%= f.hidden_field :project_id, value: @project.id %>
+              <%= f.text_field :name %>
+              <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+              <i class="material-icons">add_circle</i>
+              <% end %>
+            </td>
+            <% end %>
+            <td></td>
+            <td></td>
+          </tr>
+
+            <% @project.tasks.each do |task| %>
+              <tr class="second-level">
+                <td></td>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <%=task.name %>
+                  </div>
+                </td>
+                <%= form_for @subtask, url: {action: "create", controller: 'subtask'} do |f| %>
+                <%= f.hidden_field :task_id, value: task.id %>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <%= f.text_field :name %>
+                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                  <i class="material-icons">add_circle</i>
+
+                </td>
+                <% end %>
+                <td></td>
+                <%end%>
+              </tr>
+
+                <% task.subtasks.each do |subtask| %>
+                   <tr class="third-level">
+                      <td class="mdl-data-table__cell--non-numeric"></td>
+                      <td class="mdl-data-table__cell--non-numeric"></td>
+                      <td class="mdl-data-table__cell--non-numeric"><%=subtask.name%></td>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        <%= form_for @workpack, url: {action: "create", controller: 'workpackage'} do |f| %>
+                        <%= f.hidden_field :subtask_id, value: subtask.id %>
+                        <%= f.text_field :name %>
+                        <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                        <i class="material-icons">add_circle</i>
+                        <% end %>
+                      </td>
+                    </tr>
+                    <% subtask.workpackages.each do |work| %>
+                      <tr class="fourth-level">
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                          <%=work.name%>
+                        </td>
+                      </tr>
+                    <%end%>
+                  <%end%>
+                <%end%>
+
+            <%end%>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="mdl-tabs__panel" id="tree-panel">
+    <div id='chart'>
+
+    </div>
+    <%= render_chart(@wbs_chart, 'chart') %>
+
+</div>

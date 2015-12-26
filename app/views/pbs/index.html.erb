@@ -1,4 +1,4 @@
-<%= render partial: '/shared/header', locals: {project: @project} %>
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: @project, section: 'Product-Breakdown-Structure'} %>
 
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
   <div class="mdl-tabs__tab-bar">
@@ -7,6 +7,7 @@
   </div>
 
   <div class="mdl-tabs__panel is-active" id="table-panel">
+    <%= render partial: '/shared/flash_message'%>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
       <thead>
         <tr>
@@ -14,6 +15,7 @@
           <th class="mdl-data-table__cell--non-numeric">Teilprodukt</th>
           <th class="mdl-data-table__cell--non-numeric">Modul</th>
           <th class="mdl-data-table__cell--non-numeric">Komponente</th>
+          <th class="button-cell"></th>
         </tr>
       </thead>
       <tbody>
@@ -28,20 +30,29 @@
                 <% end %>
               <% end %>
             </td>
+            <td>
+            </td>
           </tr>
           <% @project.subproducts.each do |subproduct| %>
             <tr class="second-level">
               <td></td>
               <td class="mdl-data-table__cell--non-numeric"> <%= subproduct.name %></td>
               <td class="mdl-data-table__cell--non-numeric" colspan="2">
-              <%= form_for @modul, url: {action: "create", controller: 'moduls'} do |f| %>
-                <%= f.hidden_field :project_id, value: @project.id %>
-                <%= f.hidden_field :subproduct_id, value: subproduct.id %>
-                <%= f.text_field :name %>
-                <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                  <i class="material-icons">add_circle</i>
+                <%= form_for @modul, url: {action: "create", controller: 'moduls'} do |f| %>
+                  <%= f.hidden_field :project_id, value: @project.id %>
+                  <%= f.hidden_field :subproduct_id, value: subproduct.id %>
+                  <%= f.text_field :name %>
+                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                    <i class="material-icons">add_circle</i>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </td>
+              <td class="button-cell">
+                <span class="onMouseOver">
+                 <%= button_to subproduct, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                    <i class="material-icons">delete</i>
+                  <% end %>
+                </span>
               </td>
             </tr>
             <% subproduct.moduls.each do |modul| %>
@@ -49,14 +60,47 @@
                 <td></td>
                 <td></td>
                 <td class="mdl-data-table__cell--non-numeric"> <%= modul.name %></td>
-                <td></td>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <%= form_for @component, url: {action: "create", controller: 'components'} do |f| %>
+                    <%= f.hidden_field :project_id, value: @project.id %>
+                    <%= f.hidden_field :modul_id, value: modul.id %>
+                    <%= f.text_field :name %>
+                    <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                      <i class="material-icons">add_circle</i>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td class="button-cell">
+                  <span class="onMouseOver">
+                   <%= button_to modul, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                      <i class="material-icons">delete</i>
+                    <% end %>
+                  </span>
+                </td>
               </tr>
+              <% modul.components.each do |component| %>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td class="mdl-data-table__cell--non-numeric"> <%= component.name %></td>
+                  <td class="button-cell">
+                    <span class="onMouseOver">
+                     <%= button_to component, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                        <i class="material-icons">delete</i>
+                      <% end %>
+                    </span>
+                  </td>
+                </tr>
+              <% end %>
             <% end %>
           <% end %>
       </tbody>
     </table>
   </div>
   <div class="mdl-tabs__panel" id="tree-panel">
+    <div id='chart'></div>
+    <%= render_chart(@pbs_chart, 'chart') %>
   </div>
 </div>
 

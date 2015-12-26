@@ -3,6 +3,7 @@ class RbsController < ApplicationController
     @project = Project.find(params[:project])
     @kind = Kind.new
     @role = Role.new
+    @req = Requirment.new
     ressource_breakdown_chart
   end
 
@@ -15,7 +16,7 @@ class RbsController < ApplicationController
     @project = Project.find(kind_params[:project_id])
     respond_to do |format|
       if @kind.save
-        format.html { redirect_to rbs_path(project: @project), notice: 'Typ wurde erfolgreich erstellt.' }
+        format.html { redirect_to rbs_path(project: @project), success: 'Typ wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
         format.html { render :new }
@@ -27,7 +28,7 @@ class RbsController < ApplicationController
    def destroy
     @kind.destroy
     respond_to do |format|
-      format.html { redirect_to rbs_path(project: @project), notice: 'Typ wurde erfolgreich entfernt.' }
+      format.html { redirect_to rbs_path(project: @project), success: 'Typ wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end
@@ -54,21 +55,32 @@ class RbsController < ApplicationController
       data_table.new_column('string', 'ToolTip')
       data_table.add_row(
         [
-         {:v => @project.title, :f =>@project.title   }, @project.title, ' '
+         {:v => "p"+@project.id.to_s, :f =>@project.title   }, "p"+@project.id.to_s, ' '
         ]
       )
       @project.kinds.each do |kind|
         data_table.add_row(
           [
-            {:v => kind.name, :f =>kind.name   }, @project.title, ' '
+            {:v => "k"+kind.id.to_s, :f =>kind.name   }, "p"+@project.id.to_s, ' '
           ]
         )
         kind.roles.each do |role|
           data_table.add_row(
             [
-              {:v => role.name, :f =>role.name   }, kind.name, ' '
+              {:v => "r"+role.id.to_s,
+                :f =>'<div style="font-style:bold">'+ role.name+'</div>'}, "k"+kind.id.to_s, ' '
+
             ]
           )
+          role.requirments.each do |req|
+            data_table.add_row(
+            [
+              {:v => "re"+req.id.to_s,
+                :f =>'Qualifikation:<br>'+req.qualifikation+'<br>'+
+                'Erfahrung:<br>'+req.experience}, "r"+role.id.to_s, ' '
+            ]
+            )
+          end
         end
       end
       opts   = { :allowHtml => true }

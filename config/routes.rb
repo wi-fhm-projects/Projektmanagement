@@ -2,10 +2,10 @@ Rails.application.routes.draw do
 
   resources :events
   resources :projects
-  resources :rbs
-  resources :role
-  resources :subproducts, :moduls
-  resources :pbs
+  resources :rbs, :role, :requirment
+  resources :pbs, :subproducts, :moduls, :components
+  resources :wbs, :subtask, :workpackage
+  resources :delphi, :question, :response
 
 
   root 'projects#index'

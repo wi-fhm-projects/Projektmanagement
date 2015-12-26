@@ -2,9 +2,10 @@
   <div class="mdl-layout__header-row">
     <!-- Title -->
   <span class="mdl-layout-title">
-    <%= link_to @project , class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color--indigo-500' do %>
+    <%= link_to linkVariable , class: 'mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-color--indigo-500' do %>
     <i class="material-icons">keyboard_arrow_left</i>
     <% end %> <%= @project.title %>
   </span>
-  <span class="project-description"><%= @project.description %></span>
+  <span class="header-chevron"><i class="material-icons">chevron_right</i></span>
+  <span class="project-description"><%= section %></span>
 </header>

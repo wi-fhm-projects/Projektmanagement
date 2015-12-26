@@ -1,0 +1,47 @@
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: :back, section: 'Breitband-Delphi'} %>
+<div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+  <div class="mdl-tabs__panel is-active" id="table-panel">
+    <%= render partial: '/shared/flash_message'%>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
+      <thead>
+        <tr>
+          <th class="mdl-data-table__cell--non-numeric">Projekt</th>
+          <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
+          <th class="mdl-data-table__cell--non-numeric">Frage</th>
+          <th class="mdl-data-table__cell--non-numeric">Antwort</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="first-level">
+            <td class="mdl-data-table__cell--non-numeric"><%= @project.title %><%=@questionary.id%></td>
+          </td>
+            <td></td>
+            <td class="mdl-data-table__cell--non-numeric" colspan="3">
+            </td>
+          </tr>
+          <% @questionary.questions.each do |quest| %>
+            <tr class="second-level">
+              <td></td>
+              <td></td>
+              <td class="mdl-data-table__cell--non-numeric"><%=quest.frage%></td>
+              <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                Durchschnitt: <%=quest.response_average%>
+              </td>
+            </tr>
+              <% quest.responses.each do |response| %>
+              <tr class="third-level">
+                <td></td>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <%=response.question.workpackage.subtask.task.name%>/<%=response.question.workpackage.subtask.name%>/<%=response.question.workpackage.name%>
+                </td>
+              <td class="mdl-data-table__cell--non-numeric"></td>
+              <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                <%=response.antwort%>
+              </td>
+              </tr>
+              <%end%>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216153017) do
+ActiveRecord::Schema.define(version: 20151223074143) do
+
+  create_table "components", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "modul_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "components", ["modul_id"], name: "index_components_on_modul_id"
 
   create_table "events", force: :cascade do |t|
     t.integer  "number"
@@ -51,13 +61,52 @@ ActiveRecord::Schema.define(version: 20151216153017) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "roles", force: :cascade do |t|
+  create_table "questionaries", force: :cascade do |t|
     t.string   "name"
+    t.string   "description"
+    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "questionaries", ["project_id"], name: "index_questionaries_on_project_id"
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "frage"
+    t.integer  "response_average"
+    t.integer  "questionary_id"
+    t.integer  "workpackage_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "questions", ["questionary_id"], name: "index_questions_on_questionary_id"
+  add_index "questions", ["workpackage_id"], name: "index_questions_on_workpackage_id"
+
+  create_table "requirments", force: :cascade do |t|
     t.string   "qualifikation"
     t.string   "experience"
-    t.integer  "kind_id"
+    t.integer  "role_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  add_index "requirments", ["role_id"], name: "index_requirments_on_role_id"
+
+  create_table "responses", force: :cascade do |t|
+    t.string   "antwort"
+    t.integer  "question_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "responses", ["question_id"], name: "index_responses_on_question_id"
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "kind_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "roles", ["kind_id"], name: "index_roles_on_kind_id"
@@ -71,5 +120,32 @@ ActiveRecord::Schema.define(version: 20151216153017) do
   end
 
   add_index "subproducts", ["project_id"], name: "index_subproducts_on_project_id"
+
+  create_table "subtasks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "subtasks", ["task_id"], name: "index_subtasks_on_task_id"
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tasks", ["project_id"], name: "index_tasks_on_project_id"
+
+  create_table "workpackages", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "subtask_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "workpackages", ["subtask_id"], name: "index_workpackages_on_subtask_id"
 
 end

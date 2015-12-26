@@ -3,7 +3,9 @@
 modul1:
   name: modul1
   description: description1
+  subproduct: subproduct1
 
 modul2:
   name: modul2
   description: description2
+  subproduct: subproduct2

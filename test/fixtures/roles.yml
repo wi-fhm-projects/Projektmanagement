@@ -2,12 +2,8 @@
 
 role1:
   name: MyString
-  qualifikation: MyString
-  experience: MyString
   kind: kind1
 
 role2:
   name: MyString
-  qualifikation: MyString
-  experience: MyString
   kind: kind2

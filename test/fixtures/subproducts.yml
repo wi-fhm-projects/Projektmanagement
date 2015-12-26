@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+subproduct1:
+  name: subproduct1
+  description: beschreibung1
+  project: project1
+
+subproduct2:
+  name: subproduct2
+  description: beschreibung2
+  project: project2

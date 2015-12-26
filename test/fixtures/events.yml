@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 Event1:
+  number: 1
   title: Event1
   startDate: 2015-12-16
   endDate: 2015-12-17
+  project: project1
 
 Event2:
+  number: 2
   title: Event2
   startDate: 2015-12-16
   endDate: 2015-12-18
+  project: project2

@@ -108,12 +108,12 @@ class EventsController < ApplicationController
         data_table.new_column('date',   'Startzeitpunkt')
         data_table.new_column('date',   'Endzeitpunkt'  )
 
-        if @project.questions.any? then
-        @project.questions.each do |question|
+        if @project.events.any? then
+        @project.events.each do |event|
           data_table.add_row(
           [
-            #event.title, Date.new(event.startDate.year, event.startDate.month, event.startDate.day), Date.new(event.endDate.year, event.endDate.month, event.endDate.day)
-            question.workpackage.name, DateTime.now, (DateTime.now + 90)
+            event.title, Date.new(event.startDate.year, event.startDate.month, event.startDate.day), Date.new(event.endDate.year, event.endDate.month, event.endDate.day)
+            #question.workpackage.name, DateTime.now, (DateTime.now + 90)
           ]
           )
           end

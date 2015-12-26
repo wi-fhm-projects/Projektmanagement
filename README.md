@@ -12,5 +12,6 @@ Für die Visualisierung?
 
 https://developers.google.com/chart/interactive/docs/
 
+Befehl um fixtures in richtiger Reihenfolge zu laden:
 
-Test
+rake db:fixtures:load FIXTURES=projects,events,kinds,subproducts,tasks,roles,questionaries,moduls,subtasks,requirments,components,workpackages,questions,responses

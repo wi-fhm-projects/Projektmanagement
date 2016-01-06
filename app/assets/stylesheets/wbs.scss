@@ -1,3 +1,19 @@
 // Place all the styles related to the wbs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#e1{
+  position: absolute;
+  width: 250px;
+}
+
+.select2-selection{
+  height: 44px;
+  overflow: hidden;
+}
+
+.test-td{
+  position: absolute;
+  color: black;
+  padding: 2px!important;
+}

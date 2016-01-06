@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223074143) do
+ActiveRecord::Schema.define(version: 20160106140032) do
+
+  create_table "allocationitems", force: :cascade do |t|
+    t.integer  "workpackage_id"
+    t.integer  "component_id"
+    t.integer  "role_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "allocationitems", ["component_id"], name: "index_allocationitems_on_component_id"
+  add_index "allocationitems", ["role_id"], name: "index_allocationitems_on_role_id"
+  add_index "allocationitems", ["workpackage_id"], name: "index_allocationitems_on_workpackage_id"
 
   create_table "components", force: :cascade do |t|
     t.string   "name"
@@ -41,6 +53,11 @@ ActiveRecord::Schema.define(version: 20151223074143) do
   end
 
   add_index "moduls", ["subproduct_id"], name: "index_moduls_on_subproduct_id"
+
+  create_table "predecessors", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"

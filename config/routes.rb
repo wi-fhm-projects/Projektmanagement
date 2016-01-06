@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :rbs, :role, :requirment
   resources :pbs, :subproducts, :moduls, :components
-  resources :wbs, :subtask, :workpackage
+  resources :wbs, :subtask, :workpackage, :predecessor
   resources :delphi, :question, :response
   resources :ram
 

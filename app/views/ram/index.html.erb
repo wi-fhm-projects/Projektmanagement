@@ -1,2 +1,90 @@
 <%= render partial: '/shared/header', locals: {project: @project, linkVariable: @project, section: 'Ressource-Allocation-Matrix'} %>
 
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Projekt</th>
+      <th class="mdl-data-table__cell--non-numeric">Aufgabe</th>
+      <th class="mdl-data-table__cell--non-numeric">Teilaufgabe</th>
+      <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
+      <th class="mdl-data-table__cell--non-numeric">Einsatzmittel</th>
+      <th class="mdl-data-table__cell--non-numeric">Komponente</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="first-level">
+      <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
+      <td class="mdl-data-table__cell--non-numeric"></td>
+      <td class="mdl-data-table__cell--non-numeric"></td>
+      <td class="mdl-data-table__cell--non-numeric"></td>
+      <td class="mdl-data-table__cell--non-numeric"></td>
+      <td class="mdl-data-table__cell--non-numeric"></td>
+      <td class="mdl-data-table__cell--non-numeric"></td>
+    </tr>
+      <% @project.tasks.each do |task| %>
+        <tr class="second-level">
+          <td></td>
+          <td class="mdl-data-table__cell--non-numeric">
+            <%=task.name %>
+          </td>
+          <td class="mdl-data-table__cell--non-numeric"></td>
+          <td class="mdl-data-table__cell--non-numeric"></td>
+          <td class="mdl-data-table__cell--non-numeric"></td>
+          <td class="mdl-data-table__cell--non-numeric"></td>
+          <td class="mdl-data-table__cell--non-numeric"></td>
+        </tr>
+        <% task.subtasks.each do |subtask| %>
+          <tr class="third-level">
+            <td class="mdl-data-table__cell--non-numeric"></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
+            <td class="mdl-data-table__cell--non-numeric"><%=subtask.name%></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
+          </tr>
+            <% subtask.workpackages.each do |work| %>
+              <tr class="fourth-level">
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <%=work.name%>
+                </td>
+                <%= form_for @allocationItem, url: {action: "create", controller: 'allocationitems'} do |f| %>
+                  <%= f.hidden_field :workpackage_id, value: work.id %>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <% if work.allocationitem %>
+                      <%= work.allocationitem.role.name %>
+                    <% else %>
+                      <%= f.select(:role_id) do %>
+                       <% @roles.each do |c| -%>
+                          <%= content_tag(:option, c.name, value: c.id) %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <% if work.allocationitem %>
+                      <%= work.allocationitem.component.name %>
+                    <% else %>
+                      <%= f.select(:component_id) do %>
+                       <% @components.each do |c| -%>
+                          <%= content_tag(:option, c.name, value: c.id) %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                      <i class="material-icons">save</i>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <%end%>
+        <%end%>
+    <%end%>
+  </tbody>
+</table>

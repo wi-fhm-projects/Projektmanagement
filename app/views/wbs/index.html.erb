@@ -71,7 +71,7 @@
 
                       </td>
                       <td>
-                        <%=f.select :workpackage, subtask.workpackages.map{ |c| [c.name, c.id] } =%>
+                        <%= f.select(:workpackage, subtask.workpackages.collect {|m| [ m.name, m.id] }, class: "form-control", id: "e1", multiple: true) %>
                         <select id="e1" multiple="multiple">
                           <option value="1" selected>Option 1</option>
                           <option value="2">Option 2</option>
@@ -92,7 +92,10 @@
                         <td class="mdl-data-table__cell--non-numeric">
                           <%=work.name%>
                         </td>
-                        <td></td>
+                        <td>
+
+
+                        </td>
                       </tr>
                     <%end%>
                   <%end%>

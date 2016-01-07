@@ -3,7 +3,7 @@ class CreateWorkpackages < ActiveRecord::Migration
     create_table :workpackages do |t|
       t.string :name
       t.references :subtask, index: true
-      t.references :workpackages, index: true
+      t.references :workpackage, index: true
       t.timestamps null: false
     end
   end

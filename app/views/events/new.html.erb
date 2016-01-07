@@ -1,14 +1,21 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--12-col">
     <h5>
-      Prameter für eine Roadmap anlegen
+      Prameter für die Roadmap anlegen
     </h5>
     <hr>
     <%= form_for @event, url: {action: "create"} do |f| %>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <input class="mdl-textfield__input" id="event_startDate" name="event[startDate]" type="date">
-      <label class="mdl-textfield__label" for="event_startDate">Startzeitpunkt</label>
+      <label class="mdl-textfield__label" for="event_startDate"></label>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :Fragebogen, class: 'control-group' %>
+      <div class_"controls">
+        <%= collection_select( :event, :questionarys_id, Questionary.all, :id, :name, {}, {:multiple => false} ) %>
+      </div>
     </div>
 
     <%= f.hidden_field :project_id, value: @project.id %>
@@ -20,12 +27,3 @@
     <%= link_to events_path(project: @project), class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' do %>Zurück<%end%>
   </div>
 </div>
-
-
-
-<select>
-  <option disabled="disabled" selected="selected" value="">Bitte eine Umfrage auswählen</option>
-  <% @project.questionarys.each do |q| %>
-  <option ><%= q.name %></option>
-  <% end %>
-</select>

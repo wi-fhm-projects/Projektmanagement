@@ -13,7 +13,7 @@
   <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
     <div class="mdl-tabs__tab-bar">
       <a class="mdl-tabs__tab is-active" href="#tree-panel_pes">Pessimistisch</a>
-      <a class="mdl-tabs__tab" href="#tree-panel_real">Real</a>
+      <a class="mdl-tabs__tab" href="#tree-panel_real">Realistisch</a>
       <a class="mdl-tabs__tab" href="#tree-panel_opt">Optimistisch</a>
     </div>
 
@@ -50,7 +50,5 @@
       <% end %>
     </div>
   </div>
-
-  <%= link_to 'Edit', edit_event_path(@event) %> |
-  <%= link_to 'Back', events_path %>
 </div>
+  <%= link_to events_path(project: @project), class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' do %>Zurück<%end%>

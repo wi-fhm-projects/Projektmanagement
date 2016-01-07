@@ -5,10 +5,11 @@ class EventsController < ApplicationController
   def index
     @event = Event.new
     find_project
-    event_chart
   end
 
   def show
+    @project = Project.find(@event.project_id)
+    event_chart
   end
 
   def new
@@ -25,19 +26,6 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     find_project_by_id
-
-    if @event.number == nil then
-      @event.number = 1
-    end
-    if @event.title == nil then
-      @event.title = "Titel"
-    end
-    if @event.startDate == nil then
-      @event.startDate = DateTime.now
-    end
-    if @event.endDate == nil then
-      @event.endDate = DateTime.now + 90
-    end
 
     respond_to do |format|
       if @event.save
@@ -98,15 +86,18 @@ class EventsController < ApplicationController
       @project
     end
 
+    def questionary_name(id)
+      @questionary = Questionary.find(id)
+      return @questionary.name
+    end
+
     def event_params
-      params.require(:event).permit(:number, :title, :startDate, :endDate, :project_id)
+      params.require(:event).permit(:startDate, :project_id)
     end
 
     def event_chart
-
-      
         data_table = GoogleVisualr::DataTable.new
-        data_table.new_column('string', 'Event'         )
+        data_table.new_column('string', 'Arbeitspaket'         )
         data_table.new_column('date',   'Startzeitpunkt')
         data_table.new_column('date',   'Endzeitpunkt'  )
 
@@ -114,13 +105,13 @@ class EventsController < ApplicationController
           task.subtasks.each do |subtask|
             subtask.workpackages.each do |wp|
               data_table.add_row(
-                        [wp.name, DateTime.now, (DateTime.now + 90)]
+                        [wp.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day), (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day)+90)]
                         )
             end
           end
         end
 
-        opts   = { :allowHtml => true }
+        opts   = {width: 900, :allowHtml => true }
         @rdm_chart = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
 

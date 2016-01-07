@@ -1,29 +1,16 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--12-col">
     <h5>
-      Neues Event anlegen
+      Prameter für eine Roadmap anlegen
     </h5>
     <hr>
     <%= form_for @event, url: {action: "create"} do |f| %>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="event_number" name="event[number]" type="integer">
-      <label class="mdl-textfield__label" for="event_number">Eventnummer</label>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <input class="mdl-textfield__input" id="event_startDate" name="event[startDate]" type="date">
       <label class="mdl-textfield__label" for="event_startDate">Startzeitpunkt</label>
     </div>
 
-    <br>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="event_title" name="event[title]" type="text">
-      <label class="mdl-textfield__label" for="event_title">Eventtitel</label>
-    </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="event_endtDate" name="event[endDate]" type="date">
-      <label class="mdl-textfield__label" for="event_title">Endzeitpunkt</label>
-    </div>
     <%= f.hidden_field :project_id, value: @project.id %>
 
     <br>
@@ -33,3 +20,12 @@
     <%= link_to events_path(project: @project), class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' do %>Zurück<%end%>
   </div>
 </div>
+
+
+
+<select>
+  <option disabled="disabled" selected="selected" value="">Bitte eine Umfrage auswählen</option>
+  <% @project.questionarys.each do |q| %>
+  <option ><%= q.name %></option>
+  <% end %>
+</select>

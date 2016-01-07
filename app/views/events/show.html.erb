@@ -1,20 +1,56 @@
 
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
 
 <p>
   <strong>Startdate:</strong>
   <%= @event.startDate %>
+  <br>
+  <strong>Fragebogen:</strong>
 </p>
 
-<p>
-  <strong>Enddate:</strong>
-  <%= @event.endDate %>
-</p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<div class="mdl-cell mdl-cell--10-col">
+  <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+    <div class="mdl-tabs__tab-bar">
+      <a class="mdl-tabs__tab is-active" href="#tree-panel_pes">Pessimistisch</a>
+      <a class="mdl-tabs__tab" href="#tree-panel_real">Real</a>
+      <a class="mdl-tabs__tab" href="#tree-panel_opt">Optimistisch</a>
+    </div>
+
+    <div class="mdl-tabs__panel is-active" id="tree-panel_pes">
+      <!-- Nur die Roadmap anzeigen, wenn auch Events angelegt wurden -->
+      <% if @event.startDate != nil then%>
+      <div id='rdm_chart_pes'></div>
+      <%= render_chart @rdm_chart, 'rdm_chart_pes' %>
+      <% else %>
+      <i class="material-icons">report_problem</i>
+      Error
+      <% end %>
+    </div>
+
+    <div class="mdl-tabs__panel" id="tree-panel_real">
+      <!-- Nur die Roadmap anzeigen, wenn auch Events angelegt wurden -->
+      <% if @event.startDate != nil then%>
+      <div id='rdm_chart_real'></div>
+      <%= render_chart @rdm_chart, 'rdm_chart_real' %>
+      <% else %>
+      <i class="material-icons">report_problem</i>
+      Error
+      <% end %>
+    </div>
+
+    <div class="mdl-tabs__panel" id="tree-panel_opt">
+      <!-- Nur die Roadmap anzeigen, wenn auch Events angelegt wurden -->
+      <% if @event.startDate != nil then%>
+      <div id='rdm_chart_opt'></div>
+      <%= render_chart @rdm_chart, 'rdm_chart_opt' %>
+      <% else %>
+      <i class="material-icons">report_problem</i>
+      Error
+      <% end %>
+    </div>
+  </div>
+
+  <%= link_to 'Edit', edit_event_path(@event) %> |
+  <%= link_to 'Back', events_path %>
+</div>

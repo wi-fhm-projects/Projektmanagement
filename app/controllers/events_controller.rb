@@ -103,23 +103,25 @@ class EventsController < ApplicationController
     end
 
     def event_chart
+
+      
         data_table = GoogleVisualr::DataTable.new
         data_table.new_column('string', 'Event'         )
         data_table.new_column('date',   'Startzeitpunkt')
         data_table.new_column('date',   'Endzeitpunkt'  )
 
-        if @project.events.any? then
-        @project.events.each do |event|
-          data_table.add_row(
-          [
-            event.title, Date.new(event.startDate.year, event.startDate.month, event.startDate.day), Date.new(event.endDate.year, event.endDate.month, event.endDate.day)
-            #question.workpackage.name, DateTime.now, (DateTime.now + 90)
-          ]
-          )
+        @project.tasks.each do |task|
+          task.subtasks.each do |subtask|
+            subtask.workpackages.each do |wp|
+              data_table.add_row(
+                        [wp.name, DateTime.now, (DateTime.now + 90)]
+                        )
+            end
           end
         end
 
         opts   = { :allowHtml => true }
         @rdm_chart = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
+
 end

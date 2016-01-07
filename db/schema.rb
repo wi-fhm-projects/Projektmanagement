@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224100817) do
+ActiveRecord::Schema.define(version: 20160106140032) do
 
   create_table "allocationitems", force: :cascade do |t|
     t.integer  "workpackage_id"
@@ -53,6 +53,11 @@ ActiveRecord::Schema.define(version: 20151224100817) do
   end
 
   add_index "moduls", ["subproduct_id"], name: "index_moduls_on_subproduct_id"
+
+  create_table "predecessors", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"

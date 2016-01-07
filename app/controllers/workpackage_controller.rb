@@ -42,6 +42,6 @@ class WorkpackageController < ApplicationController
     end
 
     def work_params
-      params.require(:workpackage).permit(:name, :subtask_id)
+      params.require(:workpackage).permit(:name, :subtask_id, :workpackage)
     end
 end

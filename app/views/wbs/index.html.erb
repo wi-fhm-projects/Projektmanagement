@@ -14,6 +14,7 @@
           <th class="mdl-data-table__cell--non-numeric">Aufgabe</th>
           <th class="mdl-data-table__cell--non-numeric">Teilaufgabe</th>
           <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
+          <th>Vorgänger</th>
         </tr>
       </thead>
       <tbody>
@@ -31,16 +32,8 @@
             <td>
             </td>
             <td class="test-td mdl-data-table__cell--non-numeric">
-              <select id="e1" multiple="multiple">
-                <option value="1" selected>Option 1</option>
-                <option value="2">Option 2</option>
-                <!-- Option 3 will be selected in advance ... -->
-                <option value="3">Option 3</option>
-                <option value="4">Option 4</option>
-                <option value="5">Option 5</option>
-                <option value="6">Option 6</option>
-            </select>
             </td>
+            <td></td>
           </tr>
 
             <% @project.tasks.each do |task| %>
@@ -60,6 +53,7 @@
                 </td>
                 <% end %>
                 <td></td>
+                <td></td>
                 <%end%>
               </tr>
 
@@ -74,8 +68,21 @@
                         <%= f.text_field :name %>
                         <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                         <i class="material-icons">add_circle</i>
-                        <% end %>
+
                       </td>
+                      <td>
+                        <%=f.select :workpackage, subtask.workpackages.map{ |c| [c.name, c.id] } =%>
+                        <select id="e1" multiple="multiple">
+                          <option value="1" selected>Option 1</option>
+                          <option value="2">Option 2</option>
+                          <!-- Option 3 will be selected in advance ... -->
+                          <option value="3">Option 3</option>
+                          <option value="4">Option 4</option>
+                          <option value="5">Option 5</option>
+                          <option value="6">Option 6</option>
+                        </select>
+                      </td>
+                      <% end %>
                     </tr>
                     <% subtask.workpackages.each do |work| %>
                       <tr class="fourth-level">
@@ -85,6 +92,7 @@
                         <td class="mdl-data-table__cell--non-numeric">
                           <%=work.name%>
                         </td>
+                        <td></td>
                       </tr>
                     <%end%>
                   <%end%>

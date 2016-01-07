@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :ram, :allocationitems
   resources :kind, controller: 'rbs'
   resources :task, controller: 'wbs'
+  resources :questionaries, controller: 'delphi'
 
 
   root 'projects#index'

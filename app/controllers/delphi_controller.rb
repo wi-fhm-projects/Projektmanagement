@@ -1,6 +1,7 @@
 class DelphiController < ApplicationController
   def index
     @project = Project.find(params[:project])
+    @newquest = Questionary.new()
 
   end
   def show
@@ -9,8 +10,13 @@ class DelphiController < ApplicationController
 
   end
   def create
-    @quest = Questionary.new(quest_params)
-    @project = Project.find(quest_params[:project_id])
+    @project = Project.find(params[:project_id])
+    last = 0
+    if @project.questionarys.present?
+      last = @project.questionarys.last.round
+    end
+    @quest = Questionary.new(last + 1,@project.id)
+
     respond_to do |format|
       if @quest.save
         format.html { redirect_to delphi_index_path(project: @project), success: 'Fragebogen wurde erfolgreich erstellt.' }
@@ -42,6 +48,6 @@ class DelphiController < ApplicationController
     end
 
     def quest_params
-      params.require(:questionary).permit(:name, :description, :project_id)
+      params.require(:questionary).permit(:name, :project_id)
     end
 end

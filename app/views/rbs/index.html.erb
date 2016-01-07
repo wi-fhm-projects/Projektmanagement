@@ -15,6 +15,7 @@
           <th class="mdl-data-table__cell--non-numeric">Rolle</th>
           <th class="mdl-data-table__cell--non-numeric">Qualifikation</th>
           <th class="mdl-data-table__cell--non-numeric">Erfahrung</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +30,7 @@
               <% end %>
             </td>
             <% end %>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -55,6 +57,9 @@
 
                 </td>
                 <%end%>
+                 <td class="button-cell mdl-data-table__cell--non-numeric">
+
+                  </td>
               </tr>
 
                 <% kind.roles.each do |role| %>
@@ -73,6 +78,13 @@
                         <i class="material-icons">add_circle</i>
                       <% end %>
                       </td>
+                       <td class="button-cell mdl-data-table__cell--non-numeric">
+                          <span class="onMouseOver">
+                           <%= button_to role, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                              <i class="material-icons">delete</i>
+                            <% end %>
+                          </span>
+                      </td>
                     </tr>
                     <% role.requirments.each do |req| %>
                       <tr class="fourth-level">
@@ -84,10 +96,17 @@
                       </td>
                       <td class="mdl-data-table__cell--non-numeric">
                         <%=req.experience%>
-                      <% end %>
+
+                      </td>
+                       <td class="button-cell mdl-data-table__cell--non-numeric">
+                          <span class="onMouseOver">
+                           <%= button_to req, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                              <i class="material-icons">delete</i>
+                            <% end %>
+                          </span>
                       </td>
                     </tr>
-
+                    <% end %>
                     <%end%>
                 <%end%>
 

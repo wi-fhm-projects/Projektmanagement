@@ -56,10 +56,16 @@
                 <% end %>
                 <td></td>
                 <td></td>
-                <%end%>
-                <td class="mdl-data-table__cell--non-numeric"></td>
-              </tr>
 
+                <td class="mdl-data-table__cell--non-numeric">
+                  <span class="onMouseOver">
+                   <%= button_to task, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                      <i class="material-icons">delete</i>
+                    <% end %>
+                  </span>
+                </td>
+              </tr>
+              <%end%>
                 <% task.subtasks.each do |subtask| %>
                    <tr class="third-level">
                       <td class="mdl-data-table__cell--non-numeric"></td>

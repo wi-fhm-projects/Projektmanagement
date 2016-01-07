@@ -92,7 +92,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:startDate, :project_id)
+      params.require(:event).permit(:startDate, :project_id, :questionarys_id)
     end
 
     def event_chart

@@ -15,6 +15,7 @@
       <%= f.label :Fragebogen, class: 'control-group' %>
       <div class_"controls">
         <%= collection_select( :event, :questionarys_id, Questionary.all, :id, :name, {}, {:multiple => false} ) %>
+
       </div>
     </div>
 

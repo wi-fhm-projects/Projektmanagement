@@ -7,8 +7,10 @@
         <tr>
           <th class="mdl-data-table__cell--non-numeric">Projekt</th>
           <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
-          <th class="mdl-data-table__cell--non-numeric">Frage</th>
-          <th class="mdl-data-table__cell--non-numeric">Antwort</th>
+          <th class="mdl-data-table__cell--non-numeric">Angabe in</th>
+          <th class="mdl-data-table__cell--non-numeric">Pessimistische Einschätzung</th>
+          <th class="mdl-data-table__cell--non-numeric">Realistische Einschätzung</th>
+          <th class="mdl-data-table__cell--non-numeric">Optimistische Einschätzung</th>
         </tr>
       </thead>
       <tbody>
@@ -16,28 +18,36 @@
             <td class="mdl-data-table__cell--non-numeric"><%= @project.title %><%=@questionary.id%></td>
           </td>
             <td></td>
-            <td class="mdl-data-table__cell--non-numeric" colspan="3">
-            </td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
           </tr>
           <% @questionary.questions.each do |quest| %>
             <tr class="second-level">
               <td></td>
-              <td></td>
-              <td class="mdl-data-table__cell--non-numeric"><%=quest.frage%></td>
-              <td class="mdl-data-table__cell--non-numeric" colspan="2">
-                Durchschnitt: <%=quest.response_average%>
+              <td class="mdl-data-table__cell--non-numeric">
+                <%=quest.workpackage.subtask.task.name%> > <%=quest.workpackage.subtask.name%> > <%=quest.workpackage.name%>
+              </td>
+              <td class="mdl-data-table__cell--non-numeric">Mannstunden</td>
+              <td class="mdl-data-table__cell--non-numeric">Durchschnitt: <%=quest.pessimistic_average%></td>
+              <td class="mdl-data-table__cell--non-numeric">
+                Durchschnitt: <%=quest.realistic_average%>
+              </td>
+              <td class="mdl-data-table__cell--non-numeric">
+                Durchschnitt: <%=quest.optimistic_average%>
               </td>
             </tr>
               <% quest.responses.each do |response| %>
               <tr class="third-level">
                 <td></td>
                 <td class="mdl-data-table__cell--non-numeric">
-                  <%=response.question.workpackage.subtask.task.name%>/<%=response.question.workpackage.subtask.name%>/<%=response.question.workpackage.name%>
+
                 </td>
               <td class="mdl-data-table__cell--non-numeric"></td>
-              <td class="mdl-data-table__cell--non-numeric" colspan="2">
-                <%=response.antwort%>
-              </td>
+              <td class="mdl-data-table__cell--non-numeric"><%= response.pessimistic %></td>
+              <td class="mdl-data-table__cell--non-numeric"><%= response.realistic %></td>
+              <td class="mdl-data-table__cell--non-numeric"><%= response.optimistic %></td>
               </tr>
               <%end%>
           <% end %>

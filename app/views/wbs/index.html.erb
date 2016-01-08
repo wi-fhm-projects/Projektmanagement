@@ -66,6 +66,7 @@
                         <% end %>
                       </td>
                     </tr>
+                    <%end%>
                     <% subtask.workpackages.each do |work| %>
                       <tr class="fourth-level">
                         <td class="mdl-data-table__cell--non-numeric"></td>
@@ -75,7 +76,7 @@
                           <%=work.name%>
                         </td>
                       </tr>
-                    <%end%>
+
                   <%end%>
                 <%end%>
 

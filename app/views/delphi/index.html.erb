@@ -1,8 +1,9 @@
 <%= render partial: '/shared/header', locals: {project: @project, linkVariable: @project, section: 'Breitband-Delphi'} %>
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--12-col">
-    <%= link_to new_delphi_path(project: @project) , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
-      <i class="material-icons">add</i> Neuer Fragebogen
+
+    <%= link_to @newquest, method: :create, :project_id => @project.id, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+      <i class="material-icons">add</i>Fragebogen erzeugen
     <% end %>
     <h5> Bestehende Fragebögen </h5>
     <hr>

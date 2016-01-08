@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require select2
 //= require material
 //= require_tree .
 
@@ -26,4 +27,5 @@ $(document).ready(function(){
     }, function() {
       $(this).find(".onMouseOver").css({"display":"none"});
   });
+  $('.multiselect2').select2();
 });

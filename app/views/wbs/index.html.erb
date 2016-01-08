@@ -14,6 +14,8 @@
           <th class="mdl-data-table__cell--non-numeric">Aufgabe</th>
           <th class="mdl-data-table__cell--non-numeric">Teilaufgabe</th>
           <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
+          <th>Vorgänger</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -28,8 +30,12 @@
               <% end %>
             </td>
             <% end %>
+            <td>
+            </td>
+            <td class="test-td mdl-data-table__cell--non-numeric">
+            </td>
             <td></td>
-            <td></td>
+            <td class="mdl-data-table__cell--non-numeric"></td>
           </tr>
 
             <% @project.tasks.each do |task| %>
@@ -49,9 +55,14 @@
                 </td>
                 <% end %>
                 <td></td>
-                <%end%>
-              </tr>
+                <td></td>
 
+                <td class="mdl-data-table__cell--non-numeric">
+
+                  </span>
+                </td>
+              </tr>
+              <%end%>
                 <% task.subtasks.each do |subtask| %>
                    <tr class="third-level">
                       <td class="mdl-data-table__cell--non-numeric"></td>
@@ -61,10 +72,20 @@
                         <%= form_for @workpack, url: {action: "create", controller: 'workpackage'} do |f| %>
                         <%= f.hidden_field :subtask_id, value: subtask.id %>
                         <%= f.text_field :name %>
-                        <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                        <% wp_array = subtask.workpackages.map { |wp| [wp.name, wp.id] } %>
+                        <%= f.select :successor, options_for_select(wp_array), {}, {:multiple => true, :class => "multiselect2", :style => "width:200px;" } %>
+                        <%= f.button class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                         <i class="material-icons">add_circle</i>
-                        <% end %>
                       </td>
+                      <td>
+
+                      </td>
+                      <% end %>
+
+                      <td class="button-cell">
+
+                      </td>
+
                     </tr>
                     <%end%>
                     <% subtask.workpackages.each do |work| %>
@@ -75,8 +96,16 @@
                         <td class="mdl-data-table__cell--non-numeric">
                           <%=work.name%>
                         </td>
-                      </tr>
+                        <td>
+                          <% work.predecessors.each do |pre| %>
+                            <%= pre.name %>&#44;
+                          <% end %>
+                        </td>
+                        <td class="button-cell mdl-data-table__cell--non-numeric">
 
+                      </td>
+                    </tr>
+                    <%end%>
                   <%end%>
                 <%end%>
 

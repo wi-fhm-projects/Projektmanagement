@@ -1,6 +1,7 @@
 class DelphiController < ApplicationController
   def index
     @project = Project.find(params[:project])
+    @newquest = Questionary.new()
 
   end
   def show
@@ -8,6 +9,7 @@ class DelphiController < ApplicationController
     @questionary = Questionary.find(params[:questionary])
 
   end
+
   def create(project)
     @project = project
     last_quest_round = 0

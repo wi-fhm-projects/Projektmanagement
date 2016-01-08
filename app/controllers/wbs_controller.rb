@@ -6,6 +6,7 @@ class WbsController < ApplicationController
     @workpack = Workpackage.new
     work_breakdown_chart
 
+
   end
 
   def show

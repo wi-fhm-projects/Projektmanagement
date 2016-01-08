@@ -17,28 +17,28 @@
 
           </div>
           <div class="mdl-card__actions mdl-card--border">
-            <div id="tt1" class="icon material-icons">
+            <div id="tt<%= quest.id%>" class="icon material-icons">
               <%= link_to response_index_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
                 <i class="material-icons">folder_open</i>
               <% end %>
             </div>
-             <div class="mdl-tooltip" for="tt1">
+             <div class="mdl-tooltip" for="tt<%= quest.id%>">
                 Antworten hinzufügen
               </div>
-             <div id="tt2" class="icon material-icons">
+             <div id="t<%= quest.id%>" class="icon material-icons">
                 <%= link_to delphi_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
                   <i class="material-icons">report</i>
                 <% end %>
               </div>
-              <div class="mdl-tooltip" for="tt2">
+              <div class="mdl-tooltip" for="t<%= quest.id%>">
                 Auswerten
               </div>
-              <div id="tt3" class="icon material-icons">
+              <div id="<%= quest.id%>" class="icon material-icons">
                 <%= link_to delphi_path(quest), method: :delete, data: { confirm: 'Soll der Fragebogen wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
                   <i class="material-icons">delete</i>
                 <% end %>
               </div>
-              <div class="mdl-tooltip" for="tt3">
+              <div class="mdl-tooltip" for="<%= quest.id%>">
                 Löschen
               </div>
           </div>

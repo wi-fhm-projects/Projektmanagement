@@ -53,24 +53,18 @@
                 <%= f.hidden_field :kind_id, value: kind.id %>
                 <td class="mdl-data-table__cell--non-numeric">
                   <%= f.text_field :name %>
-                  <div id="tt2" class="icon material-icons">
+                  <div id="kind<%=kind.id%>" class="icon material-icons">
                     <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
                     <% end %>
                   </div>
-                  <div class="mdl-tooltip" for="tt2">
+                  <div class="mdl-tooltip" for="kind<%=kind.id%>">
                     Hinzufügen
                   </div>
                 </td>
                 <td class="mdl-data-table__cell--non-numeric"></td>
-                <td class="mdl-data-table__cell--non-numeric">
-
-
-                </td>
-
-                 <td class="button-cell mdl-data-table__cell--non-numeric">
-
-                </td>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                 <td class="button-cell mdl-data-table__cell--non-numeric"></td>
                 <%end%>
               </tr>
 
@@ -86,12 +80,12 @@
                       </td>
                       <td class="mdl-data-table__cell--non-numeric">
                         <%= f.text_field :experience %>
-                        <div id="tt3" class="icon material-icons">
+                        <div id="role<%=role.id%>" class="icon material-icons">
                           <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                           <i class="material-icons">add_circle</i>
                           <% end %>
                         </div>
-                        <div class="mdl-tooltip" for="tt3">
+                        <div class="mdl-tooltip" for="role<%=role.id%>">
                           Hinzufügen
                         </div>
                       </td>

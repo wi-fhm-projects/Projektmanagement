@@ -12,6 +12,7 @@
       <tr>
         <th class="mdl-data-table__cell--non-numeric">Projekt Startzeitpunkt</th>
         <th class="mdl-data-table__cell--non-numeric">Fragebogen</th>
+        <th class="mdl-data-table__cell--non-numeric"></th>
         <th></th>
         <th></th>
       </tr>
@@ -46,8 +47,14 @@
   <% end %>
 
   <br>
+
+  <% if @project.questionarys.any? then %>
   <%= link_to new_event_path(project: @project) , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
   <i class="material-icons">add</i>
-  Neues Event
+  Neues Roadmap-Szenario
+  <% end %>
+  <% else %>
+  <i class="material-icons">report_problem</i>
+  Bitte erst einen Fragebogen ausfüllen
   <% end %>
 </div>

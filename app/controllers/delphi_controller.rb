@@ -48,6 +48,6 @@ class DelphiController < ApplicationController
     end
 
     def quest_params
-      params.require(:questionary).permit(:name, :project_id)
+      params.require(:questionary).permit(:project_id)
     end
 end

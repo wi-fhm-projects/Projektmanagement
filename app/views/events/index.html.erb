@@ -11,7 +11,7 @@
     <thead>
       <tr>
         <th class="mdl-data-table__cell--non-numeric">Projekt Startzeitpunkt</th>
-        <th class="mdl-data-table__cell--non-numeric">Fragebogen</th>
+        <th class="mdl-data-table__cell--non-numeric">Fragenrunde</th>
         <th class="mdl-data-table__cell--non-numeric"></th>
         <th></th>
         <th></th>
@@ -23,7 +23,7 @@
         <td class="mdl-data-table__cell--non-numeric"><%= event.startDate %></td>
         <td class="mdl-data-table__cell--non-numeric">
           <% @questionary = Questionary.find(event.questionarys_id) %>
-          <%= @questionary.name %>
+          <%= @questionary.runde %>
         </td>
         <td>
           <%= link_to event, method: :delete, data: { confirm: 'Soll das Event wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>

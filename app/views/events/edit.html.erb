@@ -12,9 +12,9 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :Fragebogen, class: 'control-group' %>
+      <%= f.label :Fragenrunde, class: 'control-group' %>
       <div class_"controls">
-        <%= collection_select( :event, :questionarys_id, Questionary.all, :id, :name, {}, {:multiple => false} ) %>
+        <%= collection_select( :event, :questionarys_id, Questionary.all, :id, :runde, {}, {:multiple => false} ) %>
       </div>
     </div>
 
@@ -23,5 +23,5 @@
       <%= f.submit "Speichern", class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' %>
     <% end %><br>
   </div>
-  
+
 </div>

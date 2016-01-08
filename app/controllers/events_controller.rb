@@ -9,7 +9,9 @@ class EventsController < ApplicationController
 
   def show
     @project = Project.find(@event.project_id)
-    event_chart
+    event_chart_pes
+    event_chart_real
+    event_chart_opt
   end
 
   def new
@@ -90,8 +92,10 @@ class EventsController < ApplicationController
       params.require(:event).permit(:startDate, :project_id, :questionarys_id)
     end
 
-    def event_chart
 
+
+
+    def event_chart_pes
       @questionary = Questionary.find(@event.questionarys_id)
 
         data_table = GoogleVisualr::DataTable.new
@@ -99,18 +103,60 @@ class EventsController < ApplicationController
         data_table.new_column('date',   'Startzeitpunkt')
         data_table.new_column('date',   'Endzeitpunkt'  )
 
-        @project.tasks.each do |task|
-          task.subtasks.each do |subtask|
-            subtask.workpackages.each do |wp|
-              data_table.add_row(
-                        [wp.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day), (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day)+90)]
-                        )
-            end
-          end
+        @questionary.questions.each do |question|
+          @workpackage = Workpackage.find(question.workpackage_id)
+          data_table.add_row(
+                    [@workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
+                      (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + question.pessimistic_average)]
+                    )
         end
 
         opts   = {width: 900, :allowHtml => true }
-        @rdm_chart = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
+        @rdm_chart_pes = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
+
+
+    def event_chart_real
+      @questionary = Questionary.find(@event.questionarys_id)
+
+        data_table = GoogleVisualr::DataTable.new
+        data_table.new_column('string', 'Arbeitspaket'         )
+        data_table.new_column('date',   'Startzeitpunkt')
+        data_table.new_column('date',   'Endzeitpunkt'  )
+
+        @questionary.questions.each do |question|
+          @workpackage = Workpackage.find(question.workpackage_id)
+          data_table.add_row(
+                    [@workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
+                      (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + question.realistic_average)]
+                    )
+        end
+
+        opts   = {width: 900, :allowHtml => true }
+        @rdm_chart_real = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
+    end
+
+
+    def event_chart_opt
+      @questionary = Questionary.find(@event.questionarys_id)
+
+        data_table = GoogleVisualr::DataTable.new
+        data_table.new_column('string', 'Arbeitspaket'         )
+        data_table.new_column('date',   'Startzeitpunkt')
+        data_table.new_column('date',   'Endzeitpunkt'  )
+
+        @questionary.questions.each do |question|
+          @workpackage = Workpackage.find(question.workpackage_id)
+          data_table.add_row(
+                    [@workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
+                      (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + question.optimistic_average)]
+                    )
+        end
+
+        opts   = {width: 900, :allowHtml => true }
+        @rdm_chart_opt = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
+    end
+
+
 
 end

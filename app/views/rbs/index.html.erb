@@ -69,11 +69,7 @@
                 </td>
 
                  <td class="button-cell mdl-data-table__cell--non-numeric">
-                  <span class="onMouseOver">
-                   <%= button_to kind, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                      <i class="material-icons">delete</i>
-                    <% end %>
-                  </span>
+
                 </td>
                 <%end%>
               </tr>
@@ -100,11 +96,7 @@
                         </div>
                       </td>
                        <td class="button-cell mdl-data-table__cell--non-numeric">
-                          <span class="onMouseOver">
-                           <%= button_to role, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                              <i class="material-icons">delete</i>
-                            <% end %>
-                          </span>
+
                       </td>
                     </tr>
                     <% role.requirments.each do |req| %>

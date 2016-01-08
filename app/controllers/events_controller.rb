@@ -109,6 +109,8 @@ class EventsController < ApplicationController
 
         @workpackages = Workpackage.all
         @workpackages.each do |workpackage|
+        @last
+
           if workpackage.predecessors.empty? then
             @question = Question.find_by workpackage_id: workpackage.id
             data_table.add_row(
@@ -123,16 +125,25 @@ class EventsController < ApplicationController
                if @max < @preQuestion.pessimistic_average
                  @max = @preQuestion.pessimistic_average
                end
-             data_table.add_row(
+
+               if @last == nil then
+                 data_table.add_row(
                        [workpackage.name, (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max ),
                          (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max + @question.pessimistic_average)]
                        )
+                  @last = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max + @question.pessimistic_average
+               else
+                 data_table.add_row(
+                       [workpackage.name, @last,
+                        (@last  + @question.pessimistic_average)]
+                       )
+               end
              end
            end
 
         end
 
-        opts   = {width: 900, :allowHtml => true }
+        opts   = {width: 900, height: 900, :allowHtml => true }
         @rdm_chart_pes = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
 

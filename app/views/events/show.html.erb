@@ -1,13 +1,5 @@
-
-
-
-<p>
-  <strong>Startdate:</strong>
-  <%= @event.startDate %>
-  <br>
-  <strong>Fragebogen:</strong>
-</p>
-
+<% @questionary = Questionary.find(@event.questionarys_id) %>
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: events_path(project: @project), section: 'Roadmap (Projektstart: ' + @event.startDate.to_s + ', Fragebogen: ' + @questionary.name + ')' } %>
 
 <div class="mdl-cell mdl-cell--10-col">
   <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
@@ -51,4 +43,3 @@
     </div>
   </div>
 </div>
-  <%= link_to events_path(project: @project), class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' do %>Zurück<%end%>

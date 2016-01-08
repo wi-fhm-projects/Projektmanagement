@@ -92,8 +92,8 @@ class EventsController < ApplicationController
 
     def event_chart
 
-      @questionary = Questionary.find(event.questionarys_id)
-      
+      @questionary = Questionary.find(@event.questionarys_id)
+
         data_table = GoogleVisualr::DataTable.new
         data_table.new_column('string', 'Arbeitspaket'         )
         data_table.new_column('date',   'Startzeitpunkt')

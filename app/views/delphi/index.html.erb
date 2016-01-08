@@ -23,9 +23,6 @@
             <%= link_to delphi_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
               <i class="material-icons">report</i>
             <% end %>
-            <%= link_to question_index_path(project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
-              <i class="material-icons">create</i>
-            <% end %>
             <%= link_to delphi_path(quest), method: :delete, data: { confirm: 'Soll der Fragebogen wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
               <i class="material-icons">delete</i>
             <% end %>

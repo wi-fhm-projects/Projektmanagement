@@ -16,5 +16,5 @@ Befehl um fixtures in richtiger Reihenfolge zu laden:
 
 rake db:fixtures:load FIXTURES=projects,events,kinds,subproducts,tasks,roles,questionaries,moduls,subtasks,requirments,components,workpackages,questions,responses
 
-Diagramme erszeugen:
+Diagramme erzeugen:
 rake diagram:all

@@ -77,9 +77,14 @@
                     <% end %>
                   </td>
                   <td>
-                    <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                      <i class="material-icons">save</i>
-                    <% end %>
+                    <div id="work<%=work.id%>" class="icon material-icons">
+                      <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                        <i class="material-icons">save</i>
+                      <% end %>
+                    </div>
+                    <div class="mdl-tooltip" for="work<%=work.id%>">
+                    Speichern
+                  </div>
                   </td>
                 <% end %>
               </tr>

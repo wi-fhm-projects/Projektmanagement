@@ -20,7 +20,10 @@
       <% @project.events.each do |event| %>
       <tr>
         <td class="mdl-data-table__cell--non-numeric"><%= event.startDate %></td>
-        <td class="mdl-data-table__cell--non-numeric"><%= event.questionarys_id %></td>
+        <td class="mdl-data-table__cell--non-numeric">
+          <% @questionary = Questionary.find(event.questionarys_id) %>
+          <%= @questionary.name %>
+        </td>
         <td>
           <%= link_to event, method: :delete, data: { confirm: 'Soll das Event wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
           <i class="material-icons">delete</i>

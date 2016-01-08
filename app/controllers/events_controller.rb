@@ -95,6 +95,10 @@ class EventsController < ApplicationController
 
 
 
+
+
+
+
     def event_chart_pes
       @questionary = Questionary.find(@event.questionarys_id)
 
@@ -107,13 +111,18 @@ class EventsController < ApplicationController
           @workpackage = Workpackage.find(question.workpackage_id)
           data_table.add_row(
                     [@workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
-                      (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + question.pessimistic_average)]
+                      (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + question.realistic_average)]
                     )
         end
 
         opts   = {width: 900, :allowHtml => true }
         @rdm_chart_pes = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
+
+
+
+
+
 
 
     def event_chart_real

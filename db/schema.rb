@@ -71,12 +71,13 @@ ActiveRecord::Schema.define(version: 20151224100817) do
   add_index "questionaries", ["project_id"], name: "index_questionaries_on_project_id"
 
   create_table "questions", force: :cascade do |t|
-    t.string   "frage"
-    t.integer  "response_average"
+    t.integer  "pessimistic_average"
+    t.integer  "realistic_average"
+    t.integer  "optimistic_average"
     t.integer  "questionary_id"
     t.integer  "workpackage_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "questions", ["questionary_id"], name: "index_questions_on_questionary_id"

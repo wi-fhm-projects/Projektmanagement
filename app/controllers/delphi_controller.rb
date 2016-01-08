@@ -20,6 +20,19 @@ class DelphiController < ApplicationController
     @quest.project_id = @project.id
     respond_to do |format|
       if @quest.save
+
+        project.tasks.each do |task|
+          task.subtasks.each do |subtask|
+            subtask.workpackages.each do |work|
+              @question = Question.new()
+              @question.workpackage_id = work.id
+              @question.questionary_id = @quest.id
+              @question.save
+            end
+          end
+        end
+
+
         format.html { redirect_to delphi_index_path(project: @project), success: 'Fragebogen wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else

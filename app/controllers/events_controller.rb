@@ -86,11 +86,6 @@ class EventsController < ApplicationController
       @project
     end
 
-    def questionary_name(id)
-      @questionary = Questionary.find(id)
-      return @questionary.name
-    end
-
     def event_params
       params.require(:event).permit(:startDate, :project_id, :questionarys_id)
     end

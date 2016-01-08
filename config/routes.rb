@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   resources :pbs, :subproducts, :moduls, :components
   resources :wbs, :subtask, :workpackage
   resources :delphi, :question, :response
-
+  resources :ram, :allocationitems
+  resources :kind, controller: 'rbs'
+  resources :task, controller: 'wbs'
+  resources :questionaries, controller: 'delphi'
 
   root 'projects#index'
 

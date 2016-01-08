@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223074143) do
+ActiveRecord::Schema.define(version: 20160108121704) do
+
+  create_table "allocationitems", force: :cascade do |t|
+    t.integer  "workpackage_id"
+    t.integer  "component_id"
+    t.integer  "role_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "allocationitems", ["component_id"], name: "index_allocationitems_on_component_id"
+  add_index "allocationitems", ["role_id"], name: "index_allocationitems_on_role_id"
+  add_index "allocationitems", ["workpackage_id"], name: "index_allocationitems_on_workpackage_id"
 
   create_table "components", force: :cascade do |t|
     t.string   "name"
@@ -60,22 +72,22 @@ ActiveRecord::Schema.define(version: 20151223074143) do
   end
 
   create_table "questionaries", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
+    t.integer  "runde"
     t.integer  "project_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "questionaries", ["project_id"], name: "index_questionaries_on_project_id"
 
   create_table "questions", force: :cascade do |t|
-    t.string   "frage"
-    t.integer  "response_average"
+    t.integer  "pessimistic_average"
+    t.integer  "realistic_average"
+    t.integer  "optimistic_average"
     t.integer  "questionary_id"
     t.integer  "workpackage_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   add_index "questions", ["questionary_id"], name: "index_questions_on_questionary_id"
@@ -92,7 +104,9 @@ ActiveRecord::Schema.define(version: 20151223074143) do
   add_index "requirments", ["role_id"], name: "index_requirments_on_role_id"
 
   create_table "responses", force: :cascade do |t|
-    t.string   "antwort"
+    t.integer  "pessimistic"
+    t.integer  "realistic"
+    t.integer  "optimistic"
     t.integer  "question_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -140,10 +154,17 @@ ActiveRecord::Schema.define(version: 20151223074143) do
   create_table "workpackages", force: :cascade do |t|
     t.string   "name"
     t.integer  "subtask_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "successor_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "workpackages", ["subtask_id"], name: "index_workpackages_on_subtask_id"
+  add_index "workpackages", ["successor_id"], name: "index_workpackages_on_successor_id"
+
+  create_table "workpackages_workpackages", force: :cascade do |t|
+    t.integer "workpackage_id"
+    t.integer "successor_id"
+  end
 
 end

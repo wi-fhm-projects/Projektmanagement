@@ -44,17 +44,23 @@ class ResponseController < ApplicationController
     end
 
     def resp_params
-      params.require(:response).permit(:antwort,:question_id)
+      params.require(:response).permit(:pessimistic,:realistic,:optimistic,:question_id)
     end
 
     def calculate_average
       anzahl = 0
-      wert = 0
+      pess = 0
+      opt = 0
+      real = 0
       @question.responses.each do |resp|
-        wert = wert + resp.antwort.to_i
+        pess = pess + resp.pessimistic
+        opt = opt + resp.optimistic
+        real = real + resp.realistic
         anzahl = anzahl + 1
       end
-      @question.response_average = wert/anzahl
+      @question.pessimistic_average = pess/anzahl
+      @question.optimistic_average = opt/anzahl
+      @question.realistic_average = real/anzahl
       @question.save
     end
 end

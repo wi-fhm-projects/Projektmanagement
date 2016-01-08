@@ -10,7 +10,8 @@ class QuestionController < ApplicationController
     @project = Project.find(params[:project])
 
   end
-  def create
+  def create()
+
     @quest = Question.new(quest_params)
     @questionary = Questionary.find(quest_params[:questionary_id])
     respond_to do |format|

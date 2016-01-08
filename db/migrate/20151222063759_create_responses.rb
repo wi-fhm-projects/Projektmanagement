@@ -1,7 +1,9 @@
 class CreateResponses < ActiveRecord::Migration
   def change
     create_table :responses do |t|
-      t.string :antwort
+      t.integer :pessimistic
+      t.integer :realistic
+      t.integer :optimistic
       t.references :question, index: true
       t.timestamps null: false
     end

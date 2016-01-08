@@ -16,12 +16,22 @@
             <%= truncate(project.description, :length => 120) %>
           </div>
           <div class="mdl-card__actions mdl-card--border">
-            <%= link_to project, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
-              <i class="material-icons">folder_open</i>
+            <div id="open" class="icon material-icons">
+              <%= link_to project, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+                <i class="material-icons">folder_open</i>
+            </div>
             <% end %>
+            <div class="mdl-tooltip" for="open">
+              Projekt öffnen
+            </div>
+            <div id="del" class="icon material-icons">
             <%= link_to project, method: :delete, data: { confirm: 'Soll das Projekt wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
               <i class="material-icons">delete</i>
             <% end %>
+            </div>
+            <div class="mdl-tooltip" for="del">
+              Projekt löschen
+            </div>
           </div>
         </div>
       </div>

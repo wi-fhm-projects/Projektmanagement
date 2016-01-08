@@ -53,3 +53,20 @@
   position: absolute;
   width: 80px;
 }
+
+a:link {
+  color: #333333;
+  text-decoration: none;
+}
+a:visited {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+a:hover {
+  color: #CCCCCC;
+  text-decoration: none;
+}
+a:active {
+  color: #333333;
+  text-decoration: none;
+}

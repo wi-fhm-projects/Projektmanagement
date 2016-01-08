@@ -9,38 +9,40 @@
   </div>
   <% @project.questionarys.each do |quest| %>
       <div class="mdl-cell mdl-cell--4-col">
-        <div class="structure mdl-card mdl-shadow--2dp">
-          <div class="format mdl-card__title mdl-card--expand">
-            <h2 class="format mdl-card__title-text">Runde <%=quest.runde %></h2>
-          </div>
-          <div class="mdl-card__supporting-text">
-
-          </div>
-          <div class="mdl-card__actions mdl-card--border">
-            <div id="tt1" class="icon material-icons">
-              <%= link_to response_index_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
-                <i class="material-icons">folder_open</i>
-              <% end %>
+        <div class="question-card">
+          <div class="structure mdl-card mdl-shadow--2dp">
+            <div class="format mdl-card__title mdl-card--expand">
+              <h2 class="format mdl-card__title-text">Runde <%=quest.runde %></h2>
             </div>
-             <div class="mdl-tooltip" for="tt1">
-                Antworten hinzufügen
-              </div>
-             <div id="tt2" class="icon material-icons">
-                <%= link_to delphi_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
-                  <i class="material-icons">report</i>
+            <div class="mdl-card__supporting-text">
+
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <div id="tt1" class="icon material-icons">
+                <%= link_to response_index_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+                  <i class="material-icons">folder_open</i>
                 <% end %>
               </div>
-              <div class="mdl-tooltip" for="tt2">
-                Auswerten
-              </div>
-              <div id="tt3" class="icon material-icons">
-                <%= link_to delphi_path(quest), method: :delete, data: { confirm: 'Soll der Fragebogen wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
-                  <i class="material-icons">delete</i>
-                <% end %>
-              </div>
-              <div class="mdl-tooltip" for="tt3">
-                Löschen
-              </div>
+               <div class="mdl-tooltip" for="tt1">
+                  Antworten hinzufügen
+                </div>
+               <div id="tt2" class="icon material-icons">
+                  <%= link_to delphi_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+                    <i class="material-icons">report</i>
+                  <% end %>
+                </div>
+                <div class="mdl-tooltip" for="tt2">
+                  Auswerten
+                </div>
+                <div id="tt3" class="icon material-icons">
+                  <%= link_to delphi_path(quest), method: :delete, data: { confirm: 'Soll der Fragebogen wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+                    <i class="material-icons">delete</i>
+                  <% end %>
+                </div>
+                <div class="mdl-tooltip" for="tt3">
+                  Löschen
+                </div>
+            </div>
           </div>
         </div>
       </div>

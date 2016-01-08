@@ -7,8 +7,10 @@
         <tr>
           <th class="mdl-data-table__cell--non-numeric">Projekt</th>
           <th class="mdl-data-table__cell--non-numeric">Arbeitspaket</th>
-          <th class="mdl-data-table__cell--non-numeric">Frage</th>
-          <th class="mdl-data-table__cell--non-numeric">Antwort</th>
+          <th class="mdl-data-table__cell--non-numeric">Angabe in</th>
+          <th class="mdl-data-table__cell--non-numeric">Pessimistische Antwort</th>
+          <th class="mdl-data-table__cell--non-numeric">Realistische Antwort</th>
+          <th class="mdl-data-table__cell--non-numeric">Optimistische Antwort</th>
         </tr>
       </thead>
       <tbody>
@@ -19,6 +21,8 @@
             <td></td>
             <td class="mdl-data-table__cell--non-numeric" colspan="3">
             </td>
+            <td class="mdl-data-table__cell--non-numeric" colspan="3">
+            </td>
           </tr>
           <% @questionary.questions.each do |quest| %>
             <tr class="second-level">
@@ -26,16 +30,22 @@
               <td class="mdl-data-table__cell--non-numeric">
                 <%=quest.workpackage.subtask.task.name%>/<%=quest.workpackage.subtask.name%>/<%=quest.workpackage.name%>
               </td>
-              <td class="mdl-data-table__cell--non-numeric"><%=quest.frage%></td>
+              <td class="mdl-data-table__cell--non-numeric">Manntagen</td>
               <td class="mdl-data-table__cell--non-numeric" colspan="2">
                 <%= form_for @answer, url: {action: "create", controller: 'response'} do |f| %>
                 <%= f.hidden_field :question_id, value: quest.id %>
-                <%= f.text_field :antwort %>
-                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                  <i class="material-icons">add_circle</i>
-                <% end %>
-              <% end %>
+                <%= f.text_field :pessimistic %>
               </td>
+              <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                <%= f.text_field :realistic %>
+              </td>
+              <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                <%= f.text_field :optimistic %>
+                 <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                  <i class="material-icons">add_circle</i>
+              </td>
+               <% end %>
+              <% end %>
             </tr>
               <% quest.responses.each do |response| %>
               <tr class="third-level">
@@ -43,7 +53,7 @@
                 <td></td>
               <td class="mdl-data-table__cell--non-numeric"></td>
               <td class="mdl-data-table__cell--non-numeric" colspan="2">
-                <%=response.antwort%>
+
               </td>
               </tr>
               <%end%>

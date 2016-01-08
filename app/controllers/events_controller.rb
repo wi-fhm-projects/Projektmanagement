@@ -107,18 +107,34 @@ class EventsController < ApplicationController
         data_table.new_column('date',   'Startzeitpunkt')
         data_table.new_column('date',   'Endzeitpunkt'  )
 
-        @questionary.questions.each do |question|
-          @workpackage = Workpackage.find(question.workpackage_id)
-          data_table.add_row(
-                    [@workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
-                      (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + question.realistic_average)]
+        @workpackages = Workpackage.all
+        @workpackages.each do |workpackage|
+          if workpackage.predecessors.empty? then
+            @question = Question.find_by workpackage_id: workpackage.id
+            data_table.add_row(
+                    [workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
+                      (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @question.pessimistic_average)]
                     )
+           else
+             @question = Question.find_by workpackage_id: workpackage.id
+             @max = 0
+             workpackage.predecessors.each do |pre|
+               @preQuestion = Question.find_by workpackage_id: pre.id
+               if @max < @preQuestion.pessimistic_average
+                 @max = @preQuestion.pessimistic_average
+               end
+             data_table.add_row(
+                       [workpackage.name, (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max ),
+                         (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max + @question.pessimistic_average)]
+                       )
+             end
+           end
+
         end
 
         opts   = {width: 900, :allowHtml => true }
         @rdm_chart_pes = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
-
 
 
 
@@ -133,11 +149,12 @@ class EventsController < ApplicationController
         data_table.new_column('date',   'Startzeitpunkt')
         data_table.new_column('date',   'Endzeitpunkt'  )
 
-        @questionary.questions.each do |question|
-          @workpackage = Workpackage.find(question.workpackage_id)
+        @workpackages = Workpackage.all
+        @workpackages.each do |workpackage|
+          @question = Question.find_by workpackage_id: workpackage.id
           data_table.add_row(
-                    [@workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
-                      (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + question.realistic_average)]
+                    [workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
+                      (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @question.pessimistic_average)]
                     )
         end
 

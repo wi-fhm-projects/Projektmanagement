@@ -58,10 +58,7 @@
                 <td></td>
 
                 <td class="mdl-data-table__cell--non-numeric">
-                  <span class="onMouseOver">
-                   <%= button_to task, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                      <i class="material-icons">delete</i>
-                    <% end %>
+
                   </span>
                 </td>
               </tr>
@@ -75,37 +72,18 @@
                         <%= form_for @workpack, url: {action: "create", controller: 'workpackage'} do |f| %>
                         <%= f.hidden_field :subtask_id, value: subtask.id %>
                         <%= f.text_field :name %>
-                        <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                        <% wp_array = subtask.workpackages.map { |wp| [wp.name, wp.id] } %>
+                        <%= f.select :successor, options_for_select(wp_array), {}, {:multiple => true, :class => "multiselect2", :style => "width:200px;" } %>
+                        <%= f.button class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                         <i class="material-icons">add_circle</i>
-
                       </td>
                       <td>
-                        <script>
-                          $(document).ready(function() {
-                            $("#e1").select2({
 
-                            });
-                          });
-                        </script>
-                        <%= f.select(:workpackage, subtask.workpackages.collect {|m| [ m.name, m.id] }, id: "e1", multiple: true) %>
-                        <select id="e1" multiple="multiple">
-                          <option value="1" selected>Option 1</option>
-                          <option value="2">Option 2</option>
-                          <!-- Option 3 will be selected in advance ... -->
-                          <option value="3">Option 3</option>
-                          <option value="4">Option 4</option>
-                          <option value="5">Option 5</option>
-                          <option value="6">Option 6</option>
-                        </select>
                       </td>
                       <% end %>
 
                       <td class="button-cell">
-                        <span class="onMouseOver mdl-data-table__cell--non-numeric">
-                         <%= button_to subtask, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                            <i class="material-icons">delete</i>
-                          <% end %>
-                        </span>
+
                       </td>
 
                     </tr>
@@ -118,15 +96,12 @@
                           <%=work.name%>
                         </td>
                         <td>
-
-
+                          <% work.predecessors.each do |pre| %>
+                            <%= pre.name %>&#44;
+                          <% end %>
                         </td>
                         <td class="button-cell mdl-data-table__cell--non-numeric">
-                          <span class="onMouseOver">
-                           <%= button_to work, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                              <i class="material-icons">delete</i>
-                            <% end %>
-                          </span>
+
                       </td>
                     </tr>
                     <%end%>

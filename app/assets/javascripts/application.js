@@ -27,5 +27,5 @@ $(document).ready(function(){
     }, function() {
       $(this).find(".onMouseOver").css({"display":"none"});
   });
-  $('#e1').select2();
+  $('.multiselect2').select2();
 });

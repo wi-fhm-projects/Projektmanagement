@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224100817) do
+ActiveRecord::Schema.define(version: 20160108121704) do
 
   create_table "allocationitems", force: :cascade do |t|
     t.integer  "workpackage_id"
@@ -141,12 +141,17 @@ ActiveRecord::Schema.define(version: 20151224100817) do
   create_table "workpackages", force: :cascade do |t|
     t.string   "name"
     t.integer  "subtask_id"
-    t.integer  "workpackage_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "successor_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "workpackages", ["subtask_id"], name: "index_workpackages_on_subtask_id"
-  add_index "workpackages", ["workpackage_id"], name: "index_workpackages_on_workpackage_id"
+  add_index "workpackages", ["successor_id"], name: "index_workpackages_on_successor_id"
+
+  create_table "workpackages_workpackages", force: :cascade do |t|
+    t.integer "workpackage_id"
+    t.integer "successor_id"
+  end
 
 end

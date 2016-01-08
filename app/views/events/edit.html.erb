@@ -1,35 +1,22 @@
 <div class="mdl-grid">
 
   <div class="mdl-cell mdl-cell--12-col">
-    <h5> Event bearbeiten </h5>
+    <h5> Roadmap-Parameter bearbeiten </h5>
     <hr>
     <%= form_for @event, url: {action: "update"} do |f| %>
 
+
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" id="event_number" name="event[number]" type="integer">
-      <label class="mdl-textfield__label" for="event_number">
-        <%= @event.number%>
-      </label>
+      <input class="mdl-textfield__input" id="event_startDate" name="event[startDate]" type="date">
+      <label class="mdl-textfield__label" for="event_startDate"></label>
     </div>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input type="date" name="event[startDate]" id="event_startDate" class="mdl-textfield__input">
-      <label class="mdl-textfield__label" for="event_startDate">
-        <%= @event.startDate%>
-      </label>
+
+    <div class="control-group">
+      <%= f.label :Fragebogen, class: 'control-group' %>
+      <div class_"controls">
+        <%= collection_select( :event, :questionarys_id, Questionary.all, :id, :name, {}, {:multiple => false} ) %>
+      </div>
     </div>
-    <br>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input type="text" name="event[title]" id="event_title" class="mdl-textfield__input">
-        <label class="mdl-textfield__label" for="event_title">
-          <%= @event.title%>
-        </label>
-      </div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input type="date" name="event[endDate]" id="event_endtDate" class="mdl-textfield__input">
-        <label class="mdl-textfield__label" for="event_title">
-          <%= @event.endDate%>
-        </label>
-      </div>
 
       <br>
       <br>

@@ -95,5 +95,13 @@ response2 = Response.create(pessimistic: 20, realistic: 15, optimistic: 10, ques
 #################
 ##Roadmap-Seeds##
 #################
-event1 = Event.create(startDate: DateTime.new(2016, 2, 11), project: vollkornbäckerei, questionarys_id: quest1.id)
-event2 = Event.create(startDate: DateTime.new(2016, 3, 28), project: vollkornbäckerei, questionarys_id: quest2.id)
+event1 = Event.create(startDate: Date.new(2016, 2, 11), project: vollkornbäckerei, questionarys_id: quest1.id)
+event2 = Event.create(startDate: Date.new(2016, 3, 28), project: vollkornbäckerei, questionarys_id: quest2.id)
+
+
+##############
+##User-Seeds##
+##############
+
+admin = User.create(email: 'admin@pmtool.com',  password: '12345678', first_name: 'John', last_name: 'Cena')
+admin.save!

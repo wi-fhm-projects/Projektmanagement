@@ -7,8 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+#################
+##Projekt-Seeds##
+#################
 vollkornbäckerei = Project.create(title: 'Vollkornbäckerei', description: 'Ein Controlling-Projekt')
 webprojekt = Project.create(title: 'Webprojekt', description: 'Ein Programmier-Projekt')
+
 
 #############
 ##PBS-Seeds##
@@ -53,4 +57,43 @@ produktionsarbeiter2 = Role.create(name: 'Produktionsarbeiter', kind: produktion
 #############
 ##WBS-Seeds##
 #############
-Task.create(name: '', project: vollkornbäckerei)
+betriebsfest = Task.create(name: 'Betriebsfest organisieren', project: vollkornbäckerei)
+
+raum = Subtask.create(name: 'Raum', task: betriebsfest)
+bewirtung = Subtask.create(name: 'Bewirtung', task: betriebsfest)
+programm = Subtask.create(name: 'Programm', task: betriebsfest)
+einladung = Subtask.create(name: 'Einladung', task: betriebsfest)
+
+angebote = Workpackage.create(name: 'Angebote einholen', subtask: raum)
+besichtigung = Workpackage.create(name: 'Besichtigung', subtask: raum)
+
+angebote2 = Workpackage.create(name: 'Angebote einholen', subtask: bewirtung)
+essen = Workpackage.create(name: 'Probeessen', subtask: bewirtung)
+auftrag = Workpackage.create(name: 'Beauftragung', subtask: bewirtung)
+
+brainstorm = Workpackage.create(name: 'Brainstorming', subtask: programm)
+angebote3 = Workpackage.create(name: 'Angebote einholen', subtask: programm)
+
+inhalt = Workpackage.create(name: 'Inhalt definieren', subtask: einladung)
+gestalltung = Workpackage.create(name: 'Gestaltung definieren', subtask: einladung)
+druck = Workpackage.create(name: 'Druck', subtask: einladung)
+versand = Workpackage.create(name: 'Versand', subtask: einladung)
+
+
+################
+##Delphi-Seeds##
+################
+quest1 = Questionary.create(runde: 1, project: vollkornbäckerei)
+quest2 = Questionary.create(runde: 2, project: vollkornbäckerei)
+
+question1 = Question.create(workpackage: angebote, questionary: quest1)
+
+response1 = Response.create(pessimistic: 15, realistic: 10, optimistic: 5, question: question1)
+response2 = Response.create(pessimistic: 20, realistic: 15, optimistic: 10, question: question1)
+
+
+#################
+##Roadmap-Seeds##
+#################
+event1 = Event.create(startDate: DateTime.new(2016, 2, 11), project: vollkornbäckerei, questionarys_id: quest1.id)
+event2 = Event.create(startDate: DateTime.new(2016, 3, 28), project: vollkornbäckerei, questionarys_id: quest2.id)

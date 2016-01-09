@@ -82,6 +82,13 @@
   }
 }
 
+.roadmap-card{
+  .structure > .mdl-card__title {
+    background: url('roadmap.jpg') top no-repeat #3F51B5 ;
+    background-size: 100% 100%;
+  }
+}
+
 .format > .mdl-card__title-text {
   display: block;
   font-weight: bold;

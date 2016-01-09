@@ -16,6 +16,12 @@
 </ul>
 
 <% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+  Nicht eingeloggt!&nbsp;
+  <%= link_to new_user_registration_path do %>
+    <strong>Registrieren</strong>
+  <% end %>
+  &nbsp;oder&nbsp;
+  <%= link_to new_user_session_path do %>
+    <strong >Login</strong>
+  <% end %>
 <% end %>

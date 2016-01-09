@@ -3,4 +3,5 @@ class Questionary < ActiveRecord::Base
   has_many :questions, dependent: :destroy
   has_many :userquests, dependent: :destroy
   has_many :users, through: :userquests
+  has_many :events
 end

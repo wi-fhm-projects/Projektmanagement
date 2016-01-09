@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  Eingeloggt als &nbsp;<strong><%= current_user.email %></strong>
+  Eingeloggt als &nbsp;<strong><%= current_user.first_name %> <%= current_user.last_name %></strong>
   <button id="demo-menu-lower-right"
           class="mdl-button mdl-js-button mdl-button--icon">
     <i class="material-icons">keyboard_arrow_down</i>

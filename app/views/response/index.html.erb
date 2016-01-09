@@ -1,4 +1,4 @@
-<%= render partial: '/shared/header', locals: {project: @project, linkVariable: :back, section: 'Breitband-Delphi'} %>
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: delphi_index_path(project: @project.id), section: 'Breitband-Delphi'} %>
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
   <div class="mdl-tabs__panel is-active" id="table-panel">
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">

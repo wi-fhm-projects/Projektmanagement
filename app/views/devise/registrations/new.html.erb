@@ -12,6 +12,16 @@
       </div>
 
       <div class="field">
+        <%= f.text_field :first_name, autofocus: true, :class => 'mdl-textfield__input' %>
+        <%= f.label :vorname %><br>
+      </div>
+
+      <div class="field">
+        <%= f.text_field :last_name, autofocus: true, :class => 'mdl-textfield__input' %>
+        <%= f.label :nachname %><br>
+      </div>
+
+      <div class="field">
         <%= f.password_field :password, autocomplete: "off", :class => 'mdl-textfield__input' %>
         <%= f.label :password %>
         <% if @minimum_password_length %>
@@ -24,7 +34,6 @@
         <%= f.label :password_confirmation %><br>
       </div>
 
-      <%= render "devise/shared/links" %>
       </div>
       <div class="mdl-card__actions mdl-card--border">
         <div class="actions">

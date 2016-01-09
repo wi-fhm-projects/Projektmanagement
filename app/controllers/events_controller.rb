@@ -88,6 +88,22 @@ class EventsController < ApplicationController
     params.require(:event).permit(:startDate, :project_id, :questionarys_id)
   end
 
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+
   def event_chart_pes
     @questionary = Questionary.find(@event.questionarys_id)
 
@@ -102,33 +118,34 @@ class EventsController < ApplicationController
 
       if workpackage.predecessors.empty?
         @question = Question.find_by workpackage_id: workpackage.id
-        data_table.add_row(
-          [workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
-           (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @question.pessimistic_average)]
-        )
-        data_table.add_row(
-          [workpackage.name, nil, nil]
-        )
+        unless @question.pessimistic_average.nil?
+          data_table.add_row(
+            [workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
+             (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @question.pessimistic_average)]
+          )
+        end
       else
         @question = Question.find_by workpackage_id: workpackage.id
         @max = 0
-        workpackage.predecessors.each do |pre|
-          @preQuestion = Question.find_by workpackage_id: pre.id
-          if @max < @preQuestion.pessimistic_average
-            @max = @preQuestion.pessimistic_average
-          end
+        unless @question.pessimistic_average.nil?
+          workpackage.predecessors.each do |pre|
+            @preQuestion = Question.find_by workpackage_id: pre.id
+            if @max < @preQuestion.pessimistic_average
+              @max = @preQuestion.pessimistic_average
+            end
 
-          if @last.nil?
-            data_table.add_row(
-              [workpackage.name, (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max),
-               (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max + @question.pessimistic_average)]
-            )
-            @last = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max + @question.pessimistic_average
-          else
-            data_table.add_row(
-              [workpackage.name, @last,
-               (@last + @question.pessimistic_average)]
-            )
+            if @last.nil?
+              data_table.add_row(
+                [workpackage.name, (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max),
+                 (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max + @question.pessimistic_average)]
+              )
+              @last = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max + @question.pessimistic_average
+            else
+              data_table.add_row(
+                [workpackage.name, @last,
+                 (@last + @question.pessimistic_average)]
+              )
+            end
           end
         end
        end
@@ -137,6 +154,30 @@ class EventsController < ApplicationController
     opts = { width: 900, height: 900, allowHtml: true }
     @rdm_chart_pes = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
   end
+
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
 
   def event_chart_real
     @questionary = Questionary.find(@event.questionarys_id)
@@ -151,7 +192,7 @@ class EventsController < ApplicationController
       @question = Question.find_by workpackage_id: workpackage.id
       data_table.add_row(
         [workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
-         (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @question.pessimistic_average)]
+         (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + 90)]
       )
     end
 
@@ -171,7 +212,7 @@ class EventsController < ApplicationController
       @workpackage = Workpackage.find(question.workpackage_id)
       data_table.add_row(
         [@workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
-         (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + question.optimistic_average)]
+         (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + 90)]
       )
     end
 

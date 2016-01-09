@@ -9,4 +9,10 @@ class ApplicationController < ActionController::Base
   def find_projects
     @projects = Project.all
   end
+
+  def quest_count
+    @quests = current_user.userquests.where(newquest: true)
+    return @quests.count
+  end
+  helper_method :quest_count
 end

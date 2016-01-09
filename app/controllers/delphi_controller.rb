@@ -20,6 +20,7 @@ class DelphiController < ApplicationController
     @quest = Questionary.new()
     @quest.runde = last_quest_round
     @quest.project_id = @project.id
+    @quest.users << User.all
     respond_to do |format|
       if @quest.save
         project.tasks.each do |task|

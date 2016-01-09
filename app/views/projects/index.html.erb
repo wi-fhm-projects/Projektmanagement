@@ -6,6 +6,11 @@
     <h5> Meine Projekte </h5>
     <hr>
   </div>
+  <% current_user.userquests.each do |uquest| %>
+    <% if uquest.newquest == true %>
+      <%= uquest.questionary.project.title %> > Runde <%=uqest.questionary.runde%>
+    <% end %>
+   <% end %>
   <% @projects.each do |project| %>
       <div class="mdl-cell mdl-cell--4-col">
         <div class="project-card">

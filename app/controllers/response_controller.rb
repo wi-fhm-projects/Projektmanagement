@@ -3,7 +3,9 @@ class ResponseController < ApplicationController
     @project = Project.find(params[:project])
     @questionary = Questionary.find(params[:questionary])
     @answer = Response.new()
-
+    @uquest = @questionary.userquests.where(user: current_user).first
+    @uquest.newquest = false
+    @uquest.save
   end
   def show
     @project = Project.find(params[:project])

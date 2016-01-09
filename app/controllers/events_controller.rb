@@ -118,7 +118,7 @@ class EventsController < ApplicationController
 
       if workpackage.predecessors.empty?
         @question = Question.find_by workpackage_id: workpackage.id   #Frage suchen, die die Dauer des Arbeitspaket enthält
-        unless @question.pessimistic_average.nil?                     #Nicht weitermachen, wenn noch keine Dauer angegeben wurde
+        if @question != nil and @question.pessimistic_average != nil then                     #Nicht weitermachen, wenn noch keine Dauer angegeben wurde
           data_table.add_row(
             [workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
              (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @question.pessimistic_average)]
@@ -127,7 +127,7 @@ class EventsController < ApplicationController
       else
         @question = Question.find_by workpackage_id: workpackage.id
         @max = 0
-        unless @question.pessimistic_average.nil?
+        if @question != nil and @question.pessimistic_average != nil then
           workpackage.predecessors.each do |pre|
             @preQuestion = Question.find_by workpackage_id: pre.id
             if @max < @preQuestion.pessimistic_average

@@ -52,14 +52,14 @@ programm = Subtask.create(name: 'Programm', task: betriebsfest)
 einladung = Subtask.create(name: 'Einladung', task: betriebsfest)
 
 angebote = Workpackage.create(name: 'Angebote einholen', subtask: raum)
-besichtigung = Workpackage.create(name: 'Besichtigung', subtask: raum)
+besichtigung = Workpackage.create(name: 'Besichtigung', successor_id: angebote.id, subtask: raum)
 
 angebote2 = Workpackage.create(name: 'Angebote einholen', subtask: bewirtung)
-essen = Workpackage.create(name: 'Probeessen', subtask: bewirtung)
-auftrag = Workpackage.create(name: 'Beauftragung', subtask: bewirtung)
+essen = Workpackage.create(name: 'Probeessen', successor_id: angebote2.id, subtask: bewirtung)
+auftrag = Workpackage.create(name: 'Beauftragung', successor_id: essen, subtask: bewirtung)
 
 brainstorm = Workpackage.create(name: 'Brainstorming', subtask: programm)
-angebote3 = Workpackage.create(name: 'Angebote einholen', subtask: programm)
+angebote3 = Workpackage.create(name: 'Angebote einholen', successor_id: brainstorm.id, subtask: programm)
 
 inhalt = Workpackage.create(name: 'Inhalt definieren', subtask: einladung)
 gestalltung = Workpackage.create(name: 'Gestaltung definieren', subtask: einladung)

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :projects
   resources :rbs, :role, :requirment
   resources :pbs, :subproducts, :moduls, :components

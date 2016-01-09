@@ -1,0 +1,21 @@
+#login-dropdown{
+
+  &:hover{
+    cursor: pointer;
+    color: #CCCCCC;
+  }
+
+  &:active{
+    color: #333333;
+  }
+}
+
+.login-card{
+  top: 100px;
+  margin: 0 auto;
+
+  .title{
+    background-color: #3F51B5;
+    color: white;
+  }
+}

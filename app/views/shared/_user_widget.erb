@@ -1,0 +1,27 @@
+<% if user_signed_in? %>
+  Eingeloggt als &nbsp;<strong><%= current_user.email %></strong>
+  <button id="demo-menu-lower-right"
+        class="mdl-button mdl-js-button mdl-button--icon">
+  <i class="material-icons">account_box</i>
+</button>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+    for="demo-menu-lower-right">
+  <%= link_to edit_user_registration_path do%>
+  <li class="mdl-menu__item">Profil bearbeiten</li>
+  <%end%>
+  <%= link_to destroy_user_session_path, method: :delete do%>
+    <li class="mdl-menu__item">Logout</li>
+  <% end %>
+</ul>
+
+<% else %>
+  Nicht eingeloggt!&nbsp;
+  <%= link_to new_user_registration_path do %>
+    <strong>Registrieren</strong>
+  <% end %>
+  &nbsp;oder&nbsp;
+  <%= link_to new_user_session_path do %>
+    <strong >Login</strong>
+  <% end %>
+<% end %>

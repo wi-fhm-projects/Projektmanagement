@@ -8,30 +8,32 @@
   </div>
   <% @projects.each do |project| %>
       <div class="mdl-cell mdl-cell--4-col">
-        <div class="structure mdl-card mdl-shadow--2dp">
-          <div class="format mdl-card__title mdl-card--expand">
-            <h2 class="format mdl-card__title-text"><%=project.title %></h2>
-          </div>
-          <div class="mdl-card__supporting-text">
-            <%= truncate(project.description, :length => 120) %>
-          </div>
-          <div class="mdl-card__actions mdl-card--border">
-            <div id="open" class="icon material-icons">
-              <%= link_to project, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
-                <i class="material-icons">folder_open</i>
-                <% end %>
+        <div class="project-card">
+          <div class="structure mdl-card mdl-shadow--2dp">
+            <div class="format mdl-card__title mdl-card--expand">
+              <h2 class="format mdl-card__title-text"><%=project.title %></h2>
             </div>
+            <div class="mdl-card__supporting-text">
+              <%= truncate(project.description, :length => 120) %>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <div id="open" class="icon material-icons">
+                <%= link_to project, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+                  <i class="material-icons">folder_open</i>
+                  <% end %>
+              </div>
 
-            <div class="mdl-tooltip" for="open">
-              Projekt öffnen
-            </div>
-            <div id="del" class="icon material-icons">
-            <%= link_to project, method: :delete, data: { confirm: 'Soll das Projekt wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
-              <i class="material-icons">delete</i>
-            <% end %>
-            </div>
-            <div class="mdl-tooltip" for="del">
-              Projekt löschen
+              <div class="mdl-tooltip" for="open">
+                Projekt öffnen
+              </div>
+              <div id="del" class="icon material-icons">
+              <%= link_to project, method: :delete, data: { confirm: 'Soll das Projekt wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+                <i class="material-icons">delete</i>
+              <% end %>
+              </div>
+              <div class="mdl-tooltip" for="del">
+                Projekt löschen
+              </div>
             </div>
           </div>
         </div>

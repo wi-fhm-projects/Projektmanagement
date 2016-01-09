@@ -9,12 +9,12 @@
   </div>
   <% @project.questionarys.each do |quest| %>
       <div class="mdl-cell mdl-cell--4-col">
-        <div class="structure mdl-card mdl-shadow--2dp">
-          <div class="format mdl-card__title mdl-card--expand">
-            <h2 class="format mdl-card__title-text">Runde <%=quest.runde %></h2>
-          </div>
-          <div class="mdl-card__supporting-text">
-
+        <div class="question-card">
+          <div class="structure mdl-card mdl-shadow--2dp">
+            <div class="format mdl-card__title mdl-card--expand">
+              <h2 class="format mdl-card__title-text">Runde <%=quest.runde %></h2>
+            </div>
+            <div class="mdl-card__supporting-text">
           </div>
           <div class="mdl-card__actions mdl-card--border">
             <div id="tt<%= quest.id%>" class="icon material-icons">

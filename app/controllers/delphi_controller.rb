@@ -1,4 +1,6 @@
 class DelphiController < ApplicationController
+  before_action :find_quest, only: [:destroy]
+
   def index
     @project = Project.find(params[:project])
     @newquest = Questionary.new()
@@ -20,9 +22,9 @@ class DelphiController < ApplicationController
     @quest = Questionary.new()
     @quest.runde = last_quest_round
     @quest.project_id = @project.id
+    @quest.users << User.all
     respond_to do |format|
       if @quest.save
-
         project.tasks.each do |task|
           task.subtasks.each do |subtask|
             subtask.workpackages.each do |work|
@@ -33,21 +35,19 @@ class DelphiController < ApplicationController
             end
           end
         end
-
-
         format.html { redirect_to delphi_index_path(project: @project), success: 'Fragebogen wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
-        format.html { render :new }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
     end
   end
 
    def destroy
+    @project = @quest.project
     @quest.destroy
     respond_to do |format|
-      format.html { redirect_to rbs_path(project: @project), success: 'Fragebogen wurde erfolgreich entfernt.' }
+      format.html { redirect_to project_path(@project), success: 'Fragebogen wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end
@@ -60,7 +60,7 @@ class DelphiController < ApplicationController
   private
 
     def find_quest
-      @quest = Questionarie.find(params[:id])
+      @quest = Questionary.find(params[:id])
     end
 
     def quest_params

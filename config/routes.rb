@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :events
   resources :projects
   resources :rbs, :role, :requirment

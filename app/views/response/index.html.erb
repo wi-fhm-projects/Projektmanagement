@@ -1,7 +1,6 @@
-<%= render partial: '/shared/header', locals: {project: @project, linkVariable: :back, section: 'Breitband-Delphi'} %>
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: delphi_index_path(project: @project.id), section: 'Breitband-Delphi'} %>
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
   <div class="mdl-tabs__panel is-active" id="table-panel">
-    <%= render partial: '/shared/flash_message'%>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
       <thead>
         <tr>
@@ -24,44 +23,42 @@
           </tr>
           <% @questionary.questions.each do |quest| %>
             <tr class="second-level">
-              <td></td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%=quest.workpackage.subtask.task.name%> > <%=quest.workpackage.subtask.name%> > <%=quest.workpackage.name%>
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">Manntagen</td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%= form_for @answer, url: {action: "create", controller: 'response'} do |f| %>
-                <%= f.hidden_field :question_id, value: quest.id %>
-                <%= f.text_field :pessimistic %>
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%= f.text_field :realistic %>
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%= f.text_field :optimistic %>
-                 <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                  <i class="material-icons">add_circle</i>
-              </td>
-               <% end %>
-              <% end %>
-            </tr>
-              <% quest.responses.each do |response| %>
-              <tr class="third-level">
-                <td></td>
-                <td></td>
-              <td class="mdl-data-table__cell--non-numeric"></td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%= response.pessimistic %>
-              </td>
-               <td class="mdl-data-table__cell--non-numeric">
-                 <%= response.realistic %>
-               </td>
-               <td class="mdl-data-table__cell--non-numeric">
-                 <%= response.optimistic %>
-               </td>
+               <% if check_response(quest).present? %>
+                 <td></td>
+                  <td></td>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <%= check_response(quest).pessimistic %>
+                </td>
+                 <td class="mdl-data-table__cell--non-numeric">
+                   <%= check_response(quest).realistic %>
+                 </td>
+                 <td class="mdl-data-table__cell--non-numeric">
+                   <%= check_response(quest).optimistic %>
+                 </td>
+                <% else %>
+                  <td></td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <%=quest.workpackage.subtask.task.name%> > <%=quest.workpackage.subtask.name%> > <%=quest.workpackage.name%>
+                  </td>
+                  <td class="mdl-data-table__cell--non-numeric">Manntagen</td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <%= form_for @answer, url: {action: "create", controller: 'response'} do |f| %>
+                    <%= f.hidden_field :question_id, value: quest.id %>
+                    <%= f.text_field :pessimistic %>
+                  </td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <%= f.text_field :realistic %>
+                  </td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <%= f.text_field :optimistic %>
+                     <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                      <i class="material-icons">add_circle</i>
+                  </td>
+                   <% end %>
+                  <% end %>
+                <%end%>
 
-              </tr>
-              <%end%>
           <% end %>
       </tbody>
     </table>

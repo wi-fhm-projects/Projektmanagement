@@ -1,0 +1,44 @@
+<div class="login-card mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title title">
+    <h2 class="mdl-card__title-text">Registrieren</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="field">
+        <%= f.email_field :email, autofocus: true, :class => 'mdl-textfield__input' %>
+        <%= f.label :email %><br>
+      </div>
+
+      <div class="field">
+        <%= f.text_field :first_name, autofocus: true, :class => 'mdl-textfield__input' %>
+        <%= f.label :vorname %><br>
+      </div>
+
+      <div class="field">
+        <%= f.text_field :last_name, autofocus: true, :class => 'mdl-textfield__input' %>
+        <%= f.label :nachname %><br>
+      </div>
+
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "off", :class => 'mdl-textfield__input' %>
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br>
+      </div>
+
+      <div class="field">
+        <%= f.password_field :password_confirmation, autocomplete: "off", :class => 'mdl-textfield__input' %>
+        <%= f.label :password_confirmation %><br>
+      </div>
+
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <div class="actions">
+          <%= f.submit "Registrieren", class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'%>
+        </div>
+      </div>
+    <% end %>
+</div>

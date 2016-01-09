@@ -1,0 +1,42 @@
+<% if user_signed_in? %>
+  Eingeloggt als &nbsp;<strong><%= current_user.first_name %> <%= current_user.last_name %></strong>
+  <button id="demo-menu-lower-right"
+          class="mdl-button mdl-js-button mdl-button--icon">
+    <i class="material-icons">keyboard_arrow_down</i>
+  </button>
+  <% if quest_count == 0 %>
+    <i class="material-icons" style="color: #BDBDBD;">live_help</i>
+  <% else %>
+    <span class="material-icons mdl-badge" data-badge="<%= quest_count %>" id="user-badge">live_help</span>
+  <% end %>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+    for="demo-menu-lower-right">
+  <%= link_to edit_user_registration_path do%>
+  <li class="mdl-menu__item">Profil bearbeiten</li>
+  <%end%>
+  <%= link_to destroy_user_session_path, method: :delete do%>
+    <li class="mdl-menu__item">Logout</li>
+  <% end %>
+</ul>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+    for="user-badge">
+  <% current_user.userquests.each do |uquest| %>
+    <% if uquest.newquest == true %>
+    <%= link_to response_index_path(uquest.questionary, project: uquest.questionary.project,questionary: uquest.questionary) do %>
+      <li class="mdl-menu__item"><%= uquest.questionary.project.title %> > Runde <%=uquest.questionary.runde%></li>
+      <% end %>
+    <% end %>
+  <% end %>
+</ul>
+
+<% else %>
+  Nicht eingeloggt!&nbsp;
+  <%= link_to new_user_registration_path do %>
+    <strong>Registrieren</strong>
+  <% end %>
+  &nbsp;oder&nbsp;
+  <%= link_to new_user_session_path do %>
+    <strong >Login</strong>
+  <% end %>
+<% end %>

@@ -3,7 +3,9 @@ class ResponseController < ApplicationController
     @project = Project.find(params[:project])
     @questionary = Questionary.find(params[:questionary])
     @answer = Response.new()
-
+    @uquest = @questionary.userquests.where(user: current_user).first
+    @uquest.newquest = false
+    @uquest.save
   end
   def show
     @project = Project.find(params[:project])
@@ -12,6 +14,7 @@ class ResponseController < ApplicationController
   def create
     @response = Response.new(resp_params)
     @question = Question.find(resp_params[:question_id])
+    @response.user = current_user
     respond_to do |format|
       if @response.save
         calculate_average
@@ -36,6 +39,18 @@ class ResponseController < ApplicationController
     @project = Project.find(params[:project])
     @response = Question.new
   end
+
+  def check_response(question)
+    p '____________Hallo Eddie__________________'
+    @question = question
+    @response = nil
+    question.responses.each do |resp|
+      @response = resp unless resp.user != current_user
+    end
+    p @response
+    return @response
+  end
+  helper_method :check_response
 
   private
 

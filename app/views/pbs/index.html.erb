@@ -7,7 +7,6 @@
   </div>
 
   <div class="mdl-tabs__panel is-active" id="table-panel">
-    <%= render partial: '/shared/flash_message'%>
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
       <thead>
         <tr>
@@ -24,15 +23,22 @@
             <td class="mdl-data-table__cell--non-numeric" colspan="3">
               <%= form_for @subproduct, url: {action: "create", controller: 'subproducts'} do |f| %>
                 <%= f.hidden_field :project_id, value: @project.id %>
-                <%= f.text_field :name %>
-                <div id="tt1" class="icon material-icons">
+
+
+                <span class="group">
+                  <%= f.text_field :name%>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+
+                <span id="tt1" class="icon material-icons">
                   <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
                   <% end %>
-                </div>
+                </span>
                 <div class="mdl-tooltip" for="tt1">
                   Hinzufügen
                 </div>
+                </span>
               <% end %>
             </td>
             <td>
@@ -47,25 +53,25 @@
                   <%= f.hidden_field :project_id, value: @project.id %>
                   <%= f.hidden_field :subproduct_id, value: subproduct.id %>
                   <%= f.text_field :name %>
-                  <div id="tt2" class="icon material-icons">
+                  <div id="subproduct<%=subproduct.id%>" class="icon material-icons">
                     <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                       <i class="material-icons">add_circle</i>
                     <% end %>
                   </div>
-                  <div class="mdl-tooltip" for="tt2">
+                  <div class="mdl-tooltip" for="subproduct<%=subproduct.id%>">
                   Hinzufügen
                 </div>
                 <% end %>
               </td>
               <td class="button-cell">
-                <div id="tt3" class="icon material-icons">
+                <div id="del<%=subproduct.id%>" class="icon material-icons">
                   <span class="onMouseOver">
                    <%= button_to subproduct, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                       <i class="material-icons">delete</i>
                     <% end %>
                   </span>
                 </div>
-                <div class="mdl-tooltip" for="tt3">
+                <div class="mdl-tooltip" for="del<%=subproduct.id%>">
                   Löschen
                 </div>
               </td>
@@ -80,25 +86,25 @@
                     <%= f.hidden_field :project_id, value: @project.id %>
                     <%= f.hidden_field :modul_id, value: modul.id %>
                     <%= f.text_field :name %>
-                     <div id="tt4" class="icon material-icons">
+                     <div id="modul<%=modul.id%>" class="icon material-icons">
                       <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                         <i class="material-icons">add_circle</i>
                       <% end %>
                     </div>
-                     <div class="mdl-tooltip" for="tt4">
+                     <div class="mdl-tooltip" for="modul<%=modul.id%>">
                       Hinzufügen
                     </div>
                   <% end %>
                 </td>
                 <td class="button-cell">
-                  <div id="tt5" class="icon material-icons">
+                  <div id="moddel<%=modul.id%>" class="icon material-icons">
                     <span class="onMouseOver">
                      <%= button_to modul, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                         <i class="material-icons">delete</i>
                       <% end %>
                     </span>
                   </div>
-                  <div class="mdl-tooltip" for="tt5">
+                  <div class="mdl-tooltip" for="moddel<%=modul.id%>">
                     Löschen
                   </div>
                 </td>
@@ -110,14 +116,14 @@
                   <td></td>
                   <td class="mdl-data-table__cell--non-numeric"> <%= component.name %></td>
                   <td class="button-cell">
-                    <div id="tt6" class="icon material-icons">
+                    <div id="component<%=component.id%>" class="icon material-icons">
                       <span class="onMouseOver">
                        <%= button_to component, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                           <i class="material-icons">delete</i>
                         <% end %>
                       </span>
                     </div>
-                    <div class="mdl-tooltip" for="tt6">
+                    <div class="mdl-tooltip" for="component<%=component.id%>">
                     Löschen
                   </div>
                   </td>
@@ -127,6 +133,7 @@
           <% end %>
       </tbody>
     </table>
+
   </div>
   <div class="mdl-tabs__panel" id="tree-panel">
     <div id='chart'></div>

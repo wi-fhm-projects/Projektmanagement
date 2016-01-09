@@ -1,0 +1,33 @@
+<div class="login-card mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title title">
+    <h2 class="mdl-card__title-text">Login</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="field">
+
+        <%= f.email_field :email, autofocus: true, :class => 'mdl-textfield__input'%>
+        <%= f.label :email %><br />
+      </div>
+      <br>
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "off", :class => 'mdl-textfield__input' %>
+        <%= f.label :password %><br />
+      </div>
+
+      <% if devise_mapping.rememberable? -%>
+        <br>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <div class="actions">
+          <%= f.submit "Login", class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect'%>
+        </div>
+      </div>
+    <% end %>
+</div>

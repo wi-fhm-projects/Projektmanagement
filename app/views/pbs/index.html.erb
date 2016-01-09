@@ -22,24 +22,19 @@
             <td class="mdl-data-table__cell--non-numeric"><%= @project.title %></td>
             <td class="mdl-data-table__cell--non-numeric" colspan="3">
               <%= form_for @subproduct, url: {action: "create", controller: 'subproducts'} do |f| %>
-                <%= f.hidden_field :project_id, value: @project.id %>
-
-
-                <span class="group">
-                  <%= f.text_field :name%>
-                  <span class="highlight"></span>
-                  <span class="bar"></span>
-
-                <span id="tt1" class="icon material-icons">
-                  <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                    <i class="material-icons">add_circle</i>
+                <div>
+                  <%= f.hidden_field :project_id, value: @project.id %>
+                  <span id="tt1" class="icon material-icons">
+                        <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                          <i class="material-icons">add_circle</i>
+                        <% end %>
+                  </span>
+                  <div class="mdl-tooltip" for="tt1">
+                        Hinzufügen
+                  </div>
+                  <%= f.text_field :name, :class => 'mdl-textfield__input', :style => 'width: 120px;'%>
                   <% end %>
-                </span>
-                <div class="mdl-tooltip" for="tt1">
-                  Hinzufügen
                 </div>
-                </span>
-              <% end %>
             </td>
             <td>
             </td>

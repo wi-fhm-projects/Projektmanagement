@@ -24,15 +24,22 @@
             <td class="mdl-data-table__cell--non-numeric" colspan="3">
               <%= form_for @subproduct, url: {action: "create", controller: 'subproducts'} do |f| %>
                 <%= f.hidden_field :project_id, value: @project.id %>
-                <%= f.text_field :name %>
-                <div id="tt1" class="icon material-icons">
+
+
+                <span class="group">
+                  <%= f.text_field :name%>
+                  <span class="highlight"></span>
+                  <span class="bar"></span>
+
+                <span id="tt1" class="icon material-icons">
                   <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
                   <% end %>
-                </div>
+                </span>
                 <div class="mdl-tooltip" for="tt1">
                   Hinzufügen
                 </div>
+                </span>
               <% end %>
             </td>
             <td>
@@ -127,6 +134,7 @@
           <% end %>
       </tbody>
     </table>
+
   </div>
   <div class="mdl-tabs__panel" id="tree-panel">
     <div id='chart'></div>

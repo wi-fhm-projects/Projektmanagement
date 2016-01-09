@@ -1,0 +1,47 @@
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: @project, section: 'Breitband-Delphi'} %>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <%= link_to new_delphi_path(:project => @project.id) , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
+      <i class="material-icons">add</i>Fragebogen erzeugen
+    <% end %>
+    <h5> Bestehende Fragebögen </h5>
+    <hr>
+  </div>
+  <% @project.questionarys.each do |quest| %>
+      <div class="mdl-cell mdl-cell--4-col">
+        <div class="question-card">
+          <div class="structure mdl-card mdl-shadow--2dp">
+            <div class="format mdl-card__title mdl-card--expand">
+              <h2 class="format mdl-card__title-text">Runde <%=quest.runde %></h2>
+            </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <div id="tt<%= quest.id%>" class="icon material-icons">
+              <%= link_to response_index_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+                <i class="material-icons">folder_open</i>
+              <% end %>
+            </div>
+             <div class="mdl-tooltip" for="tt<%= quest.id%>">
+                Antworten hinzufügen
+              </div>
+             <div id="t<%= quest.id%>" class="icon material-icons">
+                <%= link_to delphi_path(quest,project: @project,questionary: quest), class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+                  <i class="material-icons">report</i>
+                <% end %>
+              </div>
+              <div class="mdl-tooltip" for="t<%= quest.id%>">
+                Auswerten
+              </div>
+              <div id="<%= quest.id%>" class="icon material-icons">
+                <%= link_to delphi_path(quest), method: :delete, data: { confirm: 'Soll der Fragebogen wirklich gelöscht werden?' }, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+                  <i class="material-icons">delete</i>
+                <% end %>
+              </div>
+              <div class="mdl-tooltip" for="<%= quest.id%>">
+                Löschen
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

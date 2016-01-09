@@ -6,8 +6,7 @@ class ProjectsController < ApplicationController
 	end
 
   def show
-    product_breakdown_chart
-    roadmap_chart
+    @product = Subproduct.new
   end
 
 
@@ -16,10 +15,10 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to projects_path, notice: 'Projekt wurde erfolgreich erstellt.' }
+        format.html { redirect_to projects_path, success: 'Projekt wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @project }
       else
-        format.html { render :new }
+        format.html { redirect_to projects, danger: 'Projekt nicht erstellt' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
@@ -28,7 +27,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Projekt wurde erfolgreich entfernt.' }
+      format.html { redirect_to projects_url, success: 'Projekt wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end
@@ -46,6 +45,7 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :description)
     end
+<<<<<<< HEAD
 
     def product_breakdown_chart
       data_table = GoogleVisualr::DataTable.new
@@ -81,4 +81,6 @@ class ProjectsController < ApplicationController
         @rdm_chart = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
 
+=======
+>>>>>>> develop
 end

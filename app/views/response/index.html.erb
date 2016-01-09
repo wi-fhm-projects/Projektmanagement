@@ -23,44 +23,42 @@
           </tr>
           <% @questionary.questions.each do |quest| %>
             <tr class="second-level">
-              <td></td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%=quest.workpackage.subtask.task.name%> > <%=quest.workpackage.subtask.name%> > <%=quest.workpackage.name%>
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">Manntagen</td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%= form_for @answer, url: {action: "create", controller: 'response'} do |f| %>
-                <%= f.hidden_field :question_id, value: quest.id %>
-                <%= f.text_field :pessimistic %>
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%= f.text_field :realistic %>
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%= f.text_field :optimistic %>
-                 <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                  <i class="material-icons">add_circle</i>
-              </td>
-               <% end %>
-              <% end %>
-            </tr>
-              <% quest.responses.each do |response| %>
-              <tr class="third-level">
-                <td></td>
-                <td></td>
-              <td class="mdl-data-table__cell--non-numeric"></td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <%= response.pessimistic %>
-              </td>
-               <td class="mdl-data-table__cell--non-numeric">
-                 <%= response.realistic %>
-               </td>
-               <td class="mdl-data-table__cell--non-numeric">
-                 <%= response.optimistic %>
-               </td>
+               <% if check_response(quest).present? %>
+                 <td></td>
+                  <td></td>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td class="mdl-data-table__cell--non-numeric">
+                  <%= check_response(quest).pessimistic %>
+                </td>
+                 <td class="mdl-data-table__cell--non-numeric">
+                   <%= check_response(quest).realistic %>
+                 </td>
+                 <td class="mdl-data-table__cell--non-numeric">
+                   <%= check_response(quest).optimistic %>
+                 </td>
+                <% else %>
+                  <td></td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <%=quest.workpackage.subtask.task.name%> > <%=quest.workpackage.subtask.name%> > <%=quest.workpackage.name%>
+                  </td>
+                  <td class="mdl-data-table__cell--non-numeric">Manntagen</td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <%= form_for @answer, url: {action: "create", controller: 'response'} do |f| %>
+                    <%= f.hidden_field :question_id, value: quest.id %>
+                    <%= f.text_field :pessimistic %>
+                  </td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <%= f.text_field :realistic %>
+                  </td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <%= f.text_field :optimistic %>
+                     <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                      <i class="material-icons">add_circle</i>
+                  </td>
+                   <% end %>
+                  <% end %>
+                <%end%>
 
-              </tr>
-              <%end%>
           <% end %>
       </tbody>
     </table>

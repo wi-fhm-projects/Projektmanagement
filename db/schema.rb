@@ -97,12 +97,14 @@ ActiveRecord::Schema.define(version: 20160108151047) do
     t.integer  "pessimistic"
     t.integer  "realistic"
     t.integer  "optimistic"
+    t.integer  "user_id"
     t.integer  "question_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   add_index "responses", ["question_id"], name: "index_responses_on_question_id"
+  add_index "responses", ["user_id"], name: "index_responses_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

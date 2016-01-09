@@ -53,13 +53,32 @@
   position: absolute;
   width: 80px;
 }
+.mdl-layout__header-row{
+a:link {
+  color: white;
+  text-decoration: none;
+}
+a:visited {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: #CCCCCC;
+  text-decoration: none;
+}
+a:active {
+  color: #333333;
+  text-decoration: none;
+}
+}
+
 
 a:link {
   color: #333333;
   text-decoration: none;
 }
 a:visited {
-  color: #FFFFFF;
+  color: #333333;
   text-decoration: none;
 }
 a:hover {

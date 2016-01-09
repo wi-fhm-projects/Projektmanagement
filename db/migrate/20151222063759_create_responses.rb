@@ -4,6 +4,7 @@ class CreateResponses < ActiveRecord::Migration
       t.integer :pessimistic
       t.integer :realistic
       t.integer :optimistic
+      t.references :user, index: true
       t.references :question, index: true
       t.timestamps null: false
     end

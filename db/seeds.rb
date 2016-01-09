@@ -41,26 +41,6 @@ housing_2 = Component.create(name: 'Gehäuse', description: '', modul: monitor)
 electronics = Component.create(name: 'Elektronik', description: '', modul: maus)
 
 
-#############
-##RBS-Seeds##
-#############
-produktionsressource = Kind.create(name: 'Produktionsressourcen', project: vollkornbäckerei)
-#produktionsleiter = Role.create(name: 'Produktionsleiter', kind: produktionsressource, allocationitem: allo1)
-#produktionsarbeiter = Role.create(name: 'Produktionsarbeiter', kind: produktionsressource, allocationitem: allo2)
-#qualifikation = Requirement.create(qualifikation: 'Besondere Motivation', experience: '5 Jahre Berufserfahrung', role: produktionsleiter)
-#qualifikation_1 = Requirement.create(qualifikation: 'Besondere Motivation', experience: '3 Jahre Berufserfahrung', role: produktionsarbeiter)
-
-#allo1 = Allocationitem.create(component: pulver, role: produktionsleiter)
-#allo2 = Allocationitem.create(component: salz,   role: produktionsarbeiter)
-#allo3 = Allocationitem.create(component: zucker, role: produktionsarbeiter)
-#allo4 = Allocationitem.create(component: pulver, role: produktionsarbeiter)
-
-produktionsressource2 = Kind.create(name: 'Produktionsressourcen', project: webprojekt)
-produktionsleiter2 = Role.create(name: 'Produktionsleiter', kind: produktionsressource2)
-produktionsarbeiter2 = Role.create(name: 'Produktionsarbeiter', kind: produktionsressource2)
-#qualifikation2 = Requirement.create(qualifikation: 'Besondere Motivation', experience: '5 Jahre Berufserfahrung', role: produktionsleiter2)
-#qualifikation_12 = Requirement.create(qualifikation: 'Besondere Motivation', experience: '3 Jahre Berufserfahrung', role: produktionsarbeiter2)
-
 
 #############
 ##WBS-Seeds##
@@ -88,6 +68,26 @@ druck = Workpackage.create(name: 'Druck', subtask: einladung)
 versand = Workpackage.create(name: 'Versand', subtask: einladung)
 
 
+#############
+##RBS-Seeds##
+#############
+produktionsressource = Kind.create(name: 'Produktionsressourcen', project: vollkornbäckerei)
+produktionsleiter = Role.create(name: 'Produktionsleiter', kind: produktionsressource)
+produktionsarbeiter = Role.create(name: 'Produktionsarbeiter', kind: produktionsressource)
+#qualifikation = Requirement.create(qualifikation: 'Besondere Motivation', experience: '5 Jahre Berufserfahrung', role: produktionsleiter)
+#qualifikation_1 = Requirement.create(qualifikation: 'Besondere Motivation', experience: '3 Jahre Berufserfahrung', role: produktionsarbeiter)
+
+#allo1 = Allocationitem.create(component: pulver, role: produktionsleiter)
+#allo2 = Allocationitem.create(component: salz,   role: produktionsarbeiter)
+#allo3 = Allocationitem.create(component: zucker, role: produktionsarbeiter)
+#allo4 = Allocationitem.create(component: pulver, role: produktionsarbeiter)
+
+produktionsressource2 = Kind.create(name: 'Produktionsressourcen', project: webprojekt)
+produktionsleiter2 = Role.create(name: 'Produktionsleiter', kind: produktionsressource2)
+produktionsarbeiter2 = Role.create(name: 'Produktionsarbeiter', kind: produktionsressource2)
+#qualifikation2 = Requirement.create(qualifikation: 'Besondere Motivation', experience: '5 Jahre Berufserfahrung', role: produktionsleiter2)
+#qualifikation_12 = Requirement.create(qualifikation: 'Besondere Motivation', experience: '3 Jahre Berufserfahrung', role: produktionsarbeiter2)
+
 ################
 ##Delphi-Seeds##
 ################
@@ -102,6 +102,9 @@ response2 = Response.create(pessimistic: 20, realistic: 15, optimistic: 10, ques
 
 response3 = Response.create(pessimistic: 15, realistic: 10, optimistic: 5, question: question2, user: admin)
 response4 = Response.create(pessimistic: 20, realistic: 15, optimistic: 10, question: question2, user: admin)
+
+Userquest.create(questionary: runde1, user: admin)
+Userquest.create(questionary: runde2, user: admin)
 
 
 #################

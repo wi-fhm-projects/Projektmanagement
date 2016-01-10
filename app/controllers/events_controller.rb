@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 
   def show
     @project = Project.find(@event.project_id)
+    calc_dates
     event_chart_pes
     event_chart_real
     event_chart_opt
@@ -103,34 +104,93 @@ class EventsController < ApplicationController
   #
   #
   #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
 
-  def event_chart_pes
+  def calc_dates
 
     # Fragebögen und Arbeitspakete holen
     @questionary = Questionary.find(@event.questionarys_id)
     @workpackages = Workpackage.all
-    @eventDates = EventDate.all
+    @eventdates = Eventdate.all
 
     # Bevor es los geht, db cleanen
-    @eventDates.delete_all
+    @eventdates.delete_all
 
     #DB befüllen
     # Abchecken, ob workpackage vorhanden
     if @workpackages.any?
       @workpackages.each do |workpackage|
         #Kein Vorgänger vorhanden!
-        next unless workpackage.predecessors.empty?
-        @question = Question.find_by workpackage_id: workpackage.id
-        #Frage muss ausgefüllt sein
-        if @question.pessimistic_average != nil
-          startDate = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day)
-          endDate = startDate + @question.pessimistic_average
-          EventDate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+        if workpackage.predecessors.empty?
+          @question = Question.find_by workpackage_id: workpackage.id
+          #Frage muss ausgefüllt sein
+          if @question.pessimistic_average != nil
+            startDate = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day)
+            endDate = startDate + @question.pessimistic_average
+            Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+          end
+        else
+          #Vorgänger vorhanden!
+          #Frage muss ausgefüllt sein
+          if @question.pessimistic_average != nil
+            # StartDate ist EndDate des Vorgänger (mit längster Dauer) und Enddate das StartDate des Vorgängers plus Frage
+            succescor = eventdate.find(workpackage.successor_id)
+            startDate = succesor.endDate
+            endDate   = succesor.endDate + @question.pessimistic_average
+            Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
         end
+
       end
     end
 
+  end
 
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+  #
+
+  def event_chart_pes
 
     # Zum Schluss die Grafik erzeugen
     data_table = GoogleVisualr::DataTable.new

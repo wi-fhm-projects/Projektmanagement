@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109121954) do
+ActiveRecord::Schema.define(version: 20160110133745) do
 
   create_table "allocationitems", force: :cascade do |t|
     t.integer  "workpackage_id"
@@ -34,6 +34,16 @@ ActiveRecord::Schema.define(version: 20160109121954) do
   end
 
   add_index "components", ["modul_id"], name: "index_components_on_modul_id"
+
+  create_table "eventdates", force: :cascade do |t|
+    t.integer  "workpackage_id"
+    t.date     "startDate"
+    t.date     "endDate"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "eventdates", ["workpackage_id"], name: "index_eventdates_on_workpackage_id"
 
   create_table "events", force: :cascade do |t|
     t.date     "startDate"

@@ -5,5 +5,6 @@ class Workpackage < ActiveRecord::Base
   has_and_belongs_to_many :predecessors, class_name: 'Workpackage', foreign_key: 'successor_id'
   has_and_belongs_to_many :successors, class_name: 'Workpackage'
   has_one :allocationitem, dependent: :destroy
+  has_one :eventdate
   validates :name, presence: true
 end

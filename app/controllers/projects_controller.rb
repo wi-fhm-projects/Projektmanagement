@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
     @product = Subproduct.new
   end
 
+
   def create
     @project = Project.new(project_params)
 
@@ -44,4 +45,42 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :description)
     end
+<<<<<<< HEAD
+
+    def product_breakdown_chart
+      data_table = GoogleVisualr::DataTable.new
+      data_table.new_column('string', 'Name'   )
+      data_table.new_column('string', 'Manager')
+      data_table.new_column('string', 'ToolTip')
+      data_table.add_rows(
+        [
+          [ {:v => 'Mike', :f => 'Mike<div style="color:red; font-style:italic">President</div>'   }, ''    , 'The President' ],
+          [ {:v => 'Jim' , :f => 'Jim<div style="color:red; font-style:italic">Vice President<div>'}, 'Mike', 'VP'            ],
+          [ 'Alice'  , 'Mike', ''           ],
+          [ 'Bob'    , 'Jim' , 'Bob Sponge' ],
+          [ 'Carol'  , 'Bob' , ''           ]
+        ]
+      )
+      opts   = { :allowHtml => true }
+      @pbs_chart = GoogleVisualr::Interactive::OrgChart.new(data_table, opts)
+    end
+
+    def roadmap_chart
+        data_table = GoogleVisualr::DataTable.new
+        data_table.new_column('string', 'President' )
+        data_table.new_column('date',   'Start'     )
+        data_table.new_column('date',   'End'       )
+        data_table.add_rows(
+        [
+          [ 'Projektentwurf', Date.new(2015, 12, 31), Date.new(2016, 2, 29) ],
+          [ 'Feinplanung',      Date.new(2016, 2, 29),  Date.new(2016, 5, 30) ],
+          [ 'Kundenpräsentation',  Date.new(2016, 4, 30),  Date.new(2016, 6, 30) ]
+          ]
+        )
+        opts   = { :allowHtml => true }
+        @rdm_chart = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
+    end
+
+=======
+>>>>>>> develop
 end

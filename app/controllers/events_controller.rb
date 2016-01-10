@@ -8,7 +8,6 @@ class EventsController < ApplicationController
 
   def show
     @project = Project.find(@event.project_id)
-    calc_dates
     event_chart_pes
     event_chart_real
     event_chart_opt
@@ -89,43 +88,24 @@ class EventsController < ApplicationController
     params.require(:event).permit(:startDate, :project_id, :questionarys_id)
   end
 
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
 
-  def calc_dates
+
+
+
+
+
+
+
+  def calc_dates_pes
 
     # Fragebögen und Arbeitspakete holen
     @questionary = Questionary.find(@event.questionarys_id)
     @workpackages = Workpackage.all
     @eventdates = Eventdate.all
+
+    @last_subtask_id
+    @start_date = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day)
+    @last_date
 
     # Bevor es los geht, db cleanen
     @eventdates.delete_all
@@ -134,63 +114,219 @@ class EventsController < ApplicationController
     # Abchecken, ob workpackage vorhanden
     if @workpackages.any?
       @workpackages.each do |workpackage|
-        #Kein Vorgänger vorhanden!
-        if workpackage.predecessors.empty?
-          @question = Question.find_by workpackage_id: workpackage.id
-          #Frage muss ausgefüllt sein
-          if @question.pessimistic_average != nil
-            startDate = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day)
-            endDate = startDate + @question.pessimistic_average
-            Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+        #Kein neuer Subtask
+        if @last_subtask_id == nil or @last_subtask_id == workpackage.id
+          #Kein Vorgänger vorhanden!
+          if workpackage.successor_id == nil then
+            @question = Question.find_by workpackage_id: workpackage.id
+            #Frage muss ausgefüllt sein
+            if @question.pessimistic_average != nil
+              startDate = @start_date
+              endDate = @start_date + @question.pessimistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          else
+            #Vorgänger vorhanden!
+            #Frage muss ausgefüllt sein
+            if @question.pessimistic_average != nil
+              # StartDate ist EndDate des Vorgänger (mit längster Dauer) und Enddate das StartDate des Vorgängers plus Frage
+              startDate = @eventdates.order(:endDate).first.endDate
+              endDate   = @eventdates.order(:endDate).first.endDate + @question.pessimistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
           end
         else
-          #Vorgänger vorhanden!
-          #Frage muss ausgefüllt sein
-          if @question.pessimistic_average != nil
-            # StartDate ist EndDate des Vorgänger (mit längster Dauer) und Enddate das StartDate des Vorgängers plus Frage
-            succescor = eventdate.find(workpackage.successor_id)
-            startDate = succesor.endDate
-            endDate   = succesor.endDate + @question.pessimistic_average
-            Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+          #Ab hier haben wir einen neuen Subtask
+          @start_date = @last_date
+          if workpackage.successor_id == nil then
+            @question = Question.find_by workpackage_id: workpackage.id
+            #Frage muss ausgefüllt sein
+            if @question.pessimistic_average != nil
+              startDate = @start_date
+              endDate = @start_date + @question.pessimistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          else
+            #Vorgänger vorhanden!
+            #Frage muss ausgefüllt sein
+            if @question.pessimistic_average != nil
+              # StartDate ist EndDate des Vorgänger (mit längster Dauer) und Enddate das StartDate des Vorgängers plus Frage
+              startDate = @eventdates.order(:endDate).first.endDate
+              endDate   = @eventdates.order(:endDate).first.endDate + @question.pessimistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          end
         end
-
       end
     end
 
   end
 
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
+
+
+  def calc_dates_real
+
+    # Fragebögen und Arbeitspakete holen
+    @questionary = Questionary.find(@event.questionarys_id)
+    @workpackages = Workpackage.all
+    @eventdates = Eventdate.all
+
+    @last_subtask_id
+    @start_date = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day)
+    @last_date
+
+    # Bevor es los geht, db cleanen
+    @eventdates.delete_all
+
+    #DB befüllen
+    # Abchecken, ob workpackage vorhanden
+    if @workpackages.any?
+      @workpackages.each do |workpackage|
+        #Kein neuer Subtask
+        if @last_subtask_id == nil or @last_subtask_id == workpackage.id
+          #Kein Vorgänger vorhanden!
+          if workpackage.successor_id == nil then
+            @question = Question.find_by workpackage_id: workpackage.id
+            #Frage muss ausgefüllt sein
+            if @question.realistic_average != nil
+              startDate = @start_date
+              endDate = @start_date + @question.realistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          else
+            #Vorgänger vorhanden!
+            #Frage muss ausgefüllt sein
+            if @question.realistic_average != nil
+              # StartDate ist EndDate des Vorgänger (mit längster Dauer) und Enddate das StartDate des Vorgängers plus Frage
+              startDate = @eventdates.order(:endDate).first.endDate
+              endDate   = @eventdates.order(:endDate).first.endDate + @question.realistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          end
+        else
+          #Ab hier haben wir einen neuen Subtask
+          @start_date = @last_date
+          if workpackage.successor_id == nil then
+            @question = Question.find_by workpackage_id: workpackage.id
+            #Frage muss ausgefüllt sein
+            if @question.realistic_average != nil
+              startDate = @start_date
+              endDate = @start_date + @question.realistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          else
+            #Vorgänger vorhanden!
+            #Frage muss ausgefüllt sein
+            if @question.realistic_average != nil
+              # StartDate ist EndDate des Vorgänger (mit längster Dauer) und Enddate das StartDate des Vorgängers plus Frage
+              startDate = @eventdates.order(:endDate).first.endDate
+              endDate   = @eventdates.order(:endDate).first.endDate + @question.realistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          end
+        end
+      end
+    end
+
+  end
+
+
+  def calc_dates_opt
+
+    # Fragebögen und Arbeitspakete holen
+    @questionary = Questionary.find(@event.questionarys_id)
+    @workpackages = Workpackage.all
+    @eventdates = Eventdate.all
+
+    @last_subtask_id
+    @start_date = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day)
+    @last_date
+
+    # Bevor es los geht, db cleanen
+    @eventdates.delete_all
+
+    #DB befüllen
+    # Abchecken, ob workpackage vorhanden
+    if @workpackages.any?
+      @workpackages.each do |workpackage|
+        #Kein neuer Subtask
+        if @last_subtask_id == nil or @last_subtask_id == workpackage.id
+          #Kein Vorgänger vorhanden!
+          if workpackage.successor_id == nil then
+            @question = Question.find_by workpackage_id: workpackage.id
+            #Frage muss ausgefüllt sein
+            if @question.optimistic_average != nil
+              startDate = @start_date
+              endDate = @start_date + @question.optimistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          else
+            #Vorgänger vorhanden!
+            #Frage muss ausgefüllt sein
+            if @question.optimistic_average != nil
+              # StartDate ist EndDate des Vorgänger (mit längster Dauer) und Enddate das StartDate des Vorgängers plus Frage
+              startDate = @eventdates.order(:endDate).first.endDate
+              endDate   = @eventdates.order(:endDate).first.endDate + @question.optimistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          end
+        else
+          #Ab hier haben wir einen neuen Subtask
+          @start_date = @last_date
+          if workpackage.successor_id == nil then
+            @question = Question.find_by workpackage_id: workpackage.id
+            #Frage muss ausgefüllt sein
+            if @question.optimistic_average != nil
+              startDate = @start_date
+              endDate = @start_date + @question.optimistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          else
+            #Vorgänger vorhanden!
+            #Frage muss ausgefüllt sein
+            if @question.optimistic_average != nil
+              # StartDate ist EndDate des Vorgänger (mit längster Dauer) und Enddate das StartDate des Vorgängers plus Frage
+              startDate = @eventdates.order(:endDate).first.endDate
+              endDate   = @eventdates.order(:endDate).first.endDate + @question.optimistic_average
+              Eventdate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+              @last_subtask_id = workpackage.id
+              @last_date = endDate
+            end
+          end
+        end
+      end
+    end
+
+  end
+
+
+
 
   def event_chart_pes
+    #Daten erzeugen
+    calc_dates_pes
 
     # Zum Schluss die Grafik erzeugen
     data_table = GoogleVisualr::DataTable.new
@@ -198,76 +334,57 @@ class EventsController < ApplicationController
     data_table.new_column('date',   'Startzeitpunkt')
     data_table.new_column('date',   'Endzeitpunkt')
 
-    data_table.add_row(
-      ['dummy', Date.new(2016, 2, 16), Date.new(2016, 2, 17)]
-    )
+    if @eventdates.any?
+      @eventdates.each do |eventdate|
+        data_table.add_row([@workpackages.find(eventdate.workpackage_id).name, eventdate.startDate, eventdate.endDate])
+      end
+    end
 
-    opts = { width: 900, allowHtml: true }
+    opts = {  allowHtml: true }
     @rdm_chart_pes = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
   end
 
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
 
   def event_chart_real
-    @questionary = Questionary.find(@event.questionarys_id)
+    #Daten erzeugen
+    calc_dates_real
 
+    # Zum Schluss die Grafik erzeugen
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'Arbeitspaket')
     data_table.new_column('date',   'Startzeitpunkt')
     data_table.new_column('date',   'Endzeitpunkt')
 
-    @workpackages = Workpackage.all
-    @workpackages.each do |workpackage|
-      @question = Question.find_by workpackage_id: workpackage.id
-      data_table.add_row(
-        [workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
-         (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + 90)]
-      )
+    if @eventdates.any?
+      @eventdates.each do |eventdate|
+        data_table.add_row([@workpackages.find(eventdate.workpackage_id).name, eventdate.startDate, eventdate.endDate])
+      end
     end
 
-    opts = { width: 900, allowHtml: true }
+    opts = { allowHtml: true }
     @rdm_chart_real = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
   end
 
-  def event_chart_opt
-    @questionary = Questionary.find(@event.questionarys_id)
 
+  def event_chart_opt
+    #Daten erzeugen
+    calc_dates_opt
+
+    # Zum Schluss die Grafik erzeugen
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'Arbeitspaket')
     data_table.new_column('date',   'Startzeitpunkt')
     data_table.new_column('date',   'Endzeitpunkt')
 
-    @questionary.questions.each do |question|
-      @workpackage = Workpackage.find(question.workpackage_id)
-      data_table.add_row(
-        [@workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
-         (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + 90)]
-      )
+    if @eventdates.any?
+      @eventdates.each do |eventdate|
+        data_table.add_row([@workpackages.find(eventdate.workpackage_id).name, eventdate.startDate, eventdate.endDate])
+      end
     end
 
-    opts = { width: 900, allowHtml: true }
+    opts = { allowHtml: true }
     @rdm_chart_opt = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
   end
+
+
 end

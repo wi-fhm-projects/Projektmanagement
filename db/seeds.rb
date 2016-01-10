@@ -96,24 +96,24 @@ produktionsarbeiter.allocationitem = allo2
 ################
 ##Delphi-Seeds##
 ################
-runde1 = Questionary.create(runde: 1, project: vollkornbäckerei)
-runde2 = Questionary.create(runde: 2, project: vollkornbäckerei)
+#runde1 = Questionary.create(runde: 1, project: vollkornbäckerei)
+#runde2 = Questionary.create(runde: 2, project: vollkornbäckerei)
 
-question1 = Question.create(workpackage: angebote, questionary: runde1)
-question2 = Question.create(workpackage: brainstorm, questionary: runde2)
+#question1 = Question.create(workpackage: angebote, questionary: runde1)
+#question2 = Question.create(workpackage: brainstorm, questionary: runde2)
 
-response1 = Response.create(pessimistic: 15, realistic: 10, optimistic: 5, question: question1, user: admin)
-response2 = Response.create(pessimistic: 20, realistic: 15, optimistic: 10, question: question1, user: admin)
+#response1 = Response.create(pessimistic: 15, realistic: 10, optimistic: 5, question: question1, user: admin)
+#response2 = Response.create(pessimistic: 20, realistic: 15, optimistic: 10, question: question1, user: admin)
 
-response3 = Response.create(pessimistic: 15, realistic: 10, optimistic: 5, question: question2, user: admin)
-response4 = Response.create(pessimistic: 20, realistic: 15, optimistic: 10, question: question2, user: admin)
+#response3 = Response.create(pessimistic: 15, realistic: 10, optimistic: 5, question: question2, user: admin)
+#response4 = Response.create(pessimistic: 20, realistic: 15, optimistic: 10, question: question2, user: admin)
 
-Userquest.create(questionary: runde1, user: admin)
-Userquest.create(questionary: runde2, user: admin)
+#Userquest.create(questionary: runde1, user: admin)
+#Userquest.create(questionary: runde2, user: admin)
 
 
 #################
 ##Roadmap-Seeds##
 #################
-event1 = Event.create(startDate: Date.new(2016, 2, 11), project: vollkornbäckerei, questionarys_id: runde1.id)
-event2 = Event.create(startDate: Date.new(2016, 3, 28), project: vollkornbäckerei, questionarys_id: runde2.id)
+#event1 = Event.create(startDate: Date.new(2016, 2, 11), project: vollkornbäckerei, questionarys_id: runde1.id)
+#event2 = Event.create(startDate: Date.new(2016, 3, 28), project: vollkornbäckerei, questionarys_id: runde2.id)

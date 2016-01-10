@@ -45,7 +45,6 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:title, :description)
     end
-<<<<<<< HEAD
 
     def product_breakdown_chart
       data_table = GoogleVisualr::DataTable.new
@@ -81,6 +80,4 @@ class ProjectsController < ApplicationController
         @rdm_chart = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
     end
 
-=======
->>>>>>> develop
 end

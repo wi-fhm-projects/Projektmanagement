@@ -105,53 +105,44 @@ class EventsController < ApplicationController
   #
 
   def event_chart_pes
-    @questionary = Questionary.find(@event.questionarys_id)
 
+    # Fragebögen und Arbeitspakete holen
+    @questionary = Questionary.find(@event.questionarys_id)
+    @workpackages = Workpackage.all
+    @eventDates = EventDate.all
+
+    # Bevor es los geht, db cleanen
+    @eventDates.delete_all
+
+    #DB befüllen
+    # Abchecken, ob workpackage vorhanden
+    if @workpackages.any?
+      @workpackages.each do |workpackage|
+        #Kein Vorgänger vorhanden!
+        next unless workpackage.predecessors.empty?
+        @question = Question.find_by workpackage_id: workpackage.id
+        #Frage muss ausgefüllt sein
+        if @question.pessimistic_average != nil
+          startDate = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day)
+          endDate = startDate + @question.pessimistic_average
+          EventDate.create(workpackage: workpackage, startDate: startDate, endDate: endDate)
+        end
+      end
+    end
+
+
+
+    # Zum Schluss die Grafik erzeugen
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'Arbeitspaket')
     data_table.new_column('date',   'Startzeitpunkt')
     data_table.new_column('date',   'Endzeitpunkt')
 
-    @workpackages = Workpackage.all
-    @workpackages.each do |workpackage|
-      @last
+    data_table.add_row(
+      ['dummy', Date.new(2016, 2, 16), Date.new(2016, 2, 17)]
+    )
 
-      if workpackage.predecessors.empty?
-        @question = Question.find_by workpackage_id: workpackage.id   #Frage suchen, die die Dauer des Arbeitspaket enthält
-        if @question != nil and @question.pessimistic_average != nil then                     #Nicht weitermachen, wenn noch keine Dauer angegeben wurde
-          data_table.add_row(
-            [workpackage.name, Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day),
-             (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @question.pessimistic_average)]
-          )
-        end
-      else
-        @question = Question.find_by workpackage_id: workpackage.id
-        @max = 0
-        if @question != nil and @question.pessimistic_average != nil then
-          workpackage.predecessors.each do |pre|
-            @preQuestion = Question.find_by workpackage_id: pre.id
-            if @max < @preQuestion.pessimistic_average
-              @max = @preQuestion.pessimistic_average
-            end
-
-            if @last.nil?
-              data_table.add_row(
-                [workpackage.name, (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max),
-                 (Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max + @question.pessimistic_average)]
-              )
-              @last = Date.new(@event.startDate.year, @event.startDate.month, @event.startDate.day) + @max + @question.pessimistic_average
-            else
-              data_table.add_row(
-                [workpackage.name, @last,
-                 (@last + @question.pessimistic_average)]
-              )
-            end
-          end
-        end
-       end
-    end
-
-    opts = { width: 900, height: 900, allowHtml: true }
+    opts = { width: 900, allowHtml: true }
     @rdm_chart_pes = GoogleVisualr::Interactive::Timeline.new(data_table, opts)
   end
 

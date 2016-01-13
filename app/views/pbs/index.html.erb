@@ -24,21 +24,16 @@
               <%= form_for @subproduct, url: {action: "create", controller: 'subproducts'} do |f| %>
                 <%= f.hidden_field :project_id, value: @project.id %>
 
-
-                <span class="group">
-                  <%= f.text_field :name%>
-                  <span class="highlight"></span>
-                  <span class="bar"></span>
-
+                <%= f.text_field :name%>
                 <span id="tt1" class="icon material-icons">
                   <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
                   <% end %>
-                </span>
-                <div class="mdl-tooltip" for="tt1">
-                  Hinzufügen
-                </div>
-                </span>
+
+                  <div class="mdl-tooltip" for="tt1">
+                    Hinzufügen
+                  </div>
+                  </span>
               <% end %>
             </td>
             <td>

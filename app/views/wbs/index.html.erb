@@ -23,7 +23,7 @@
             <td class="mdl-data-table__cell--non-numeric">
               <%= form_for @task, url: {action: "create", controller: 'wbs'} do |f| %>
               <%= f.hidden_field :project_id, value: @project.id %>
-              <%= f.text_field :name %>
+              <%= f.text_field :name, :class => 'textfield__input_table', :placeholder => "Aufgabe" %>
               <div id="tt1" class="icon material-icons">
                 <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                 <i class="material-icons">add_circle</i>
@@ -52,7 +52,7 @@
                 <%= form_for @subtask, url: {action: "create", controller: 'subtask'} do |f| %>
                 <%= f.hidden_field :task_id, value: task.id %>
                 <td class="mdl-data-table__cell--non-numeric">
-                  <%= f.text_field :name %>
+                  <%= f.text_field :name, :class => 'textfield__input_table', :placeholder => "Teilaufgabe" %>
                   <div id="task<%=task.id%>" class="icon material-icons">
                     <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
@@ -79,7 +79,7 @@
                       <td class="mdl-data-table__cell--non-numeric">
                         <%= form_for @workpack, url: {action: "create", controller: 'workpackage'} do |f| %>
                         <%= f.hidden_field :subtask_id, value: subtask.id %>
-                        <%= f.text_field :name %>
+                        <%= f.text_field :name, :class => 'textfield__input_table', :placeholder => "Arbeitspaket" %>
 
                       </td>
                       <td>

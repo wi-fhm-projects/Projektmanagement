@@ -28,7 +28,7 @@
               <td class="mdl-data-table__cell--non-numeric">
                 <%=quest.workpackage.subtask.task.name%> > <%=quest.workpackage.subtask.name%> > <%=quest.workpackage.name%>
               </td>
-              <td class="mdl-data-table__cell--non-numeric">Mannstunden</td>
+              <td class="mdl-data-table__cell--non-numeric">Projekttagen</td>
               <td class="mdl-data-table__cell--non-numeric">Durchschnitt: <%=quest.pessimistic_average%></td>
               <td class="mdl-data-table__cell--non-numeric">
                 Durchschnitt: <%=quest.realistic_average%>
@@ -41,12 +41,12 @@
               <tr class="third-level">
                 <td></td>
                 <td class="mdl-data-table__cell--non-numeric">
-
+                  <%= response.user.first_name %> <%=response.user.last_name%>
                 </td>
-              <td class="mdl-data-table__cell--non-numeric"></td>
-              <td class="mdl-data-table__cell--non-numeric"><%= response.pessimistic %></td>
-              <td class="mdl-data-table__cell--non-numeric"><%= response.realistic %></td>
-              <td class="mdl-data-table__cell--non-numeric"><%= response.optimistic %></td>
+                <td class="mdl-data-table__cell--non-numeric"></td>
+                <td class="mdl-data-table__cell--non-numeric"><%= response.pessimistic %></td>
+                <td class="mdl-data-table__cell--non-numeric"><%= response.realistic %></td>
+                <td class="mdl-data-table__cell--non-numeric"><%= response.optimistic %></td>
               </tr>
               <%end%>
           <% end %>

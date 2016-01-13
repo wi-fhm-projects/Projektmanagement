@@ -47,7 +47,7 @@ class DelphiController < ApplicationController
     @project = @quest.project
     @quest.destroy
     respond_to do |format|
-      format.html { redirect_to project_path(@project), success: 'Fragebogen wurde erfolgreich entfernt.' }
+      format.html { redirect_to delphi_index_path(project: @project), success: 'Fragebogen wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end

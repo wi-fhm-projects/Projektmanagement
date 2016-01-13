@@ -12,7 +12,11 @@
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">Projektmanagement</span>
+          <span class="mdl-layout-title">
+            <%= link_to projects_path, class: 'mdl-button mdl-js-button mdl-button--icon mdl-button--colored button-middle' do %>
+              <i class="material-icons">home</i>
+            <% end %>
+            Projektmanagement</span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <%= render partial: '/shared/user_widget'%>

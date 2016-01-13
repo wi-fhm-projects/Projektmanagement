@@ -23,7 +23,7 @@
             <td class="mdl-data-table__cell--non-numeric">
               <%= form_for @kind, url: {action: "create", controller: 'rbs'} do |f| %>
               <%= f.hidden_field :project_id, value: @project.id %>
-              <%= f.text_field :name %>
+              <%= f.text_field :name, :class => 'textfield__input_table', :placeholder => "Art" %>
               <div id="tt1" class="icon material-icons">
                 <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                 <i class="material-icons">add_circle</i>
@@ -51,7 +51,7 @@
                 <%= form_for @role, url: {action: "create", controller: 'role'} do |f| %>
                 <%= f.hidden_field :kind_id, value: kind.id %>
                 <td class="mdl-data-table__cell--non-numeric">
-                  <%= f.text_field :name %>
+                  <%= f.text_field :name, :class => 'textfield__input_table', :placeholder => "Rolle" %>
                   <div id="kind<%=kind.id%>" class="icon material-icons">
                     <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
@@ -75,10 +75,10 @@
                       <%= form_for @req, url: {action: "create", controller: 'requirment'} do |f| %>
                       <%= f.hidden_field :role_id, value: role.id %>
                       <td class="mdl-data-table__cell--non-numeric">
-                        <%= f.text_field :qualifikation %>
+                        <%= f.text_field :qualifikation, :class => 'textfield__input_table', :placeholder => "Qualifikation" %>
                       </td>
                       <td class="mdl-data-table__cell--non-numeric">
-                        <%= f.text_field :experience %>
+                        <%= f.text_field :experience, :class => 'textfield__input_table', :placeholder => "Erfahrung" %>
                         <div id="role<%=role.id%>" class="icon material-icons">
                           <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                           <i class="material-icons">add_circle</i>

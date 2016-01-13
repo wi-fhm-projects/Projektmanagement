@@ -1,0 +1,32 @@
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <h5>
+      Prameter für die Roadmap anlegen
+    </h5>
+    <hr>
+    <% if @project.questionarys.present? %>
+      <%= form_for @roadmap, url: {action: "create"} do |f| %>
+      <%= f.label :Startdatum %><br>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" id="roadmap_start" name="roadmap[start]" type="date">
+      </div>
+      <br>
+        <%= f.label :Fragebogen %><br>
+        <%= f.select(:questionary_id) do %>
+         <% @project.questionarys.each do |c| -%>
+            <%= content_tag(:option, c.runde, value: c.id) %>
+          <% end %>
+        <% end %>
+
+
+      <%= f.hidden_field :project_id, value: @project.id %>
+
+      <br>
+      <br>
+      <%= f.submit "Erstellen", class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' %>
+      <% end %>
+    <% else %>
+      Es ist noch keine Aufwandsschätzung erfolgt!
+    <% end %>
+  </div>
+</div>

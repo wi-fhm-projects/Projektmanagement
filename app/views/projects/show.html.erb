@@ -85,4 +85,19 @@
         </div>
       </div>
   </div>
+    <div class="mdl-cell mdl-cell--4-col">
+    <div class="wbs-card">
+      <div class="structure mdl-card mdl-shadow--2dp">
+        <div class="format mdl-card__title mdl-card--expand">
+          <h2 class="format mdl-card__title-text">Roadmap</h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+          Roadmap anzeigen
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <%= link_to roadmaps_path(project: @project), class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' do %>Anzeigen <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

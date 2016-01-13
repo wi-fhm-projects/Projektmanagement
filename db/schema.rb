@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160109121954) do
+ActiveRecord::Schema.define(version: 20160113161818) do
 
   create_table "allocationitems", force: :cascade do |t|
     t.integer  "workpackage_id"
@@ -105,6 +105,18 @@ ActiveRecord::Schema.define(version: 20160109121954) do
 
   add_index "responses", ["question_id"], name: "index_responses_on_question_id"
   add_index "responses", ["user_id"], name: "index_responses_on_user_id"
+
+  create_table "roadmaps", force: :cascade do |t|
+    t.string   "title"
+    t.date     "start"
+    t.integer  "project_id"
+    t.integer  "questionary_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "roadmaps", ["project_id"], name: "index_roadmaps_on_project_id"
+  add_index "roadmaps", ["questionary_id"], name: "index_roadmaps_on_questionary_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

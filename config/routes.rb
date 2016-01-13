@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'roadmap/index'
+
   devise_for :users
   resources :projects
   resources :rbs, :role, :requirment
@@ -10,6 +12,7 @@ Rails.application.routes.draw do
   resources :kind, controller: 'rbs'
   resources :task, controller: 'wbs'
   resources :questionaries, controller: 'delphi'
+  resources :roadmaps
 
 
   root 'projects#index'

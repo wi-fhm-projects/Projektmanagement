@@ -1,0 +1,25 @@
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: @project, section: 'Roadmap'} %>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <%= link_to new_roadmap_path(:project => @project.id) , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
+      <i class="material-icons">add</i>Roadmap erzeugen
+    <% end %>
+    <h5> Roadmaps </h5>
+    <hr>
+  </div>
+  <% @project.roadmaps.each do |roadmap| %>
+    <div class="mdl-cell mdl-cell--4-col">
+    <!-- Product Breaktdown -->
+    <div class="pbs-card">
+      <div class="picture_pbs structure mdl-card mdl-shadow--2dp">
+        <div class="picture_pbs format mdl-card__title mdl-card--expand">
+          <h2 class="picture_pbs format mdl-card__title-text"><%= roadmap.title %></h2>
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+          <%= link_to roadmap, class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' do %>Anzeigen <%end%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

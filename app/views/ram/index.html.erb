@@ -81,7 +81,7 @@
                     <% end %>
                   </td>
                   <td>
-                    <% unless @components.empty? or @roles.empty? %>
+                    <% unless @components.empty? or @roles.empty? or work.allocationitem %>
                       <div id="work<%=work.id%>" class="icon material-icons">
                         <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                           <i class="material-icons">save</i>

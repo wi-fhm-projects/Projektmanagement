@@ -25,15 +25,9 @@
                 <%= f.hidden_field :project_id, value: @project.id %>
 
                 <%= f.text_field :name, :class => 'textfield__input_table', :placeholder => "Teilprodukt"%>
-                <span id="tt1" class="icon material-icons">
                   <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
                   <% end %>
-
-                  <div class="mdl-tooltip" for="tt1">
-                    Hinzufügen
-                  </div>
-                  </span>
               <% end %>
             </td>
             <td>
@@ -53,9 +47,6 @@
                       <i class="material-icons">add_circle</i>
                     <% end %>
                   </div>
-                  <div class="mdl-tooltip" for="subproduct<%=subproduct.id%>">
-                  Hinzufügen
-                </div>
                 <% end %>
               </td>
               <td class="button-cell">
@@ -85,9 +76,6 @@
                       <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                         <i class="material-icons">add_circle</i>
                       <% end %>
-                    </div>
-                     <div class="mdl-tooltip" for="modul<%=modul.id%>">
-                      Hinzufügen
                     </div>
                   <% end %>
                 </td>

@@ -18,7 +18,7 @@ class RoadmapsController < ApplicationController
 
   def create
     @roadmap = Roadmap.new(roadmap_params)
-    @roadmap.title = 'Runde '+Questionary.find(roadmap_params[:questionary_id]).runde.to_s
+    @roadmap.title = 'Auswertung zur Runde '+Questionary.find(roadmap_params[:questionary_id]).runde.to_s
     respond_to do |format|
       if @roadmap.save
         format.html { redirect_to roadmap_path(@roadmap, :type => 1), success: 'Roadmap wurde erfolgreich erstellt.' }
@@ -100,7 +100,7 @@ class RoadmapsController < ApplicationController
       )
       opt_table.add_rows(
         [
-          [work.id.to_s, work.subtask.name + '>' + work.name nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.optimistic_average), 0 , @pre],
+          [work.id.to_s, work.subtask.name + '>' + work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.optimistic_average), 0 , @pre],
         ]
       )
       pess_table.add_rows(

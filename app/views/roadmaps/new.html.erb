@@ -7,6 +7,8 @@
   webshims.polyfill('forms forms-ext');
 </script>
 
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: roadmaps_path(project: @project.id), section: 'Neue Roadmap'} %>
+
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--12-col">
     <h5>

@@ -21,7 +21,7 @@ class ResponseController < ApplicationController
         format.html { redirect_to response_index_path(project: @question.questionary.project,questionary: @question.questionary), success: 'Antwort wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
-        format.html { render :new }
+        format.html { redirect_to response_index_path(project: @question.questionary.project,questionary: @question.questionary), danger: 'Antwort nicht erstellt. Nur Zahlen erlaubt!' }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
     end

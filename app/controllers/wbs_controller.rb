@@ -1,4 +1,5 @@
 class WbsController < ApplicationController
+  before_action :find_task, only: [:destroy]
   before_action :create_wp_array, only: [:index]
 
   def index
@@ -20,16 +21,17 @@ class WbsController < ApplicationController
         format.html { redirect_to wbs_path(project: @project), success: 'Aufgabe wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
-        format.html { render :new }
+        format.html { redirect_to wbs_path(project: @project), danger: 'Aufgabe wurde nicht erstellt.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
 
    def destroy
+    @project = Project.find(params[:project])
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to rbs_path(project: @project), success: 'Aufgabe wurde erfolgreich entfernt.' }
+      format.html { redirect_to wbs_path(project: @project), success: 'Aufgabe wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end
@@ -50,7 +52,7 @@ class WbsController < ApplicationController
 
 private
 
-    def find_kind
+    def find_task
       @task = Task.find(params[:id])
     end
 

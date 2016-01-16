@@ -18,13 +18,13 @@ class RoadmapsController < ApplicationController
 
   def create
     @roadmap = Roadmap.new(roadmap_params)
-    @roadmap.title = 'Runde '+Questionary.find(roadmap_params[:questionary_id]).runde.to_s
+    @roadmap.title = 'Auswertung zur Runde '+Questionary.find(roadmap_params[:questionary_id]).runde.to_s
     respond_to do |format|
       if @roadmap.save
         format.html { redirect_to roadmap_path(@roadmap, :type => 1), success: 'Roadmap wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @roamap}
       else
-        format.html { render :new }
+        format.html { redirect_to new_roadmap_path(project: @roadmap.project.id), danger: 'Startdatum muss angegeben werden' }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
       end
     end
@@ -95,17 +95,17 @@ class RoadmapsController < ApplicationController
       @date = Date.new(@roadmap.start.year, @roadmap.start.month, @roadmap.start.day) unless work.predecessors.present?
       real_table.add_rows(
         [
-          [work.id.to_s, work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.realistic_average), 100 , @pre],
+          [work.id.to_s, work.subtask.name + '>' + work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.realistic_average), 0 , @pre],
         ]
       )
       opt_table.add_rows(
         [
-          [work.id.to_s, work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.optimistic_average), 100 , @pre],
+          [work.id.to_s, work.subtask.name + '>' + work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.optimistic_average), 0 , @pre],
         ]
       )
       pess_table.add_rows(
         [
-          [work.id.to_s, work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.pessimistic_average), 100 , @pre],
+          [work.id.to_s, work.subtask.name + '>' + work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.pessimistic_average), 0 , @pre],
         ]
       )
 

@@ -1,4 +1,6 @@
 class WorkpackageController < ApplicationController
+  before_action :find_workpackage, only: [:destroy]
+
   def index
     @workpack = Workpackages.all
   end
@@ -31,9 +33,10 @@ class WorkpackageController < ApplicationController
   end
 
    def destroy
+    @project = Project.find(params[:project])
     @workpack.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, success: 'Arbeitspacket wurde erfolgreich entfernt.' }
+      format.html { redirect_to wbs_path(project: @project), success: 'Arbeitspacket wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end

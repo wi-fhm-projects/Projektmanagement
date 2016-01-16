@@ -1,4 +1,5 @@
 class RbsController < ApplicationController
+  before_action :find_kind, only: [:destroy]
   def index
     @project = Project.find(params[:project])
     @kind = Kind.new
@@ -19,13 +20,14 @@ class RbsController < ApplicationController
         format.html { redirect_to rbs_path(project: @project), success: 'Typ wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
-        format.html { render :new }
+        format.html { redirect_to rbs_path(project: @project), danger: 'Typ wurde nicht erstellt.' }
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
 
    def destroy
+    @project = Project.find(params[:project])
     @kind.destroy
     respond_to do |format|
       format.html { redirect_to rbs_path(project: @project), success: 'Typ wurde erfolgreich entfernt.' }

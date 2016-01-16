@@ -1,3 +1,4 @@
+<%= render partial: '/shared/flash_message'%>
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--12-col">
     <%= link_to new_project_path , class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' do %>
@@ -11,7 +12,7 @@
         <div class="project-card">
           <div class="structure mdl-card mdl-shadow--2dp">
             <div class="format mdl-card__title mdl-card--expand">
-              <h2 class="format mdl-card__title-text"><%=project.title %></h2>
+              <h2 class="format mdl-card__title-text"><span class="card-title-text"><%=project.title %></span></h2>
             </div>
             <div class="mdl-card__supporting-text">
               <%= truncate(project.description, :length => 120) %>

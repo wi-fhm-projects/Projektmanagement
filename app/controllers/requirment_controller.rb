@@ -1,4 +1,6 @@
 class RequirmentController < ApplicationController
+  before_action :find_req, only: [:destroy]
+
   def index
     @req = Requirment.all
   end
@@ -23,9 +25,10 @@ class RequirmentController < ApplicationController
   end
 
    def destroy
+    @project = Project.find(params[:project])
     @req.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, success: 'Anforderung wurde erfolgreich entfernt.' }
+      format.html { redirect_to rbs_path(project: @project), success: 'Anforderung wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end

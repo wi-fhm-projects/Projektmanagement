@@ -16,7 +16,9 @@
           <h2 class="picture_pbs format mdl-card__title-text"><%= roadmap.title %></h2>
         </div>
         <div class="mdl-card__actions mdl-card--border">
-          <%= link_to roadmap, class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' do %>Anzeigen <%end%>
+          <%= link_to roadmap_path(roadmap, :type => 1), class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' do %>Realistisch<%end%>
+          <%= link_to roadmap_path(roadmap, :type => 2), class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' do %>Optimistisch<%end%>
+          <%= link_to roadmap_path(roadmap, :type => 3), class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' do %>Pessimistisch<%end%>
         </div>
       </div>
     </div>

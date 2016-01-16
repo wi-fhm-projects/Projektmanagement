@@ -21,7 +21,7 @@ class RoadmapsController < ApplicationController
     @roadmap.title = 'Runde '+Questionary.find(roadmap_params[:questionary_id]).runde.to_s
     respond_to do |format|
       if @roadmap.save
-        format.html { redirect_to @roadmap, success: 'Roadmap wurde erfolgreich erstellt.' }
+        format.html { redirect_to roadmap_path(@roadmap, :type => 1), success: 'Roadmap wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @roamap}
       else
         format.html { render :new }
@@ -54,15 +54,37 @@ class RoadmapsController < ApplicationController
       days * 24 * 60 * 60 * 1000;
     end
 
-    data_table = GoogleVisualr::DataTable.new
-    data_table.new_column('string', 'Task ID')
-    data_table.new_column('string', 'Task Name')
-    data_table.new_column('string', 'Resource')
-    data_table.new_column('date'  , 'Start Date')
-    data_table.new_column('date'  , 'End Date')
-    data_table.new_column('number', 'Duration')
-    data_table.new_column('number', 'Percent Complete')
-    data_table.new_column('string', 'Dependencies')
+    real_table = GoogleVisualr::DataTable.new
+    real_table.new_column('string', 'Task ID')
+    real_table.new_column('string', 'Task Name')
+    real_table.new_column('string', 'Resource')
+    real_table.new_column('date'  , 'Start Date')
+    real_table.new_column('date'  , 'End Date')
+    real_table.new_column('number', 'Duration')
+    real_table.new_column('number', 'Percent Complete')
+    real_table.new_column('string', 'Dependencies')
+
+    opt_table = GoogleVisualr::DataTable.new
+    opt_table.new_column('string', 'Task ID')
+    opt_table.new_column('string', 'Task Name')
+    opt_table.new_column('string', 'Resource')
+    opt_table.new_column('date'  , 'Start Date')
+    opt_table.new_column('date'  , 'End Date')
+    opt_table.new_column('number', 'Duration')
+    opt_table.new_column('number', 'Percent Complete')
+    opt_table.new_column('string', 'Dependencies')
+
+    pess_table = GoogleVisualr::DataTable.new
+    pess_table.new_column('string', 'Task ID')
+    pess_table.new_column('string', 'Task Name')
+    pess_table.new_column('string', 'Resource')
+    pess_table.new_column('date'  , 'Start Date')
+    pess_table.new_column('date'  , 'End Date')
+    pess_table.new_column('number', 'Duration')
+    pess_table.new_column('number', 'Percent Complete')
+    pess_table.new_column('string', 'Dependencies')
+
+
     @workpackages.each do |work|
       @pre = ''
       work.predecessors.each do |p|
@@ -71,14 +93,32 @@ class RoadmapsController < ApplicationController
       end
       @date = nil
       @date = Date.new(@roadmap.start.year, @roadmap.start.month, @roadmap.start.day) unless work.predecessors.present?
-      data_table.add_rows(
+      real_table.add_rows(
         [
           [work.id.to_s, work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.realistic_average), 100 , @pre],
+        ]
+      )
+      opt_table.add_rows(
+        [
+          [work.id.to_s, work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.optimistic_average), 100 , @pre],
+        ]
+      )
+      pess_table.add_rows(
+        [
+          [work.id.to_s, work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.pessimistic_average), 100 , @pre],
         ]
       )
 
     end
     opts   = { version: "1.1", height: 275 }
-    @roadmap_chart = GoogleVisualr::Interactive::GanttChart.new(data_table, opts)
+    if params[:type] == '1'
+      @real_chart = GoogleVisualr::Interactive::GanttChart.new(real_table, opts)
+    end
+    if params[:type] == '2'
+      @opt_chart = GoogleVisualr::Interactive::GanttChart.new(opt_table, opts)
+    end
+    if params[:type] == '3'
+      @pess_chart = GoogleVisualr::Interactive::GanttChart.new(pess_table, opts)
+    end
   end
 end

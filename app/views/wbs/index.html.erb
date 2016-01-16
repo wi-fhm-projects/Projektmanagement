@@ -83,8 +83,7 @@
 
                       </td>
                       <td>
-                        <% wp_array = subtask.workpackages.map { |wp| [wp.name, wp.id] } %>
-                        <%= f.select :successor, options_for_select(wp_array), {}, {:multiple => true, :class => "multiselect2", :style => "width:200px;" } %>
+                        <%= f.select :successor, option_groups_from_collection_for_select(@subtasks, :workpackages, :name, :id, :name, nil), {}, {:multiple => true, :class => "multiselect2", :style => "width:200px;" } %>
                         <div id="subtask<%=subtask.id%>" class="icon material-icons">
                           <%= f.button class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                           <i class="material-icons">add_circle</i>

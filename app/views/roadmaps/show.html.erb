@@ -1,3 +1,9 @@
-<div id='chart'>
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: roadmaps_path(project: @project.id), section: 'Work-Breakdown-Structure'} %>
+
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--12-col">
+    <div id='chart'>
+    </div>
+    <%= render_chart(@roadmap_chart, 'chart') %>
+  </div>
 </div>
-<%= render_chart(@roadmap_chart, 'chart') %>

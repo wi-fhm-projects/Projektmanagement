@@ -40,14 +40,11 @@ class RoadmapsController < ApplicationController
 
   def workpackages_array
     workpackages = Array.new
-    @project.tasks.each do |task|
-      task.subtasks.each do |stask|
-        stask.workpackages.each do |work|
-          workpackages.push(work)
-        end
-      end
-    return workpackages
+    @roadmap.questionary.questions.each do |q|
+      workpackages.push(q.workpackage)
     end
+    return workpackages
+
   end
 
   def roadmap_chart

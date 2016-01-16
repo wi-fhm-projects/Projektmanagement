@@ -20,7 +20,7 @@ class WbsController < ApplicationController
         format.html { redirect_to wbs_path(project: @project), success: 'Aufgabe wurde erfolgreich erstellt.' }
         format.json { render :show, status: :created, location: @kind}
       else
-        format.html { render :new }
+        format.html { redirect_to wbs_path(project: @project), danger: 'Aufgabe wurde nicht erstellt.' }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end

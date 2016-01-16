@@ -14,20 +14,6 @@ def show
   product_breakdown_chart
 end
 
-def create
-  @project = Project.new(project_params)
-
-  respond_to do |format|
-    if @project.save
-      format.html { redirect_to projects_path, success: 'Projekt wurde erfolgreich erstellt.' }
-      format.json { render :show, status: :created, location: @project }
-    else
-      format.html { render :new }
-      format.json { render json: @project.errors, status: :unprocessable_entity }
-    end
-  end
-end
-
 def destroy
   @project.destroy
   respond_to do |format|

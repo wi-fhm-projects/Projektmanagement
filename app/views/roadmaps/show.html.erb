@@ -1,3 +1,33 @@
-<div id='chart'>
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: roadmaps_path(project: @project.id), section: 'Roadmap'} %>
+
+   <% if params[:type] == '1' %>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col">
+        <h5>Realistische Schätzung</h6><hr>
+        <div id='real-chart'>
+        </div>
+        <%= render_chart(@real_chart, 'real-chart') %>
+      </div>
+    </div>
+  <% end %>
+  <% if params[:type] == '2' %>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col">
+        <h5>Optimistische Schätzung</h6><hr>
+        <div id='opt-chart'>
+        </div>
+        <%= render_chart(@opt_chart, 'opt-chart') %>
+      </div>
+    </div>
+  <% end %>
+  <% if params[:type] == '3' %>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col">
+        <h5>Pessimistische Schätzung</h6><hr>
+        <div id='pess-chart'>
+        </div>
+        <%= render_chart(@pess_chart, 'pess-chart') %>
+      </div>
+    </div>
+  <% end %>
 </div>
-<%= render_chart(@roadmap_chart, 'chart') %>

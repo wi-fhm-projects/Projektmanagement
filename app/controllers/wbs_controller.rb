@@ -1,12 +1,12 @@
 class WbsController < ApplicationController
+  before_action :create_wp_array, only: [:index]
+
   def index
     @project = Project.find(params[:project])
     @task = Task.new
     @subtask = Subtask.new
     @workpack = Workpackage.new
     work_breakdown_chart
-
-
   end
 
   def show
@@ -38,7 +38,17 @@ class WbsController < ApplicationController
     @task = Task.new
   end
 
-  private
+  def create_wp_array
+    @project = Project.find(params[:project])
+    @subtasks = Array.new
+    @project.tasks.each do |task|
+      task.subtasks.each do |stask|
+        @subtasks.push(stask)
+      end
+    end
+  end
+
+private
 
     def find_kind
       @task = Task.find(params[:id])

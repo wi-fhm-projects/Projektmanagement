@@ -1,4 +1,5 @@
 class SubtaskController < ApplicationController
+  before_action :find_subtask, only: [:destroy]
    def index
     @subtasks = Subtasks.all
   end
@@ -23,9 +24,10 @@ class SubtaskController < ApplicationController
   end
 
    def destroy
+    @project = Project.find(params[:project])
     @subtask.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, success: 'Teilaufgabe wurde erfolgreich entfernt.' }
+      format.html { redirect_to wbs_path(project: @project), success: 'Teilaufgabe wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end

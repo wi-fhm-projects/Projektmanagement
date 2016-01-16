@@ -56,15 +56,20 @@
                   </div>
                 </td>
                 <% end %>
+                <%end%>
                 <td></td>
                 <td></td>
-
-                <td class="mdl-data-table__cell--non-numeric">
-
-                  </span>
+                <td class="button-cell">
+                  <div class="icon material-icons">
+                    <span class="onMouseOver">
+                     <%= button_to task_path(task, project: @project.id), method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                        <i class="material-icons">delete</i>
+                      <% end %>
+                    </span>
+                  </div>
                 </td>
               </tr>
-              <%end%>
+
                 <% task.subtasks.each do |subtask| %>
                    <tr class="third-level">
                       <td class="mdl-data-table__cell--non-numeric"></td>
@@ -84,13 +89,20 @@
                         </div>
                       </td>
                       <% end %>
-
+                      <%end%>
                       <td class="button-cell">
-
+                        <div class="icon material-icons">
+                          <span class="onMouseOver">
+                           <%= button_to subtask_path(subtask, project: @project.id), method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                              <i class="material-icons">delete</i>
+                            <% end %>
+                          </span>
+                        </div>
                       </td>
+                    </tr>
 
                     </tr>
-                    <%end%>
+
                     <% subtask.workpackages.each do |work| %>
                       <tr class="fourth-level">
                         <td class="mdl-data-table__cell--non-numeric"></td>
@@ -104,9 +116,15 @@
                             <%= pre.name %>&#44;
                           <% end %>
                         </td>
-                        <td class="button-cell mdl-data-table__cell--non-numeric">
-
-                      </td>
+                        <td class="button-cell">
+                          <div class="icon material-icons">
+                            <span class="onMouseOver">
+                             <%= button_to workpackage_path(work, project: @project.id), method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                                <i class="material-icons">delete</i>
+                              <% end %>
+                            </span>
+                          </div>
+                        </td>
                     </tr>
                   <%end%>
                 <%end%>

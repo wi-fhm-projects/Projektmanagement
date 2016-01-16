@@ -35,6 +35,7 @@
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
 
             <% @project.kinds.each do |kind| %>
@@ -57,8 +58,17 @@
                 </td>
                 <td class="mdl-data-table__cell--non-numeric"></td>
                 <td class="mdl-data-table__cell--non-numeric"></td>
-                 <td class="button-cell mdl-data-table__cell--non-numeric"></td>
-                <%end%>
+                <td class="button-cell mdl-data-table__cell--non-numeric"></td>
+                <% end %>
+                <td class="button-cell">
+                  <div class="icon material-icons">
+                    <span class="onMouseOver">
+                     <%= button_to kind_path(kind, project: @project.id), method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                        <i class="material-icons">delete</i>
+                      <% end %>
+                    </span>
+                  </div>
+                </td>
               </tr>
 
                 <% kind.roles.each do |role| %>
@@ -82,6 +92,16 @@
                        <td class="button-cell mdl-data-table__cell--non-numeric">
 
                       </td>
+                      <%end%>
+                      <td class="button-cell">
+                        <div class="icon material-icons">
+                          <span class="onMouseOver">
+                           <%= button_to role_path(role, project: @project.id), method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                              <i class="material-icons">delete</i>
+                            <% end %>
+                          </span>
+                        </div>
+                      </td>
                     </tr>
                     <% role.requirments.each do |req| %>
                       <tr class="fourth-level">
@@ -97,9 +117,18 @@
                       </td>
                        <td class="button-cell mdl-data-table__cell--non-numeric">
                       </td>
+                      <td class="button-cell">
+                        <div class="icon material-icons">
+                          <span class="onMouseOver">
+                           <%= button_to requirment_path(req, project: @project.id), method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                              <i class="material-icons">delete</i>
+                            <% end %>
+                          </span>
+                        </div>
+                      </td>
                     </tr>
                     <% end %>
-                    <%end%>
+
                 <%end%>
 
             <%end%>

@@ -50,15 +50,12 @@
                 <% end %>
               </td>
               <td class="button-cell">
-                <div id="del<%=subproduct.id%>" class="icon material-icons">
+                <div class="icon material-icons">
                   <span class="onMouseOver">
                    <%= button_to subproduct, method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                       <i class="material-icons">delete</i>
                     <% end %>
                   </span>
-                </div>
-                <div class="mdl-tooltip" for="del<%=subproduct.id%>">
-                  Löschen
                 </div>
               </td>
             </tr>

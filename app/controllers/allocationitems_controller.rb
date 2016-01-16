@@ -1,4 +1,5 @@
 class AllocationitemsController < ApplicationController
+  before_action :find_allocationitem, only: [:destroy]
 
   def index
   end
@@ -21,9 +22,10 @@ class AllocationitemsController < ApplicationController
   end
 
    def destroy
+    @project = Project.find(params[:project])
     @allocationItem.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, success: 'Zuordnung wurde erfolgreich entfernt.' }
+      format.html { redirect_to ram_index_path(project: @project), success: 'Zuordnung wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end
@@ -34,8 +36,8 @@ class AllocationitemsController < ApplicationController
 
   private
 
-    def find_role
-      @role = Role.find(params[:id])
+    def find_allocationitem
+      @allocationItem = Allocationitem.find(params[:id])
     end
 
     def allocation_params

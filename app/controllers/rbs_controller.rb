@@ -1,4 +1,5 @@
 class RbsController < ApplicationController
+  before_action :find_kind, only: [:destroy]
   def index
     @project = Project.find(params[:project])
     @kind = Kind.new
@@ -26,6 +27,7 @@ class RbsController < ApplicationController
   end
 
    def destroy
+    @project = Project.find(params[:project])
     @kind.destroy
     respond_to do |format|
       format.html { redirect_to rbs_path(project: @project), success: 'Typ wurde erfolgreich entfernt.' }

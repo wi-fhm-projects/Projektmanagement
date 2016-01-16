@@ -58,9 +58,11 @@
                     <% if work.allocationitem %>
                       <%= work.allocationitem.role.name %>
                     <% else %>
-                      <%= f.select(:role_id) do %>
-                       <% @roles.each do |c| -%>
-                          <%= content_tag(:option, c.name, value: c.id) %>
+                      <% unless @components.empty? or @roles.empty? %>
+                        <%= f.select(:role_id) do %>
+                         <% @roles.each do |c| -%>
+                            <%= content_tag(:option, c.name, value: c.id) %>
+                          <% end %>
                         <% end %>
                       <% end %>
                     <% end %>
@@ -69,22 +71,26 @@
                     <% if work.allocationitem %>
                       <%= work.allocationitem.component.name %>
                     <% else %>
-                      <%= f.select(:component_id) do %>
-                       <% @components.each do |c| -%>
-                          <%= content_tag(:option, c.name, value: c.id) %>
+                      <% unless @components.empty? or @roles.empty? %>
+                        <%= f.select(:component_id) do %>
+                         <% @components.each do |c| -%>
+                            <%= content_tag(:option, c.name, value: c.id) %>
+                          <% end %>
                         <% end %>
                       <% end %>
                     <% end %>
                   </td>
                   <td>
-                    <div id="work<%=work.id%>" class="icon material-icons">
-                      <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
-                        <i class="material-icons">save</i>
-                      <% end %>
-                    </div>
-                    <div class="mdl-tooltip" for="work<%=work.id%>">
-                    Speichern
-                  </div>
+                    <% unless @components.empty? or @roles.empty? %>
+                      <div id="work<%=work.id%>" class="icon material-icons">
+                        <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                          <i class="material-icons">save</i>
+                        <% end %>
+                      </div>
+                      <div class="mdl-tooltip" for="work<%=work.id%>">
+                        Speichern
+                      </div>
+                    <% end %>
                   </td>
                 <% end %>
               </tr>

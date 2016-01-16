@@ -1,4 +1,4 @@
-<%= render partial: '/shared/header', locals: {project: @project, linkVariable: :back, section: 'Breitband-Delphi'} %>
+<%= render partial: '/shared/header', locals: {project: @project, linkVariable: delphi_index_path(project: @project.id), section: 'Breitband-Delphi'} %>
 <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
   <div class="mdl-tabs__panel is-active" id="table-panel">
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp wide-table" id="test2">
@@ -25,8 +25,10 @@
             <tr class="second-level">
                <% if check_response(quest).present? %>
                  <td></td>
-                  <td></td>
-                <td class="mdl-data-table__cell--non-numeric"></td>
+                  <td class="mdl-data-table__cell--non-numeric">
+                    <%=quest.workpackage.subtask.task.name%> > <%=quest.workpackage.subtask.name%> > <%=quest.workpackage.name%>
+                  </td>
+                <td class="mdl-data-table__cell--non-numeric">Projekttage</td>
                 <td class="mdl-data-table__cell--non-numeric">
                   <%= check_response(quest).pessimistic %>
                 </td>
@@ -41,17 +43,17 @@
                   <td class="mdl-data-table__cell--non-numeric">
                     <%=quest.workpackage.subtask.task.name%> > <%=quest.workpackage.subtask.name%> > <%=quest.workpackage.name%>
                   </td>
-                  <td class="mdl-data-table__cell--non-numeric">Manntagen</td>
+                  <td class="mdl-data-table__cell--non-numeric">Projekttage</td>
                   <td class="mdl-data-table__cell--non-numeric">
                     <%= form_for @answer, url: {action: "create", controller: 'response'} do |f| %>
                     <%= f.hidden_field :question_id, value: quest.id %>
-                    <%= f.text_field :pessimistic %>
+                    <%= f.text_field :pessimistic, :class => 'textfield__input_table', :placeholder => "Pessimistische Antwort" %>
                   </td>
                   <td class="mdl-data-table__cell--non-numeric">
-                    <%= f.text_field :realistic %>
+                    <%= f.text_field :realistic, :class => 'textfield__input_table', :placeholder => "Realistische Antwort" %>
                   </td>
                   <td class="mdl-data-table__cell--non-numeric">
-                    <%= f.text_field :optimistic %>
+                    <%= f.text_field :optimistic, :class => 'textfield__input_table', :placeholder => "Optimistische Antwort" %>
                      <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                       <i class="material-icons">add_circle</i>
                   </td>

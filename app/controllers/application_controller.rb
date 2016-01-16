@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   add_flash_types :success, :warning, :danger, :info
   before_action :find_projects
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def find_projects
     @projects = Project.all
@@ -15,4 +16,11 @@ class ApplicationController < ActionController::Base
     return @quests.count
   end
   helper_method :quest_count
+
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit [:first_name, :last_name, :email, :password, :password_confirmation] }
+  end
 end

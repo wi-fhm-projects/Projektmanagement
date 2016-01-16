@@ -1,4 +1,6 @@
 class RoleController < ApplicationController
+  before_action :find_role, only: [:destroy]
+
   def index
     @roles = Roles.all
   end
@@ -23,9 +25,10 @@ class RoleController < ApplicationController
   end
 
    def destroy
+    @project = Project.find(params[:project])
     @role.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, success: 'Rolle wurde erfolgreich entfernt.' }
+      format.html { redirect_to rbs_path(project: @project), success: 'Rolle wurde erfolgreich entfernt.' }
       format.json { head :no_content }
     end
   end

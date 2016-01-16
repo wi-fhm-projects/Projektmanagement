@@ -95,17 +95,17 @@ class RoadmapsController < ApplicationController
       @date = Date.new(@roadmap.start.year, @roadmap.start.month, @roadmap.start.day) unless work.predecessors.present?
       real_table.add_rows(
         [
-          [work.id.to_s, work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.realistic_average), 0 , @pre],
+          [work.id.to_s, work.subtask.name + '>' + work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.realistic_average), 0 , @pre],
         ]
       )
       opt_table.add_rows(
         [
-          [work.id.to_s, work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.optimistic_average), 0 , @pre],
+          [work.id.to_s, work.subtask.name + '>' + work.name nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.optimistic_average), 0 , @pre],
         ]
       )
       pess_table.add_rows(
         [
-          [work.id.to_s, work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.pessimistic_average), 0 , @pre],
+          [work.id.to_s, work.subtask.name + '>' + work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.pessimistic_average), 0 , @pre],
         ]
       )
 

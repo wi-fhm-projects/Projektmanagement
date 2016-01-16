@@ -29,9 +29,6 @@
                 <i class="material-icons">add_circle</i>
                 <% end %>
               </div>
-               <div class="mdl-tooltip" for="tt1">
-                Hinzufügen
-              </div>
             </td>
             <% end %>
             <td>
@@ -56,9 +53,6 @@
                   <div id="task<%=task.id%>" class="icon material-icons">
                     <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                     <i class="material-icons">add_circle</i>
-                  </div>
-                  <div class="mdl-tooltip" for="task<%=task.id%>">
-                    Hinzufügen
                   </div>
                 </td>
                 <% end %>
@@ -88,10 +82,6 @@
                           <%= f.button class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                           <i class="material-icons">add_circle</i>
                         </div>
-                        <div class="mdl-tooltip" for="subtask<%=subtask.id%>">
-                          Hinzufügen
-                        </div>
-
                       </td>
                       <% end %>
 

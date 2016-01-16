@@ -1,3 +1,5 @@
+<%= render partial: '/shared/header', locals: {project: nil, linkVariable: projects_path, section: 'Neues Projekt'} %>
+
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--12-col">
     <h5> Neues Projekt anlegen </h5>
@@ -17,6 +19,5 @@
       <br>
       <%= f.submit "Erstellen", class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-color--indigo-500' %>
     <% end %><br>
-    <%= link_to projects_path, class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect' do %>Zurück<%end%>
   </div>
 </div>

@@ -97,17 +97,17 @@ class RoadmapsController < ApplicationController
         [
           [work.id.to_s, work.subtask.name + '>' + work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.realistic_average), 0 , @pre],
         ]
-      )
+      ) unless @roadmap.questionary.questions.where(workpackage: work).first.realistic_average.blank?
       opt_table.add_rows(
         [
           [work.id.to_s, work.subtask.name + '>' + work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.optimistic_average), 0 , @pre],
         ]
-      )
+      ) unless @roadmap.questionary.questions.where(workpackage: work).first.realistic_average.blank?
       pess_table.add_rows(
         [
           [work.id.to_s, work.subtask.name + '>' + work.name, nil, @date, nil, days_to_milli(@roadmap.questionary.questions.where(workpackage: work).first.pessimistic_average), 0 , @pre],
         ]
-      )
+      ) unless @roadmap.questionary.questions.where(workpackage: work).first.realistic_average.blank?
 
     end
     opts   = { version: "1.1", height: 275 }

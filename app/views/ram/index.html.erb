@@ -80,8 +80,8 @@
                       <% end %>
                     <% end %>
                   </td>
-                  <td>
                     <% unless @components.empty? or @roles.empty? or work.allocationitem %>
+                    <td>
                       <div id="work<%=work.id%>" class="icon material-icons">
                         <%= f.button '', class: 'mdl-button mdl-js-button mdl-button--icon' do %>
                           <i class="material-icons">save</i>
@@ -90,9 +90,20 @@
                       <div class="mdl-tooltip" for="work<%=work.id%>">
                         Speichern
                       </div>
+                    </td>
                     <% end %>
-                  </td>
-                <% end %>
+                  <%end%>
+                  <% if work.allocationitem %>
+                    <td class="button-cell">
+                      <div class="icon material-icons">
+                        <span class="onMouseOver">
+                         <%= button_to allocationitem_path(work.allocationitem, project: @project.id), method: :delete, class: 'mdl-button mdl-js-button mdl-button--icon' do %>
+                            <i class="material-icons">delete</i>
+                          <% end %>
+                        </span>
+                      </div>
+                    </td>
+                  <% end %>
               </tr>
             <%end%>
         <%end%>

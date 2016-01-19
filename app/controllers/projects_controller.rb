@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
     @product = Subproduct.new
   end
 
+
   def create
     @project = Project.new(project_params)
 

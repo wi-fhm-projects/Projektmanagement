@@ -4,7 +4,7 @@ class ResponseController < ApplicationController
     @questionary = Questionary.find(params[:questionary])
     @answer = Response.new()
     @uquest = @questionary.userquests.where(user: current_user).first
-    @uquest.newquest = false
+    @uquest.newquest = false unless @uquest.blank?
     @uquest.save
   end
   def show

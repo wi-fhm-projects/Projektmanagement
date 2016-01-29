@@ -30,3 +30,16 @@ default: &default
 # production:
 #   <<: *default
 #   database: db/production.sqlite3
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  adapter: postgresql
+  host: localhost
+  encoding: unicode
+  pool: 5
+  password:
+  username:
